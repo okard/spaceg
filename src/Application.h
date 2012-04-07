@@ -9,11 +9,15 @@
 #include <SFML/Graphics.hpp>
 #include <Rocket/Core.h>
 
+#include "ui/SystemInterface.h"
+
 #include "state/State.h"
 #include "state/MainMenu.h"
 
 
 namespace spaceg {
+    
+class RenderInterface;
   
 /**
 * Application Class
@@ -27,6 +31,9 @@ private:
     sf::Sprite renderSprite_;
     
     //UI
+    SystemInterface uiSysInterface_;
+    RenderInterface* uiRenderInterface_;
+    Rocket::Core::Context* uiCtx_;
     
     //State Handling
     State* currentState_;

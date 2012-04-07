@@ -1,10 +1,8 @@
 
 #include "Application.h"
 
-#include <boost/shared_ptr.hpp>
+#include <GL/glew.h>
 
-
-#include "ui/SystemInterface.h"
 #include "ui/RenderInterface.h"
 
 using namespace spaceg;
@@ -13,24 +11,38 @@ Application::Application()
     : window_(sf::VideoMode(800, 600), "SpaceG"),
       mainMenu_(this)
 {
+    //setting up sfml render stuff
     window_.setFramerateLimit(60);
-    
     auto size = window_.getSize();
-    
     renderTexture_.create(size.x, size.y);
     
-    boost::shared_ptr<sf::RenderWindow> p(&window_);
-    Rocket::Core::SetRenderInterface(new RenderInterface(p));
-    Rocket::Core::SetSystemInterface(new SystemInterface());
+    //glew init
+    glewInit();
     
+    //GUI Init
+    uiRenderInterface_ = new RenderInterface(&window_);
+    Rocket::Core::SetRenderInterface(uiRenderInterface_);
+    Rocket::Core::SetSystemInterface(&uiSysInterface_);
     Rocket::Core::Initialise();
     
+    uiCtx_ = Rocket::Core::CreateContext("default", Rocket::Core::Vector2i(size.x, size.y));
+    
+    //test
+    Rocket::Core::FontDatabase::LoadFontFace("data/fonts/LinLibertine_R.otf");
+    Rocket::Core::FontDatabase::LoadFontFace("data/fonts/Delicious-Bold.otf");
+    Rocket::Core::ElementDocument* document = uiCtx_->LoadDocument("data/ui_test.rml");
+    if (document != NULL)
+        document->Show();
+    
+    
+    //State Stuff
     currentState_ = &mainMenu_;
 }
 
 Application::~Application()
 {
-    
+    uiCtx_->RemoveReference();
+    delete uiRenderInterface_;
 }
 
 void Application::run()
@@ -45,7 +57,11 @@ void Application::run()
             // Close window : exit
             if (event.type == sf::Event::Closed)
                 window_.close();
+            
+            //resize event
         }
+        
+        uiCtx_->Update();
          
         // Clear the whole texture with red color
         renderTexture_.clear(sf::Color::Black);
@@ -62,6 +78,8 @@ void Application::run()
         //Draw Render Texture
         renderSprite_.setTexture(renderTexture_.getTexture());
         window_.draw(renderSprite_);
+        
+        uiCtx_->Render();
  
         // Update the window
         window_.display();

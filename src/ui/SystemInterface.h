@@ -6,12 +6,16 @@
 
 #include <Rocket/Core/SystemInterface.h>
 
+#include <SFML/System/Clock.hpp>
+
 
 namespace spaceg {
 
     
 class SystemInterface : public Rocket::Core::SystemInterface 
 {
+private:
+    sf::Clock clock_;
     
 public:
     // Get the number of seconds elapsed since the start of the application.

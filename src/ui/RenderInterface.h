@@ -3,10 +3,11 @@
 #ifndef __SPACEG_RENDERINTERFACE__
 #define __SPACEG_RENDERINTERFACE__
 
-#include <boost/shared_ptr.hpp>
-
 #include <Rocket/Core/RenderInterface.h>
-#include <SFML/Graphics/RenderWindow.hpp>
+
+namespace sf { 
+    class RenderWindow; 
+}
 
 namespace spaceg {
     
@@ -16,7 +17,7 @@ namespace spaceg {
 class RenderInterface : public Rocket::Core::RenderInterface 
 {
 public:
-    RenderInterface(boost::shared_ptr<sf::RenderWindow> window);
+    RenderInterface(sf::RenderWindow* window);
 
     void prepare();
     void resize();
@@ -40,7 +41,7 @@ public:
     virtual void ReleaseTexture(Rocket::Core::TextureHandle texture);
 
 private:
-    boost::shared_ptr<sf::RenderWindow> m_window;
+    sf::RenderWindow* window_;
 };
 
 } //end namespace spaceg
