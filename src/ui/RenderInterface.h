@@ -6,7 +6,7 @@
 #include <Rocket/Core/RenderInterface.h>
 
 namespace sf { 
-    class RenderWindow; 
+    class RenderTarget; 
 }
 
 namespace spaceg {
@@ -16,11 +16,16 @@ namespace spaceg {
 */
 class RenderInterface : public Rocket::Core::RenderInterface 
 {
+private:
+    sf::RenderTarget* target_;
+    
 public:
-    RenderInterface(sf::RenderWindow* window);
+    RenderInterface(sf::RenderTarget* target);
 
-    void prepare();
     void resize();
+    
+    void startRender();
+    void finishRender();
 
     virtual void RenderGeometry(Rocket::Core::Vertex* vertices, int verticesCount, int* indices, int indicesCount, Rocket::Core::TextureHandle texture, const Rocket::Core::Vector2f& translation);
     
@@ -40,8 +45,7 @@ public:
     
     virtual void ReleaseTexture(Rocket::Core::TextureHandle texture);
 
-private:
-    sf::RenderWindow* window_;
+
 };
 
 } //end namespace spaceg

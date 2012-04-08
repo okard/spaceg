@@ -39,8 +39,6 @@ private:
     State* currentState_;
     MainMenu mainMenu_;
     
-
-    
 public:
     Application();
     ~Application();

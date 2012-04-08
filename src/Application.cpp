@@ -28,7 +28,7 @@ Application::Application()
     uiCtx_ = Rocket::Core::CreateContext("default", Rocket::Core::Vector2i(size.x, size.y));
     
     //test
-    Rocket::Core::FontDatabase::LoadFontFace("data/fonts/LinLibertine_R.otf");
+    Rocket::Core::FontDatabase::LoadFontFace("data/fonts/LinLibertine_R.otf", "Libertine", Rocket::Core::Font::STYLE_NORMAL, Rocket::Core::Font::WEIGHT_NORMAL);
     Rocket::Core::FontDatabase::LoadFontFace("data/fonts/Delicious-Bold.otf");
     Rocket::Core::ElementDocument* document = uiCtx_->LoadDocument("data/ui_test.rml");
     if (document != NULL)
@@ -59,6 +59,7 @@ void Application::run()
                 window_.close();
             
             //resize event
+            //uiCtx_->SetDimensions (const Vector2i &dimensions)
         }
         
         uiCtx_->Update();
@@ -78,8 +79,11 @@ void Application::run()
         //Draw Render Texture
         renderSprite_.setTexture(renderTexture_.getTexture());
         window_.draw(renderSprite_);
+        //Post Effects Fragment shader
         
+        uiRenderInterface_->startRender();
         uiCtx_->Render();
+        uiRenderInterface_->finishRender();
  
         // Update the window
         window_.display();

@@ -19,7 +19,6 @@ private:
     std::string name_;
     
     
-    
 public:
     Player();
     ~Player();
