@@ -20,55 +20,53 @@ static const char* vertexShader =
 "\
 void main(void) \
 { \
-    gl_Position = gl_Vertex; \
+    gl_FrontColor = gl_Color; \
+    gl_TexCoord[0] = gl_MultiTexCoord0; \
+    gl_Position = ftransform(); \
 }";
 
 
 static const char* fragmentShader = 
-" \
+"\
+uniform sampler2D Texture0; \
+uniform vec4 NoTexture; \
+\
 void main(void) \
 { \
-    gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0); \
+    vec4 color = texture2D(Texture0, gl_TexCoord[0].st); \
+    color = clamp(color+NoTexture, 0.0, 1.0); \
+    gl_FragColor = color * gl_Color;\
 }";
 
+//texture2D(Texture0, gl_TexCoord[0].st)
+//texture2D(Texture0, vec2(gl_TexCoord[0])) * 
+//    //texture2D(Texture0, vec2(gl_TexCoord[0])) * \
 //gl_FragColor = texture2D( s_texture, v_texCoord ) * v_color;
 
 RenderInterface::RenderInterface(sf::RenderTarget* Window)
 {
     target_ = Window;
-    this->resize();
+    shader_ = new sf::Shader();
+    
+    std::cerr << "Load Shaders" << std::endl;
+    shader_->loadFromMemory(vertexShader, sf::Shader::Vertex);
+    shader_->loadFromMemory(fragmentShader, sf::Shader::Fragment);
 }
 
+RenderInterface::~RenderInterface()
+{
+    delete shader_;
+}
 
 void RenderInterface::startRender()
 {
-    target_->pushGLStates();
-    
-    // set required blend states
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    
-    //sf::BlendMode
+    target_->pushGLStates();    
 }
 
 void RenderInterface::finishRender()
 {
-    glDisable(GL_BLEND);
     target_->popGLStates();
 }
-
-void RenderInterface::resize()
-{
-    /*
-    auto wsize = target_->getSize();
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    glOrtho(0, wsize.x, wsize.y, 0, -1, 1);
-    glMatrixMode(GL_MODELVIEW);
-
-    glViewport(0, 0, wsize.x, wsize.y);
-    */
-};
 
 // Called by Rocket when it wants to render geometry that it does not wish to optimise.
 void RenderInterface::RenderGeometry(Rocket::Core::Vertex* vertices, int num_vertices, int* indices, int num_indices, const Rocket::Core::TextureHandle texture, const Rocket::Core::Vector2f& translation)
@@ -76,28 +74,31 @@ void RenderInterface::RenderGeometry(Rocket::Core::Vertex* vertices, int num_ver
     //std::cerr << "RenderInterface::RenderGeometry" << std::endl;
     //std::cerr << "num_vertices: " <<  num_vertices << " num_indices: " << num_indices << std::endl;
     
+    //std::cerr << "tex: " << texture << std::endl;
+    
+    auto tex = reinterpret_cast<sf::Texture*>(texture);   
     
     //render state blend and transform
     sf::RenderStates state;
     state.transform.translate(translation.x, translation.y);
-    //state.blendMode = sf::BlendAlpha;
-    state.texture = reinterpret_cast<sf::Texture*>(texture);    
+    state.blendMode = sf::BlendAlpha; 
+    state.shader = shader_;
+    state.texture = tex;
     
-    //setup shader
-    auto shader = new sf::Shader();
-    shader->loadFromMemory(vertexShader, sf::Shader::Vertex);
-    shader->loadFromMemory(fragmentShader, sf::Shader::Fragment);
-    //state.shader = shader;
-    //requires special shader?
+    if(tex)
+        shader_->setParameter("Texture0", *tex);
+    else
+        shader_->setParameter("NoTexture", 1.f, 1.f, 1.f, 1.f);
     
-    sf::VertexArray triangles(sf::TrianglesStrip, num_indices);
+    sf::VertexArray triangles(sf::Triangles, num_indices);
     
     for(int i=0; i < num_indices; i++)
     {
         auto vert = vertices[indices[i]];
         
         triangles[i].position = sf::Vector2f(vert.position.x, vert.position.y);
-        triangles[i].texCoords = sf::Vector2f(vert.tex_coord.x, vert.tex_coord.y);
+        if(tex)
+            triangles[i].texCoords = sf::Vector2f(vert.tex_coord.x*tex->getWidth(), vert.tex_coord.y*tex->getHeight());
         triangles[i].color = sf::Color(vert.colour.red, vert.colour.green, vert.colour.blue, vert.colour.alpha);
     }
     
@@ -189,7 +190,7 @@ bool RenderInterface::LoadTexture(Rocket::Core::TextureHandle& texture_handle, R
 // Called by Rocket when a texture is required to be built from an internally-generated sequence of pixels.
 bool RenderInterface::GenerateTexture(Rocket::Core::TextureHandle& texture_handle, const Rocket::Core::byte* source, const Rocket::Core::Vector2i& source_dimensions)
 {
-    std::cerr << "RenderInterface::GenerateTexture" << std::endl;
+    std::cerr << "RenderInterface::GenerateTexture:" << source_dimensions.x << " " << source_dimensions.y << std::endl;
     
     sf::Texture *image = new sf::Texture();
     
@@ -201,7 +202,7 @@ bool RenderInterface::GenerateTexture(Rocket::Core::TextureHandle& texture_handl
     }
     texture->update(source, source_dimensions.x, source_dimensions.y, 0, 0);
     texture_handle = reinterpret_cast<Rocket::Core::TextureHandle>(image);
-
+   
     return true;
 }
 

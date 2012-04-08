@@ -6,7 +6,8 @@
 #include <Rocket/Core/RenderInterface.h>
 
 namespace sf { 
-    class RenderTarget; 
+    class RenderTarget;
+    class Shader;
 }
 
 namespace spaceg {
@@ -18,12 +19,12 @@ class RenderInterface : public Rocket::Core::RenderInterface
 {
 private:
     sf::RenderTarget* target_;
+    sf::Shader* shader_;
     
 public:
     RenderInterface(sf::RenderTarget* target);
+    ~RenderInterface();
 
-    void resize();
-    
     void startRender();
     void finishRender();
 
