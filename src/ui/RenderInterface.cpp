@@ -46,9 +46,9 @@ void main(void) \
 RenderInterface::RenderInterface(sf::RenderTarget* Window)
 {
     target_ = Window;
-    shader_ = new sf::Shader();
     
     std::cerr << "Load Shaders" << std::endl;
+    shader_ = new sf::Shader();
     shader_->loadFromMemory(vertexShader, sf::Shader::Vertex);
     shader_->loadFromMemory(fragmentShader, sf::Shader::Fragment);
 }
@@ -61,6 +61,7 @@ RenderInterface::~RenderInterface()
 void RenderInterface::startRender()
 {
     target_->pushGLStates();    
+    //glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
 }
 
 void RenderInterface::finishRender()
@@ -86,9 +87,15 @@ void RenderInterface::RenderGeometry(Rocket::Core::Vertex* vertices, int num_ver
     state.texture = tex;
     
     if(tex)
+    {
         shader_->setParameter("Texture0", *tex);
+        shader_->setParameter("NoTexture", 0.f, 0.f, 0.f, 0.f);
+    }
     else
         shader_->setParameter("NoTexture", 1.f, 1.f, 1.f, 1.f);
+    
+    auto texWidth = !tex ? 1 : tex->getWidth();
+    auto texHeight = !tex ? 1 : tex->getHeight();
     
     sf::VertexArray triangles(sf::Triangles, num_indices);
     
@@ -97,8 +104,7 @@ void RenderInterface::RenderGeometry(Rocket::Core::Vertex* vertices, int num_ver
         auto vert = vertices[indices[i]];
         
         triangles[i].position = sf::Vector2f(vert.position.x, vert.position.y);
-        if(tex)
-            triangles[i].texCoords = sf::Vector2f(vert.tex_coord.x*tex->getWidth(), vert.tex_coord.y*tex->getHeight());
+        triangles[i].texCoords = sf::Vector2f(vert.tex_coord.x*texWidth, vert.tex_coord.y*texHeight);
         triangles[i].color = sf::Color(vert.colour.red, vert.colour.green, vert.colour.blue, vert.colour.alpha);
     }
     
@@ -153,21 +159,6 @@ bool RenderInterface::LoadTexture(Rocket::Core::TextureHandle& texture_handle, R
 {
     std::cerr << "RenderInterface::LoadTexture: " << source.CString() << std::endl;
     
-    /*
-    Rocket::Core::FileInterface* file_interface = Rocket::Core::GetFileInterface();
-    Rocket::Core::FileHandle file_handle = file_interface->Open(source);
-    if (file_handle == (Rocket::Core::FileHandle)NULL)
-        return false;
-
-    file_interface->Seek(file_handle, 0, SEEK_END);
-    size_t buffer_size = file_interface->Tell(file_handle);
-    file_interface->Seek(file_handle, 0, SEEK_SET);
-    
-    char* buffer = new char[buffer_size];
-    file_interface->Read(buffer, buffer_size, file_handle);
-    file_interface->Close(file_handle);
-    */
-    
     sf::Texture *image = new sf::Texture();
 
     if(!image->loadFromFile(source.CString()))
@@ -192,8 +183,6 @@ bool RenderInterface::GenerateTexture(Rocket::Core::TextureHandle& texture_handl
 {
     std::cerr << "RenderInterface::GenerateTexture:" << source_dimensions.x << " " << source_dimensions.y << std::endl;
     
-    sf::Texture *image = new sf::Texture();
-    
     sf::Texture *texture = new sf::Texture();
     if (!texture->create(source_dimensions.x, source_dimensions.y)) 
     {
@@ -201,7 +190,7 @@ bool RenderInterface::GenerateTexture(Rocket::Core::TextureHandle& texture_handl
         return false;
     }
     texture->update(source, source_dimensions.x, source_dimensions.y, 0, 0);
-    texture_handle = reinterpret_cast<Rocket::Core::TextureHandle>(image);
+    texture_handle = reinterpret_cast<Rocket::Core::TextureHandle>(texture);
    
     return true;
 }
