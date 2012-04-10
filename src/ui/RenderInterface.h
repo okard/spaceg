@@ -19,7 +19,7 @@ class RenderInterface : public Rocket::Core::RenderInterface
 {
 private:
     sf::RenderTarget* target_;
-    sf::Shader* shader_;
+    //sf::Shader* shader_;
     
 public:
     RenderInterface(sf::RenderTarget* target);
