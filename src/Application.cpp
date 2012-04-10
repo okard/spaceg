@@ -4,6 +4,7 @@
 #include <GL/glew.h>
 
 #include "ui/RenderInterface.h"
+#include "ui/SfmlUtils.h"
 
 using namespace spaceg;
 
@@ -54,12 +55,7 @@ void Application::run()
         sf::Event event;
         while (window_.pollEvent(event))
         {
-            // Close window : exit
-            if (event.type == sf::Event::Closed)
-                window_.close();
-            
-            //resize event
-            //uiCtx_->SetDimensions (const Vector2i &dimensions)
+           handleEvent(event);
         }
         
         uiCtx_->Update();
@@ -89,6 +85,44 @@ void Application::run()
         window_.display();
      }
     
+}
+
+void Application::handleEvent(const sf::Event& event)
+{
+     //TODO Switch case
+            
+    // Close window : exit
+    if (event.type == sf::Event::Closed)
+        window_.close();
+    
+    // The window was resized
+    if (event.type == sf::Event::Resized)
+        uiCtx_->SetDimensions(Rocket::Core::Vector2i(event.size.width, event.size.height));
+    
+    //TODO key_modifier Keyboard and CTRL/ALT/...
+    
+    if(event.type == sf::Event::MouseMoved)
+        uiCtx_->ProcessMouseMove(event.mouseMove.x, event.mouseMove.y, 0);
+    
+    if(event.type == sf::Event::MouseButtonPressed)
+        uiCtx_->ProcessMouseButtonDown(mouseButtonConvert(event.mouseButton.button), 0);
+        
+    if(event.type == sf::Event::MouseButtonReleased)
+        uiCtx_->ProcessMouseButtonUp(mouseButtonConvert(event.mouseButton.button), 0);
+    
+    if(event.type == sf::Event::MouseWheelMoved)
+        uiCtx_->ProcessMouseWheel(event.mouseWheel.delta, 0);
+        
+    if(event.type == sf::Event::KeyPressed)
+        uiCtx_->ProcessKeyDown(keyConvert(event.key.code), 0);
+    
+    if(event.type == sf::Event::KeyReleased)
+        uiCtx_->ProcessKeyUp(keyConvert(event.key.code), 0);
+    
+    // Sends a single character of text as text input into this context.
+    //void ProcessTextInput(Rocket::Core::word character);
+    // Sends a string of text as text input into this context.
+    //void ProcessTextInput(const Rocket::Core::String& string);
 }
 
 

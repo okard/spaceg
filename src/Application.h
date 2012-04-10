@@ -47,6 +47,10 @@ public:
       
     void setState(State* state);
     sf::RenderTexture* const getRenderTexture();
+    
+    
+private:
+    void handleEvent(const sf::Event& event);
 };
     
 }

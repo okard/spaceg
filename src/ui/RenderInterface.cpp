@@ -103,7 +103,7 @@ Rocket::Core::CompiledGeometryHandle RenderInterface::CompileGeometry(Rocket::Co
     
     //std::cerr << "Compiled: " << geometry << " Count: " << geometry->vertices.getVertexCount() << " tex: " << geometry->texture << std::endl;
     
-    return (Rocket::Core::CompiledGeometryHandle)geometry;
+    return reinterpret_cast<Rocket::Core::CompiledGeometryHandle>(geometry);
 }
 
 // Called by Rocket when it wants to render application-compiled geometry.      
