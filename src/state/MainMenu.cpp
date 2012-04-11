@@ -22,7 +22,6 @@ MainMenu::~MainMenu()
 //update
 void MainMenu::update(long timeElapsed)
 {
-    
 }
     
 //draw

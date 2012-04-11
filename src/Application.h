@@ -25,6 +25,9 @@ class RenderInterface;
 class Application
 {
 private:
+    //Logic Stuff
+    sf::Clock clock_;
+    
     //Render Stuff
     sf::RenderWindow window_;
     sf::RenderTexture renderTexture_; 
@@ -43,14 +46,26 @@ public:
     Application();
     ~Application();
     
+    /**
+    * Run Application
+    */
     void run();
       
-    void setState(State* state);
+    /**
+    * Switch State
+    */
+    void switchState(State* const state);
+    
+    /**
+    * Gets the rendering Texture
+    */
     sf::RenderTexture* const getRenderTexture();
     
     
 private:
     void handleEvent(const sf::Event& event);
+    void update();
+    void render();
 };
     
 }

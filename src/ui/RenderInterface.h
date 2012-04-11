@@ -44,7 +44,6 @@ public:
     
     virtual void ReleaseTexture(Rocket::Core::TextureHandle texture);
 
-
 };
 
 } //end namespace spaceg

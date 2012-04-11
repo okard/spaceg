@@ -6,11 +6,15 @@
 #include "ui/RenderInterface.h"
 #include "ui/SfmlUtils.h"
 
+//debug
+#include <iostream>
+
 using namespace spaceg;
 
 Application::Application()
-    : window_(sf::VideoMode(800, 600), "SpaceG"),
-      mainMenu_(this)
+    : window_(sf::VideoMode(1024, 768), "SpaceG", sf::Style::Titlebar | sf::Style::Close ),
+      mainMenu_(this),
+      currentState_(nullptr)
 {
     //setting up sfml render stuff
     window_.setFramerateLimit(60);
@@ -28,16 +32,19 @@ Application::Application()
     
     uiCtx_ = Rocket::Core::CreateContext("default", Rocket::Core::Vector2i(size.x, size.y));
     
-    //test
+    //Load Fonts
     Rocket::Core::FontDatabase::LoadFontFace("data/fonts/LinLibertine_R.otf", "Libertine", Rocket::Core::Font::STYLE_NORMAL, Rocket::Core::Font::WEIGHT_NORMAL);
-    Rocket::Core::FontDatabase::LoadFontFace("data/fonts/Delicious-Bold.otf");
+    Rocket::Core::FontDatabase::LoadFontFace("data/fonts/DroidSansMono.ttf", "DroidSansMono", Rocket::Core::Font::STYLE_NORMAL, Rocket::Core::Font::WEIGHT_NORMAL);
+
+    //test
+
     Rocket::Core::ElementDocument* document = uiCtx_->LoadDocument("data/ui_test.rml");
     if (document != NULL)
         document->Show();
     
     
     //State Stuff
-    currentState_ = &mainMenu_;
+    switchState(&mainMenu_);
 }
 
 Application::~Application()
@@ -54,37 +61,11 @@ void Application::run()
         // Process events
         sf::Event event;
         while (window_.pollEvent(event))
-        {
            handleEvent(event);
-        }
         
-        uiCtx_->Update();
-         
-        // Clear the whole texture with red color
-        renderTexture_.clear(sf::Color::Black);
-
-        // Draw stuff to the texture
-        currentState_->draw();
-
-        // We're done drawing to the texture
-        renderTexture_.display();
-        
-        // Clear screen
-        window_.clear();
-         
-        //Draw Render Texture
-        renderSprite_.setTexture(renderTexture_.getTexture());
-        window_.draw(renderSprite_);
-        //Post Effects Fragment shader
-        
-        uiRenderInterface_->startRender();
-        uiCtx_->Render();
-        uiRenderInterface_->finishRender();
- 
-        // Update the window
-        window_.display();
-     }
-    
+        update();
+        render();
+     }  
 }
 
 void Application::handleEvent(const sf::Event& event)
@@ -97,27 +78,29 @@ void Application::handleEvent(const sf::Event& event)
     
     // The window was resized
     if (event.type == sf::Event::Resized)
-        uiCtx_->SetDimensions(Rocket::Core::Vector2i(event.size.width, event.size.height));
-    
-    //TODO key_modifier Keyboard and CTRL/ALT/...
+    {
+        //std::cerr << "RESIZE" << std::endl;  
+        auto coord = window_.convertCoords (sf::Vector2i(event.size.width, event.size.height)); 
+        uiCtx_->SetDimensions(Rocket::Core::Vector2i(coord.x, coord.y));
+    }
     
     if(event.type == sf::Event::MouseMoved)
-        uiCtx_->ProcessMouseMove(event.mouseMove.x, event.mouseMove.y, 0);
+        uiCtx_->ProcessMouseMove(event.mouseMove.x, event.mouseMove.y, getKeyModifier());
     
     if(event.type == sf::Event::MouseButtonPressed)
-        uiCtx_->ProcessMouseButtonDown(mouseButtonConvert(event.mouseButton.button), 0);
+        uiCtx_->ProcessMouseButtonDown(mouseButtonConvert(event.mouseButton.button), getKeyModifier());
         
     if(event.type == sf::Event::MouseButtonReleased)
-        uiCtx_->ProcessMouseButtonUp(mouseButtonConvert(event.mouseButton.button), 0);
+        uiCtx_->ProcessMouseButtonUp(mouseButtonConvert(event.mouseButton.button), getKeyModifier());
     
     if(event.type == sf::Event::MouseWheelMoved)
-        uiCtx_->ProcessMouseWheel(event.mouseWheel.delta, 0);
+        uiCtx_->ProcessMouseWheel(event.mouseWheel.delta, getKeyModifier());
         
     if(event.type == sf::Event::KeyPressed)
-        uiCtx_->ProcessKeyDown(keyConvert(event.key.code), 0);
+        uiCtx_->ProcessKeyDown(keyConvert(event.key.code), getKeyModifier());
     
     if(event.type == sf::Event::KeyReleased)
-        uiCtx_->ProcessKeyUp(keyConvert(event.key.code), 0);
+        uiCtx_->ProcessKeyUp(keyConvert(event.key.code), getKeyModifier());
     
     // Sends a single character of text as text input into this context.
     //void ProcessTextInput(Rocket::Core::word character);
@@ -125,6 +108,47 @@ void Application::handleEvent(const sf::Event& event)
     //void ProcessTextInput(const Rocket::Core::String& string);
 }
 
+void Application::update()
+{
+    const sf::Time elapsedTime = clock_.restart();
+    currentState_->update(elapsedTime.asMilliseconds());
+    uiCtx_->Update();      
+}
+
+void Application::render()
+{
+    // Clear the whole texture with red color
+    renderTexture_.clear(sf::Color::Black);
+
+    // Draw stuff to the texture
+    currentState_->draw();
+
+    // We're done drawing to the texture
+    renderTexture_.display();
+    
+    // Clear screen
+    window_.clear();
+        
+    //Draw Render Texture
+    renderSprite_.setTexture(renderTexture_.getTexture());
+    window_.draw(renderSprite_);
+    //Post Effects Fragment shader
+    
+    uiRenderInterface_->startRender();
+    uiCtx_->Render();
+    uiRenderInterface_->finishRender();
+
+    // Update the window
+    window_.display();
+}
+
+
+void Application::switchState(State* const state)
+{
+    //disable old state?
+    //init state
+    currentState_ = state;
+}
 
 sf::RenderTexture* const Application::getRenderTexture()
 {

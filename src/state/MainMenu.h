@@ -20,6 +20,8 @@ class MainMenu : public State
 private:
     Application* const app_;
     
+    //Document
+    
 public:
     MainMenu(Application* const app);
     virtual ~MainMenu();

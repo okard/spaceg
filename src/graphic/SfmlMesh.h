@@ -18,16 +18,18 @@ class SfmlMesh : public sf::Drawable
 private:
     
     sf::Shader shader;
-    //vbo
-    //vbo
-    
+    //vbo vertexes
+    //vbo elements
     
 public:
+    SfmlMesh();
+    virtual ~SfmlMesh();
     
     //vertex format?
     //shader
+    //set translate matrix for shader from RenderStates
     
-    virtual ~SfmlMesh();
+    //add sf:.Vertex + Indices
     
     void draw (sf::RenderTarget &target, sf::RenderStates states) const;   
 };
