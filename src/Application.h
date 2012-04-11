@@ -9,10 +9,15 @@
 #include <SFML/Graphics.hpp>
 #include <Rocket/Core.h>
 
+extern "C" { 
+    #include <lua.h>
+    #include <lualib.h>
+    #include <lauxlib.h>
+}
+
 #include "ui/SystemInterface.h"
 
-#include "state/State.h"
-#include "state/MainMenu.h"
+#include "state/LuaGameState.h"
 
 
 namespace spaceg {
@@ -38,9 +43,11 @@ private:
     RenderInterface* uiRenderInterface_;
     Rocket::Core::Context* uiCtx_;
     
+    //Scripting/Lua
+    lua_State *luaState_;
+
     //State Handling
     State* currentState_;
-    MainMenu mainMenu_;
     
 public:
     Application();

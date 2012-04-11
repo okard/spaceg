@@ -5,7 +5,10 @@
 
 #include <string>
 
-#include <SFML/Graphics.hpp>
+#include <SFML/Graphics/RenderTarget.hpp>
+#include <SFML/Graphics/Sprite.hpp>
+
+#include "Entity.h"
 
 
 namespace spaceg {
@@ -26,7 +29,7 @@ private:
     
 public:
     
-    void draw(const sf::RenderTexture* renderTexture);
+    void draw(sf::RenderTarget* const renderTarget);
 };
 
 

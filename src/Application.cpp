@@ -13,7 +13,7 @@ using namespace spaceg;
 
 Application::Application()
     : window_(sf::VideoMode(1024, 768), "SpaceG", sf::Style::Titlebar | sf::Style::Close ),
-      mainMenu_(this),
+      luaState_(luaL_newstate()),
       currentState_(nullptr)
 {
     //setting up sfml render stuff
@@ -42,13 +42,14 @@ Application::Application()
     if (document != NULL)
         document->Show();
     
-    
-    //State Stuff
-    switchState(&mainMenu_);
+    //scripting:
+    luaL_openlibs(luaState_);
 }
 
 Application::~Application()
 {
+    lua_close(luaState_);
+          
     uiCtx_->RemoveReference();
     delete uiRenderInterface_;
 }
@@ -111,7 +112,10 @@ void Application::handleEvent(const sf::Event& event)
 void Application::update()
 {
     const sf::Time elapsedTime = clock_.restart();
-    currentState_->update(elapsedTime.asMilliseconds());
+    
+    if(currentState_)
+        currentState_->update(elapsedTime.asMilliseconds());
+    
     uiCtx_->Update();      
 }
 
@@ -121,7 +125,8 @@ void Application::render()
     renderTexture_.clear(sf::Color::Black);
 
     // Draw stuff to the texture
-    currentState_->draw();
+    if(currentState_)
+        currentState_->draw();
 
     // We're done drawing to the texture
     renderTexture_.display();
@@ -145,6 +150,9 @@ void Application::render()
 
 void Application::switchState(State* const state)
 {
+    if(!state)
+        return;
+    
     //disable old state?
     //init state
     currentState_ = state;

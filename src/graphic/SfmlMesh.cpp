@@ -2,6 +2,8 @@
 
 #include "SfmlMesh.h"
 
+using namespace spaceg;
+
 
 SfmlMesh::SfmlMesh()
 {

@@ -1,0 +1,3 @@
+[submodule "deps/slua"]
+	path = deps/slua
+	url = git://github.com/okard/slua.git

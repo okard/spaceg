@@ -6,6 +6,8 @@
 
 namespace spaceg {
     
+class Application;
+    
 /**
 * State Interface
 */   
@@ -16,6 +18,13 @@ private:
     
 public:
     virtual ~State() {}
+    
+    
+    //activate
+    virtual void activate(Application* const app){}
+    
+    //disable
+    virtual void disable(){}
     
     //update
     virtual void update(long timeElapsed) = 0;

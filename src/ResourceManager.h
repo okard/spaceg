@@ -8,19 +8,14 @@
 namespace spaceg {
 
     
+template <class T>    
 class ResourceManager
 {
 private:
     //hotloading change events for files?
     
 public:
-    
-    //sf::Images
-    //script files
-    //ui files
-    //as template
-    // -> FileResourceManager
-    
+        
 };
 
 

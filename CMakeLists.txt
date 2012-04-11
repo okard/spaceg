@@ -12,4 +12,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -std=c++11")
 file(GLOB_RECURSE SPACEG_SOURCES src/*.cpp)
 
 add_executable(spaceg ${SPACEG_SOURCES})
-target_link_libraries(spaceg "GL" "GLEW" "sfml-system" "sfml-window" "sfml-graphics" "sfml-audio" "RocketCore" "RocketControls" "RocketDebugger")
+target_link_libraries(spaceg 
+                      "GL" "GLEW" 
+                      "sfml-system" "sfml-window" "sfml-graphics" "sfml-audio" 
+                      "RocketCore" "RocketControls" "RocketDebugger"
+                      "lua")

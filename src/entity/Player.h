@@ -4,8 +4,9 @@
 #ifndef __SPACEG_PLAYER__
 #define __SPACEG_PLAYER__
 
-
 #include <string>
+
+#include "Entity.h"
 
 
 namespace spaceg {
