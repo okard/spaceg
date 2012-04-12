@@ -8,12 +8,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <Rocket/Core.h>
-
-extern "C" { 
-    #include <lua.h>
-    #include <lualib.h>
-    #include <lauxlib.h>
-}
+#include <slua/State.hpp>
 
 #include "ui/SystemInterface.h"
 
@@ -44,7 +39,7 @@ private:
     Rocket::Core::Context* uiCtx_;
     
     //Scripting/Lua
-    lua_State *luaState_;
+    slua::State luaState_;
 
     //State Handling
     State* currentState_;

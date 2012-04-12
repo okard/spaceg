@@ -16,7 +16,9 @@ namespace spaceg {
 class LuaGameState
 {
 private:
+    
 public:
+    
 };
     
     

@@ -5,6 +5,12 @@ cmake_minimum_required(VERSION 2.8)
 
 project(spaceg)
 
+# SLUA
+add_subdirectory("deps/slua")
+include_directories("deps/slua/include")
+link_directories(${CMAKE_CURRENT_LIST_DIR}."deps/slua/lib")
+
+
 # C++11
 set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -std=c++11")
 
@@ -16,4 +22,4 @@ target_link_libraries(spaceg
                       "GL" "GLEW" 
                       "sfml-system" "sfml-window" "sfml-graphics" "sfml-audio" 
                       "RocketCore" "RocketControls" "RocketDebugger"
-                      "lua")
+                      "slua" "lua")

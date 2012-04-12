@@ -5,8 +5,24 @@
 
 #include "State.h"
 
+//SFML Forward Declaration
+namespace sf {
+    class Sprite;
+}
 
+//LibRocket Forward Declaration
+namespace Rocket {
+    namespace Core {
+        class ElementDocument;
+    }
+}
+
+/*
+* SpaceG Namespace
+*/
 namespace spaceg {
+
+class Entity;
     
 /**
 * Basic Game State
@@ -22,11 +38,10 @@ private:
     //Rocket::Core::ElementDocument*
     
 public:
-    
-    //attach Entity
-    //attach Document
-    //attach Sprites
-    
+    void attach(Entity* const entity); 
+    void attach(sf::Sprite* const sprite);
+    void attach(Rocket::Core::ElementDocument* const doc);
+
     //create -> LuaGameState
 };
     

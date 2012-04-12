@@ -13,7 +13,6 @@ using namespace spaceg;
 
 Application::Application()
     : window_(sf::VideoMode(1024, 768), "SpaceG", sf::Style::Titlebar | sf::Style::Close ),
-      luaState_(luaL_newstate()),
       currentState_(nullptr)
 {
     //setting up sfml render stuff
@@ -42,13 +41,10 @@ Application::Application()
     if (document != NULL)
         document->Show();
     
-    //scripting:
-    luaL_openlibs(luaState_);
 }
 
 Application::~Application()
 {
-    lua_close(luaState_);
           
     uiCtx_->RemoveReference();
     delete uiRenderInterface_;
