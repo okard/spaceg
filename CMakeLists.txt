@@ -8,8 +8,7 @@ project(spaceg)
 # SLUA
 add_subdirectory("deps/slua")
 include_directories("deps/slua/include")
-link_directories(${CMAKE_CURRENT_LIST_DIR}."deps/slua/lib")
-
+link_directories("${CMAKE_CURRENT_LIST_DIR}/deps/slua/lib")
 
 # C++11
 set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -std=c++11")

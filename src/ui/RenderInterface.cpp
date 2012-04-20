@@ -50,8 +50,8 @@ void RenderInterface::RenderGeometry(Rocket::Core::Vertex* vertices, int num_ver
     //std::cerr << "tex: " << texture << std::endl;
     
     auto tex = reinterpret_cast<sf::Texture*>(texture);   
-    auto texWidth = !tex ? 1 : tex->getWidth();
-    auto texHeight = !tex ? 1 : tex->getHeight();
+    auto texWidth = !tex ? 1 : tex->getSize().x;
+    auto texHeight = !tex ? 1 : tex->getSize().y;
     
     sf::VertexArray triangles(sf::Triangles, num_indices);
     
@@ -83,8 +83,8 @@ Rocket::Core::CompiledGeometryHandle RenderInterface::CompileGeometry(Rocket::Co
     //std::cerr << "RenderInterface::CompileGeometry" << std::endl;
     
     auto tex = reinterpret_cast<sf::Texture*>(texture);  
-    auto texWidth = !tex ? 1 : tex->getWidth();
-    auto texHeight = !tex ? 1 : tex->getHeight();
+    auto texWidth = !tex ? 1 : tex->getSize().x;
+    auto texHeight = !tex ? 1 : tex->getSize().y;
     
     SfmlRenderGeometry* geometry = new SfmlRenderGeometry();
     geometry->texture = tex;
@@ -157,7 +157,7 @@ bool RenderInterface::LoadTexture(Rocket::Core::TextureHandle& texture_handle, R
     };
     
     texture_handle = reinterpret_cast<Rocket::Core::TextureHandle>(image);
-    texture_dimensions = Rocket::Core::Vector2i(image->getWidth(), image->getHeight());
+    texture_dimensions = Rocket::Core::Vector2i(image->getSize().x, image->getSize().y);
 
     return true;
 }

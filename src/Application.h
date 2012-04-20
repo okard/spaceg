@@ -12,7 +12,7 @@
 
 #include "ui/SystemInterface.h"
 
-#include "state/LuaGameState.h"
+#include "lua/LuaGameState.h"
 
 
 namespace spaceg {

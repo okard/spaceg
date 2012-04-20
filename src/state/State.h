@@ -19,7 +19,6 @@ private:
 public:
     virtual ~State() {}
     
-    
     //activate
     virtual void activate(Application* const app){}
     

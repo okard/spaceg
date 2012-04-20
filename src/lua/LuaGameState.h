@@ -5,7 +5,7 @@
 #ifndef __SPACEG_LUAGAMESTATE__
 #define __SPACEG_LUAGAMESTATE__
 
-#include "GameState.h"
+#include "../state/GameState.h"
 
 
 namespace spaceg {
