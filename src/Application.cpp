@@ -41,6 +41,8 @@ Application::Application()
     if (document != NULL)
         document->Show();
     
+    
+    //setting up lua interface
 }
 
 Application::~Application()

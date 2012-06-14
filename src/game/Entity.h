@@ -13,9 +13,14 @@ class Entity
 {
 private:
     
+    
 public:
     
 };
+
+
+
+//GraphicEntity has a Sprite?
     
 } //end namespace spaceg
 

@@ -19,6 +19,12 @@ class Player
 private:
     std::string name_;
     
+    //current resource points
+    //current level
+    
+    //Ships controlled by the player
+    //std::vector<Ship> ships_;
+    
     
 public:
     Player();

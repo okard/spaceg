@@ -2,7 +2,7 @@
 
 
 #pragma once
-#ifndef __SPACEG_RESOURCEMANAGER_
+#ifndef __SPACEG_RESOURCEMANAGER__
 #define __SPACEG_RESOURCEMANAGER__
 
 namespace spaceg {
