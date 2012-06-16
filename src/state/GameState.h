@@ -39,16 +39,13 @@ private:
     
 public:
     
-    //Initialize
-    //Hold
-    //Resume
-    //Destroy
+
     
     void attach(Entity* const entity); 
     void attach(sf::Sprite* const sprite);
     void attach(Rocket::Core::ElementDocument* const doc);
 
-    
+    //cleanup
     
     //create -> LuaGameState
 };

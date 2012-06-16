@@ -12,11 +12,12 @@ namespace spaceg {
 class Entity
 {
 private:
+    //properties: static, dynamic, active
     
-    
-public:
-    
+public:  
+    //public update(long timeElapsed);
 };
+
 
 
 

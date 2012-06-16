@@ -19,6 +19,13 @@ private:
 public:
     virtual ~State() {}
     
+        //Initialize
+    //Hold
+    //Resume
+    //Destroy
+    
+    
+    
     //activate
     virtual void activate(Application* const app){}
     
