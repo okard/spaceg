@@ -14,7 +14,7 @@ namespace spaceg {
 /**
 * Class to render nebula
 */
-class NebulaEntity : public GraphicEntity
+class NebulaGraphic : public GraphicEntity
 {
 private:
     
@@ -29,7 +29,7 @@ private:
     
 public:
     
-    virtual ~NebulaEntity();
+    virtual ~NebulaGraphic();
     
     virtual void draw (sf::RenderTarget &target, sf::RenderStates states) const;
     
