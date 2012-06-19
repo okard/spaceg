@@ -56,8 +56,8 @@ private:
     int currentSpeed_ = 0;
     int health_ = 100;
     
-    //current actions/behavior
-        //-> attack, protect, -> lower level
+    //current actions/behavior/command
+        //-> attack, protect, move to -> lower level
         //-> escort -> higher level
     //current flotte/division
 

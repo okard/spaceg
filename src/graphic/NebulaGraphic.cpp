@@ -14,5 +14,5 @@ void NebulaGraphic::draw(sf::RenderTarget &target, sf::RenderStates states) cons
 {
     //prepare shader
     
-    //target.draw(vertices, count, sf::Quads);
+    //target.draw(vertices, count, sf::Quads, states);
 }

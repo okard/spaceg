@@ -1,8 +1,8 @@
 
 
 #pragma once
-#ifndef __SPACEG_NEBULAENTITY__
-#define __SPACEG_NEBULAENTITY__
+#ifndef __SPACEG_NEBULAGRAPHIC__
+#define __SPACEG_NEBULAGRAPHIC__
 
 #include "../Types.h"
 #include "GraphicEntity.h"
@@ -23,9 +23,14 @@ private:
     
     //color:
     
+    //base texture
+    
     
     //sf::Vertex quads
     //custom shader
+    
+    
+    //see for reference: https://www.youtube.com/watch?v=CaTI2d0tQME
     
 public:
     
@@ -38,4 +43,4 @@ public:
 
 }
 
-#endif //  __SPACEG_GRAPHICENTITY__
+#endif //  __SPACEG_NEBULAGRAPHIC__
