@@ -3,7 +3,7 @@
 #ifndef __SPACEG_GRAPHICENTITY__
 #define __SPACEG_GRAPHICENTITY__
 
-#include <SFML/Drawable.hpp>
+#include <SFML/Graphics/Drawable.hpp>
 
 #include "../game/Entity.h"
 
@@ -20,10 +20,10 @@ private:
     //position absolute/relative?
     
 public:
-    GraphicEntity();
-    virtual ~GraphicEntity();
+    GraphicEntity(){};
+    virtual ~GraphicEntity(){};
     
-    virtual void draw (RenderTarget &target, RenderStates states) const;
+    virtual void draw (sf::RenderTarget &target, sf::RenderStates states) const = 0;
 };
 
 }

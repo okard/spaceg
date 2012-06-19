@@ -11,11 +11,22 @@ namespace spaceg {
 */
 class Entity
 {
-private:
-    //properties: static, dynamic, active
+protected:
+    bool static_;
+    bool active_;
     
+    //request update
 public:  
-    //public update(long timeElapsed);
+    /**
+    * Return true if entity requires an update
+    */
+    virtual bool requestUpdate();
+    
+    /**
+    * Update entity with current elapsed time
+    */
+    virtual void update(long timeElapsed);
+    
 };
 
 

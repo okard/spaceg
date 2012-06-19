@@ -16,6 +16,10 @@ private:
         
     //combine background starfield and planets and nebulas
         //create a big big map
+        
+    //entities in current chunk
+    
+    //simple tree?
     
 public:
     
