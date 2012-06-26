@@ -4,8 +4,15 @@
 #ifndef __SPACEG_NEBULAGRAPHIC__
 #define __SPACEG_NEBULAGRAPHIC__
 
+#include <vector>
+
+#include <SFML/Graphics/Vertex.hpp>
+#include <SFML/Graphics/Color.hpp>
+
 #include "../Types.h"
 #include "GraphicEntity.h"
+
+
 
 
 namespace spaceg {
@@ -22,11 +29,15 @@ private:
     ubyte layerCount_;
     
     //color:
+    sf::Color color_;
     
-    //base texture
+    //base texture (sprite?)
+    //sf::Texture* texture_;
+    
+    //vertexes
+    std::vector<sf::Vertex> vertexes_;
     
     
-    //sf::Vertex quads
     //custom shader
     
     

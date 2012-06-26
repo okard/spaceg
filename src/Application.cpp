@@ -6,6 +6,8 @@
 #include "ui/RenderInterface.h"
 #include "ui/SfmlUtils.h"
 
+#include "state/IState.h"
+
 //debug
 #include <iostream>
 
@@ -137,7 +139,8 @@ void Application::render()
     //Draw Render Texture
     renderSprite_.setTexture(renderTexture_.getTexture());
     window_.draw(renderSprite_);
-    //Post Effects Fragment shader
+    //TODO Post Effects Fragment shader here please 
+    //Hook posteffects together with state?
     
     uiRenderInterface_->startRender();
     uiCtx_->Render();

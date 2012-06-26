@@ -8,16 +8,15 @@
 
 #include <SFML/Graphics.hpp>
 #include <Rocket/Core.h>
-#include <slua/State.hpp>
 
 #include "ui/SystemInterface.h"
 
-#include "lua/LuaGameState.h"
 
 
 namespace spaceg {
     
 class RenderInterface;
+class IState;
   
 /**
 * Application Class
@@ -38,14 +37,18 @@ private:
     RenderInterface* uiRenderInterface_;
     Rocket::Core::Context* uiCtx_;
     
-    //Scripting/Lua
-    slua::State luaState_;
-
     //State Handling
     IState* currentState_;
     
 public:
+    /**
+    * settung up application
+    */
     Application();
+    
+    /**
+    * Destruct and cleanup Application
+    */
     ~Application();
     
     /**
@@ -63,9 +66,16 @@ public:
     */
     sf::RenderTarget * const getRenderTarget();
     
+    //TODO get ui Context
+    
 private:
+    //handle sfml events
     void handleEvent(const sf::Event& event);
+    
+    //logic update
     void update();
+    
+    //render to screen
     void render();
 };
     
