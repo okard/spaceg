@@ -81,6 +81,8 @@ void Application::handleEvent(const sf::Event& event)
         //std::cerr << "RESIZE" << std::endl;  
         auto coord = window_.convertCoords (sf::Vector2i(event.size.width, event.size.height)); 
         uiCtx_->SetDimensions(Rocket::Core::Vector2i(coord.x, coord.y));
+        
+        //resize render texture
     }
     
     if(event.type == sf::Event::MouseMoved)
@@ -146,7 +148,7 @@ void Application::render()
 }
 
 
-void Application::switchState(State* const state)
+void Application::switchState(IState* const state)
 {
     if(!state)
         return;
@@ -156,7 +158,7 @@ void Application::switchState(State* const state)
     currentState_ = state;
 }
 
-sf::RenderTexture* const Application::getRenderTexture()
+sf::RenderTarget* const Application::getRenderTarget()
 {
     return &renderTexture_;
 }

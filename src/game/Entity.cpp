@@ -4,6 +4,22 @@
 
 using namespace spaceg;
 
+/**
+* Default constructor
+*/
+Entity::Entity()
+    : entityType_(TypeLogic)
+{
+}
+
+/**
+* Entity with given type
+*/
+Entity::Entity(EntityType type)
+    : entityType_(type)
+{
+}
+
 
 /// Request update when not static and active
 bool Entity::requestUpdate()
@@ -16,3 +32,10 @@ void Entity::update(long timeElapsed)
 {
 }
 
+/**
+* Get entity type
+*/
+Entity::EntityType Entity::getType()
+{
+    return entityType_;
+}

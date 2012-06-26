@@ -1,7 +1,7 @@
 
 #pragma once
-#ifndef __SPACEG_STATE__
-#define __SPACEG_STATE__
+#ifndef __SPACEG_ISTATE__
+#define __SPACEG_ISTATE__
 
 
 namespace spaceg {
@@ -11,20 +11,18 @@ class Application;
 /**
 * State Interface
 */   
-class State
+class IState
 {
 private:
     
     
 public:
-    virtual ~State() {}
+    virtual ~IState() {}
     
-        //Initialize
+    //Initialize
     //Hold
     //Resume
     //Destroy
-    
-    
     
     //activate
     virtual void activate(Application* const app){}

@@ -3,7 +3,9 @@
 #ifndef __SPACEG_GAMESTATE__
 #define __SPACEG_GAMESTATE__
 
-#include "State.h"
+#include <vector>
+
+#include "IState.h"
 
 //SFML Forward Declaration
 namespace sf {
@@ -22,32 +24,57 @@ namespace Rocket {
 */
 namespace spaceg {
 
+class Application;
 class Entity;
     
 /**
 * Basic Game State
 */
-class GameState : public State
+class GameState : public IState
 {
 private:
-    //GUI Documents
-    //Sprites
-    //Entities
+    //saved entities
+    std::vector<Entity*> entities_;
     
-    //sf::Sprite
-    //Rocket::Core::ElementDocument*
+    //application
+    Application* app_;
     
 public:
+    /**
+    * Constructor
+    */
+    GameState();
     
-
+    /**
+    * Destructor
+    */
+    virtual ~GameState();
     
+    /**
+    * Attach a game entity to this state
+    */
     void attach(Entity* const entity); 
-    void attach(sf::Sprite* const sprite);
-    void attach(Rocket::Core::ElementDocument* const doc);
-
-    //cleanup
     
-    //create -> LuaGameState
+    /**
+    * Activate state for this application;
+    */
+    virtual void activate(Application* const app);
+    
+    /**
+    * Update Game State
+    */
+    virtual void update(long timeElapsed);
+        
+    /**
+    * Draw current state
+    */
+    virtual void draw();
+    
+    /**
+    * Clean up state
+    */
+    virtual void cleanup();
+    
 };
     
     

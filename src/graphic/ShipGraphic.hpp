@@ -6,6 +6,8 @@
 
 #include "GraphicEntity.h"
 
+namespace sf { class Sprite; }
+
 
 namespace spaceg {
 
@@ -22,6 +24,8 @@ private:
     Ship* const ship_;
     
     //texture
+    sf::Sprite* shipSprite_;
+    
     //model
     
 public:
@@ -29,8 +33,12 @@ public:
     ShipGraphic(Ship* const ship);
     
     virtual ~ShipGraphic();
-
+    
+    virtual void update(long timeElapsed);
+    
     virtual void draw (sf::RenderTarget &target, sf::RenderStates states) const;
+    
+    //get ship
        
 };
       

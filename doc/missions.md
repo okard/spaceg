@@ -1,5 +1,17 @@
 # Missions
 
+Each mission requires following aspects:
+
+* Actors
+    - Persons
+    - Ship
+    - Planets
+* Map information
+* Dialogs
+* Mission objectives
+
+This file has a short overview of the missions detail description can be found in the subfolder *missions/* 
+
 
 ## Intro
 
@@ -11,27 +23,17 @@
 
 ###  Mission 01
 
-*Mission objectives*
 * Protect cargo ship <Name> to planet <Name> to gain resources
 * Protect cargo ship when gaining resources
 
-*Persons*
-
-*Ships*
-
-*Dialogs*
-
-
 ### Mission 02 
 
-*Mission objectives*
 * Scan a nebula
 * Clear a route of pirates
 
 ### Mission 03 - The meeting
 
 * Meeting with other races
-
 
 ### Mission 04 - The rescue
 

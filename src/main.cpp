@@ -4,10 +4,13 @@
  
 using namespace spaceg;
 
-int main()
+int main(int argc, char **argv)
 {
-    Application app;
+    //Parse commandline options
+    //-main script(lua) file to run?
+    //-log outputs?
     
+    Application app;
     app.run();
 
     return EXIT_SUCCESS;

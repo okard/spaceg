@@ -20,10 +20,18 @@ private:
     //position absolute/relative?
     
 public:
-    GraphicEntity(){};
-    virtual ~GraphicEntity(){};
+    GraphicEntity() : 
+        Entity(TypeGraphic)
+    {   
+    }
     
-    virtual void draw (sf::RenderTarget &target, sf::RenderStates states) const = 0;
+    virtual ~GraphicEntity()
+    {
+    }
+    
+    virtual void draw (sf::RenderTarget &target, sf::RenderStates states) const
+    {
+    }
 };
 
 }

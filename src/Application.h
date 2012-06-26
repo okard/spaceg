@@ -42,7 +42,7 @@ private:
     slua::State luaState_;
 
     //State Handling
-    State* currentState_;
+    IState* currentState_;
     
 public:
     Application();
@@ -56,13 +56,12 @@ public:
     /**
     * Switch State
     */
-    void switchState(State* const state);
+    void switchState(IState* const state);
     
     /**
-    * Gets the rendering Texture
+    * Gets the rendering target
     */
-    sf::RenderTexture* const getRenderTexture();
-    
+    sf::RenderTarget * const getRenderTarget();
     
 private:
     void handleEvent(const sf::Event& event);
