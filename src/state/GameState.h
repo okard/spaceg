@@ -7,18 +7,6 @@
 
 #include "IState.h"
 
-//SFML Forward Declaration
-namespace sf {
-    class Sprite;
-}
-
-//LibRocket Forward Declaration
-namespace Rocket {
-    namespace Core {
-        class ElementDocument;
-    }
-}
-
 /*
 * SpaceG Namespace
 */

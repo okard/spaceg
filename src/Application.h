@@ -31,6 +31,7 @@ private:
     sf::RenderWindow window_;
     sf::RenderTexture renderTexture_; 
     sf::Sprite renderSprite_;
+    sf::View view_;
     
     //UI
     SystemInterface uiSysInterface_;
@@ -67,6 +68,8 @@ public:
     sf::RenderTarget * const getRenderTarget();
     
     //TODO get ui Context
+    
+    //TODO get view
     
 private:
     //handle sfml events

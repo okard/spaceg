@@ -7,7 +7,7 @@
 #include <SFML/Graphics/Transform.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
-#include "../game/Random.hpp"
+#include "../utils/Random.hpp"
 
 #include <iostream>
 
@@ -41,37 +41,37 @@ void NebulaGraphic::random()
 {
     vertexes_.clear();
     
-    MersenneTwister rand(0x896b1f30);
+    MersenneTwister rand;
+    unsigned int seed = rand.random();
     
+    std::cout << "Seed: " << seed << std::endl;
+    rand.seed(seed);
+    
+    //green: 2807516958
+    //blue: 251307725
+    //violet: 3693675364, 1041013430
+    //136749304
     
     //TODO use a seed to get the values
     
     //pick color
         
-    sf::Color c = sf::Color(rand.random(0,255), rand.random(0,255), rand.random(0,255), 255);
+    sf::Color c = sf::Color(rand.random(100,255), rand.random(100,255), rand.random(100,255), 255);
     
     //pick random count of layer
-    layerCount_ = 4;
-    
-    auto texSize = texture_->getSize();
+    layerCount_ = rand.random(2,8);
     
     //create sf:Vertex
     //set color and texture coord sf::Vertex -> layerCount * 4
     for(int i=0; i < layerCount_; i++)
     {
-        int quadSize = 500;
+        int quadSize = 400;
                 
         sf::Transform proj;
-        //proj.rotate(20*i);
-        proj.rotate(45*i, quadSize/2, quadSize/2);
+        proj.rotate(rand.random(30,50)*i, quadSize/2, quadSize/2);
         proj.translate(rand.random(35,60), rand.random(35,60));
-        //translate in random direction?
-        
-        //Vector2f rotation.transformPoint (const Vector2f &point) const 
-        //+ minimal translation? .translate(float, float);
-    
-        //set right coords
-        //color transparncy for each layer?
+
+        //color transparency for each layer?
 
         //Vertex (const Vector2f &thePosition, const Color &theColor, const Vector2f &theTexCoords)
         vertexes_.push_back(sf::Vertex(proj.transformPoint(sf::Vector2f(0, 0)), c, sf::Vector2f(0, 0)));
@@ -95,6 +95,8 @@ void NebulaGraphic::draw(sf::RenderTarget &target, sf::RenderStates states) cons
 {
     if(vertexes_.size() <= 0)
         return;
+    
+    states.transform.translate(1,1);
     
     //prepare shader
     

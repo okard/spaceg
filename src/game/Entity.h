@@ -22,10 +22,10 @@ public:
     
 protected:
     // it is a static entity
-    bool static_;
+    bool static_ = false;
     
     // the entity is active
-    bool active_;
+    bool active_ = true;
     
     // entity type
     EntityType entityType_;

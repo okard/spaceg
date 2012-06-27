@@ -20,6 +20,8 @@ private:
     
     //ship dock
     
+    //defense
+    
 public:
     
     

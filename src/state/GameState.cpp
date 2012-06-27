@@ -9,6 +9,8 @@
 #include "../game/Entity.h"
 #include "../graphic/GraphicEntity.h"
 
+#include <iostream>
+
 
 using namespace spaceg;
 
@@ -34,6 +36,8 @@ GameState::~GameState()
 void GameState::attach(Entity* const entity)
 {
     entities_.push_back(entity);
+    
+     std::cout << "attach " << entities_.size()  << std::endl;
 }
 
 
@@ -65,6 +69,8 @@ void GameState::draw()
 {
     if(app_ == nullptr)
         return;
+    
+    std::cout << "test " << entities_.size()  << std::endl;
     
     for(Entity* e: entities_)
     {

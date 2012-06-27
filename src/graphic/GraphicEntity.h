@@ -24,6 +24,10 @@ private:
     //graphic layer
     short layerId_;
     
+protected:
+    //access to render target
+    sf::RenderTarget* target_;
+    
 public:
     GraphicEntity() : 
         Entity(TypeGraphic)

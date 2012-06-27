@@ -6,7 +6,7 @@
 
 #include "GraphicEntity.h"
 
-namespace sf { class Sprite; }
+#include <SFML/Graphics/Sprite.hpp>
 
 
 namespace spaceg {
@@ -24,7 +24,7 @@ private:
     Ship* const ship_;
     
     //texture
-    sf::Sprite* shipSprite_;
+    sf::Sprite shipSprite_;
     
     //model
     

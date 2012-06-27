@@ -9,6 +9,12 @@ namespace spaceg {
 class World 
 {
 private:
+    
+    //world size is mapped to float x, y
+    
+    //within a trashhold position is set back when over a chunk
+    
+    
     //chunks?
     
     //two layer?
@@ -20,6 +26,8 @@ private:
     //entities in current chunk
     
     //simple tree?
+    
+    //load nebulas from file
     
 public:
     

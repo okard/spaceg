@@ -49,7 +49,6 @@ private:
     //acceleration
     float acc_=0.2f;
 
-    
     //Current Status values
     
     //currentSpeed

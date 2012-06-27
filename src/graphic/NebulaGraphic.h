@@ -43,6 +43,8 @@ private:
     
     //see for reference: https://www.youtube.com/watch?v=CaTI2d0tQME
     
+    //sf::Rect size?
+    
 public:
     /**
     * Constructor

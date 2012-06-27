@@ -10,12 +10,14 @@
 #include "ui/SfmlUtils.h"
 
 #include "state/IState.h"
+#include "state/GameState.h"
 #include "graphic/NebulaGraphic.h"
 
 //debug
 #include <iostream>
 
 
+static spaceg::GameState state;
 static sf::Texture nebulaTex;
 static spaceg::NebulaGraphic nebula;
 
@@ -32,6 +34,8 @@ Application::Application()
     window_.setFramerateLimit(60);
     auto size = window_.getSize();
     renderTexture_.create(size.x, size.y);
+    view_ = renderTexture_.getView();
+    renderTexture_.setView(view_);
     
     //glew init
     glewInit();
@@ -58,13 +62,16 @@ Application::Application()
     if(!nebulaTex.loadFromFile("data/img/nebula2.png"))
         throw GameException("file load failed");
     
+    
     nebula.setTexture(&nebulaTex);
     nebula.random();
+    
+    state.attach(&nebula);
+    switchState(&state);
 }
 
 Application::~Application()
 {
-          
     uiCtx_->RemoveReference();
     delete uiRenderInterface_;
 }
@@ -142,12 +149,11 @@ void Application::render()
 {
     // Clear the whole texture with red color
     renderTexture_.clear(sf::Color::Black);
+    renderTexture_.setView(view_);
 
     // Draw stuff to the texture
     if(currentState_)
         currentState_->draw();
-    
-    renderTexture_.draw(nebula);
 
     // We're done drawing to the texture
     renderTexture_.display();
@@ -176,6 +182,8 @@ void Application::switchState(IState* const state)
 {
     if(!state)
         return;
+    
+    state->activate(this);
     
     //disable old state?
     //init state

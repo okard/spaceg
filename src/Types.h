@@ -5,6 +5,8 @@
 #define __SPACEG_TYPES__
 
 namespace spaceg {
+    
+//bit types
  
 
 typedef unsigned char ubyte;
