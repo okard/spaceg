@@ -2,6 +2,11 @@
 
 Each mission requires following aspects:
 
+* Mission Type
+    - Story
+    - Filler
+    - Mining ( multiply times, randomized)
+
 * Actors
     - Persons
     - Ship
@@ -9,6 +14,7 @@ Each mission requires following aspects:
 * Map information
 * Dialogs
 * Mission objectives
+
 
 This file has a short overview of the missions detail description can be found in the subfolder *missions/* 
 

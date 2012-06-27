@@ -22,7 +22,7 @@ Entity::Entity(EntityType type)
 
 
 /// Request update when not static and active
-bool Entity::requestUpdate()
+bool Entity::requestUpdate() const
 {
     return !static_ && active_;
 }
@@ -35,7 +35,7 @@ void Entity::update(long timeElapsed)
 /**
 * Get entity type
 */
-Entity::EntityType Entity::getType()
+Entity::EntityType Entity::getType() const
 {
     return entityType_;
 }

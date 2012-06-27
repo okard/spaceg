@@ -45,7 +45,7 @@ public:
     /**
     * Return true if entity requires an update
     */
-    virtual bool requestUpdate();
+    virtual bool requestUpdate() const;
     
     /**
     * Update entity with current elapsed time
@@ -55,7 +55,7 @@ public:
     /**
     * Get entity type
     */
-    EntityType getType();
+    EntityType getType() const;
     
 };
 

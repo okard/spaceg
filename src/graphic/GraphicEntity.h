@@ -19,6 +19,11 @@ private:
     //has sprite?
     //position absolute/relative?
     
+    //GraphicEntity Type for ordering
+    
+    //graphic layer
+    short layerId_;
+    
 public:
     GraphicEntity() : 
         Entity(TypeGraphic)

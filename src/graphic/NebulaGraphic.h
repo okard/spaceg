@@ -12,11 +12,11 @@
 #include "../Types.h"
 #include "GraphicEntity.h"
 
-
+//Forward Declarations
+namespace sf { class Texture; }
 
 
 namespace spaceg {
-
 
 /**
 * Class to render nebula
@@ -32,7 +32,7 @@ private:
     sf::Color color_;
     
     //base texture (sprite?)
-    //sf::Texture* texture_;
+    sf::Texture* texture_;
     
     //vertexes
     std::vector<sf::Vertex> vertexes_;
@@ -44,12 +44,37 @@ private:
     //see for reference: https://www.youtube.com/watch?v=CaTI2d0tQME
     
 public:
+    /**
+    * Constructor
+    */
+    NebulaGraphic();
     
+    /**
+    * Constructor
+    */
+    NebulaGraphic(sf::Texture* tex);
+    
+    /**
+    * Destructor
+    */
     virtual ~NebulaGraphic();
     
+    /**
+    * Create random settings
+    * At the moment only for test purposes 
+    */
+    void random();
+    
+    /**
+    * Set texture
+    */
+    void setTexture(sf::Texture* tex);
+    
+    /**
+    * SFML Drawable Interface
+    * \sa { http://www.sfml-dev.org/documentation/2.0/classsf_1_1Drawable.php }
+    */
     virtual void draw (sf::RenderTarget &target, sf::RenderStates states) const;
-    
-    
 };
 
 }

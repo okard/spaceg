@@ -68,6 +68,7 @@ void GameState::draw()
     
     for(Entity* e: entities_)
     {
+        //Order graphic entities for faster rendering
         if(e->getType() == Entity::TypeGraphic)
         {
             const GraphicEntity& ge = static_cast<GraphicEntity&>(*e);

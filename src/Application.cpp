@@ -3,16 +3,27 @@
 
 #include <GL/glew.h>
 
+#include <SFML/Graphics.hpp>
+
+#include "Exception.h"
 #include "ui/RenderInterface.h"
 #include "ui/SfmlUtils.h"
 
 #include "state/IState.h"
+#include "graphic/NebulaGraphic.h"
 
 //debug
 #include <iostream>
 
+
+static sf::Texture nebulaTex;
+static spaceg::NebulaGraphic nebula;
+
 using namespace spaceg;
 
+/*
+* Create Application
+*/
 Application::Application()
     : window_(sf::VideoMode(1024, 768), "SpaceG", sf::Style::Titlebar | sf::Style::Close ),
       currentState_(nullptr)
@@ -44,7 +55,11 @@ Application::Application()
         document->Show();
     
     
-    //setting up lua interface
+    if(!nebulaTex.loadFromFile("data/img/nebula2.png"))
+        throw GameException("file load failed");
+    
+    nebula.setTexture(&nebulaTex);
+    nebula.random();
 }
 
 Application::~Application()
@@ -56,6 +71,8 @@ Application::~Application()
 
 void Application::run()
 {
+     //TODO Expose loop to run out of class
+    
      // Start the game loop
      while (window_.isOpen())
      {
@@ -129,6 +146,8 @@ void Application::render()
     // Draw stuff to the texture
     if(currentState_)
         currentState_->draw();
+    
+    renderTexture_.draw(nebula);
 
     // We're done drawing to the texture
     renderTexture_.display();
@@ -142,6 +161,8 @@ void Application::render()
     //TODO Post Effects Fragment shader here please 
     //Hook posteffects together with state?
     
+    
+    //Render the ui
     uiRenderInterface_->startRender();
     uiCtx_->Render();
     uiRenderInterface_->finishRender();
