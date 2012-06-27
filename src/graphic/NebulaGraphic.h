@@ -62,8 +62,11 @@ public:
     /**
     * Create random settings
     * At the moment only for test purposes 
+    * TODO use seed 
     */
     void random();
+    
+    //void generate(unsigned int seed);
     
     /**
     * Set texture

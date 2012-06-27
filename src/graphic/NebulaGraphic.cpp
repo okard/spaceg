@@ -7,6 +7,7 @@
 #include <SFML/Graphics/Transform.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
+#include "../game/Random.hpp"
 
 #include <iostream>
 
@@ -40,9 +41,14 @@ void NebulaGraphic::random()
 {
     vertexes_.clear();
     
+    MersenneTwister rand(0x896b1f30);
+    
+    
+    //TODO use a seed to get the values
+    
     //pick color
         
-    sf::Color c = sf::Color(100,149,237,255);
+    sf::Color c = sf::Color(rand.random(0,255), rand.random(0,255), rand.random(0,255), 255);
     
     //pick random count of layer
     layerCount_ = 4;
@@ -53,12 +59,14 @@ void NebulaGraphic::random()
     //set color and texture coord sf::Vertex -> layerCount * 4
     for(int i=0; i < layerCount_; i++)
     {
-        
         int quadSize = 500;
                 
         sf::Transform proj;
         //proj.rotate(20*i);
         proj.rotate(45*i, quadSize/2, quadSize/2);
+        proj.translate(rand.random(35,60), rand.random(35,60));
+        //translate in random direction?
+        
         //Vector2f rotation.transformPoint (const Vector2f &point) const 
         //+ minimal translation? .translate(float, float);
     
@@ -94,6 +102,6 @@ void NebulaGraphic::draw(sf::RenderTarget &target, sf::RenderStates states) cons
     if(texture_)
         texture_->bind();
     
-    std::cout << "Render: " << vertexes_.size() << std::endl;
+    //std::cout << "Render: " << vertexes_.size() << std::endl;
     target.draw(&vertexes_[0], vertexes_.size(), sf::Quads, states);
 }
