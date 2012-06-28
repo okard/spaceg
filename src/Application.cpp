@@ -17,10 +17,6 @@
 #include <iostream>
 
 
-static spaceg::GameState state;
-static sf::Texture nebulaTex;
-static spaceg::NebulaGraphic nebula;
-
 using namespace spaceg;
 
 /*
@@ -58,16 +54,6 @@ Application::Application()
     if (document != NULL)
         document->Show();
     
-    
-    if(!nebulaTex.loadFromFile("data/img/nebula2.png"))
-        throw GameException("file load failed");
-    
-    
-    nebula.setTexture(&nebulaTex);
-    nebula.random();
-    
-    state.attach(&nebula);
-    switchState(&state);
 }
 
 Application::~Application()

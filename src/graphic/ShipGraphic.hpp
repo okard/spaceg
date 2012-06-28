@@ -39,6 +39,10 @@ public:
     virtual void draw (sf::RenderTarget &target, sf::RenderStates states) const;
     
     //get ship
+    
+    //set texture
+    
+    //positioning
        
 };
       

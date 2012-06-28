@@ -1,8 +1,12 @@
 
 
 #include "Application.h"
+#include "Exception.h"
 
 #include "lua/LuaGameState.h"
+
+#include "state/GameState.h"
+#include "graphic/NebulaGraphic.h"
  
 using namespace spaceg;
 
@@ -16,8 +20,18 @@ int main(int argc, char **argv)
     
     Application app;
     
+    //test stuff
+    GameState MyState;
+    sf::Texture nebulaTex;
+    NebulaGraphic nebula;
+    if(!nebulaTex.loadFromFile("data/img/nebula2.png"))
+        throw GameException("file load failed");
+    nebula.setTexture(&nebulaTex);
+    nebula.random();
+    MyState.attach(&nebula);
+    
     LuaGameState state;
-    app.switchState(&state);
+    app.switchState(&MyState);
     app.run();
 
     return EXIT_SUCCESS;

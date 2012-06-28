@@ -38,6 +38,8 @@ void WorldGraphic::update(long timeElapsed)
     
 void WorldGraphic::draw (sf::RenderTarget &target, sf::RenderStates states) const
 {
+    //use the states.transform for right drawing?
+    
     //create texture mapping
     
     //const FloatRect& sf::View::getViewport    (       )

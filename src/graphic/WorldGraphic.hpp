@@ -7,7 +7,7 @@
 
 #include "GraphicEntity.h"
 
-
+namespace sf { class Texture; }
 
 
 namespace spaceg {
@@ -28,7 +28,7 @@ private:
     float x_, y_;
     
     //starfield texture
-    //sf::Texture* tex_;
+    sf::Texture* tex_;
     
     //sf::Vertex für quads
     sf::Vertex vertices_[4];
