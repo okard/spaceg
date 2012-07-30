@@ -53,6 +53,8 @@ void GameState::activate(Application* const app)
 */
 void GameState::update(long timeElapsed)
 {
+    //keyboard/mouse input?
+    
     //update logic part of entities
     for(Entity* e: entities_)
     {

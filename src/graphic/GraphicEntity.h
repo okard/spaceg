@@ -26,7 +26,7 @@ private:
     
 protected:
     //access to render target
-    sf::RenderTarget* target_;
+    //sf::RenderTarget* target_;
     
 public:
     GraphicEntity() : 

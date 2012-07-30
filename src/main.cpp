@@ -1,7 +1,8 @@
 
 
 #include "Application.h"
-#include "Exception.h"
+#include "GameException.hpp"
+#include "ResourceManager.h"
 
 #include "lua/LuaGameState.h"
 
@@ -9,6 +10,7 @@
 #include "graphic/NebulaGraphic.h"
  
 using namespace spaceg;
+
 
 int main(int argc, char **argv)
 {
@@ -29,6 +31,9 @@ int main(int argc, char **argv)
     nebula.setTexture(&nebulaTex);
     nebula.random();
     MyState.attach(&nebula);
+    
+    
+    TexResMng::getInstance().retrieve<textureLoader>("data/img/nebula2.png");
     
     LuaGameState state;
     app.switchState(&MyState);

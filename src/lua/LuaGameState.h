@@ -6,6 +6,7 @@
 #define __SPACEG_LUAGAMESTATE__
 
 #include <slua/State.hpp>
+#include <slua/Context.hpp>
 
 #include "../state/GameState.h"
 
@@ -24,8 +25,15 @@ private:
     
     //Scripting/Lua
     slua::State luaState_;
+    
+    slua::Context luaCtx_;
+    
+    //table for state representation
 
 public:
+    
+    //shared luastate?
+    //LuaGameState(slua::State luaState) 
     
     //script
     //init

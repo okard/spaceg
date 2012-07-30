@@ -17,6 +17,9 @@ private:
     
     
 public:
+    /**
+    * Destructs state finally
+    */
     virtual ~IState() {}
     
     //Initialize
@@ -24,16 +27,26 @@ public:
     //Resume
     //Destroy
     
-    //activate
+    /**
+    * Activate state and attach to application
+    *TODO Rename?
+    */
     virtual void activate(Application* const app){}
     
-    //disable
+    /**
+    * Disable state
+    *TODO Rename?
+    */
     virtual void disable(){}
     
-    //update
+    /**
+    * Update the state
+    */
     virtual void update(long timeElapsed) = 0;
         
-    //draw
+    /**
+    * Draw the state
+    */
     virtual void draw() = 0;
     
 };

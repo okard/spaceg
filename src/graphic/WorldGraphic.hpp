@@ -24,16 +24,17 @@ private:
     //world
     World* const world_;
     
-    //position
+    //position -> 4 points?
     float x_, y_;
     
     //starfield texture
-    sf::Texture* tex_;
+    sf::Texture* spacefieldTex_;
     
     //sf::Vertex für quads
     sf::Vertex vertices_[4];
     
     //Hold Nebula Graphics and so on
+    
     
 public:
     /**
@@ -56,6 +57,11 @@ public:
     */
     virtual void draw (sf::RenderTarget &target, sf::RenderStates states) const;
      
+    
+    
+    void setSpaceFieldTexture(sf::Texture* tex);
+    
+    
     
     //internal speed factor?
     //void move(float offsetX, float offsetY);

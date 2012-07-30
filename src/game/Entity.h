@@ -17,6 +17,9 @@ public:
     {
         TypeLogic,
         TypeGraphic,
+        TypeScript,
+        TypeAudio,
+        TypeGroup,
         TypeCustom
     };
     

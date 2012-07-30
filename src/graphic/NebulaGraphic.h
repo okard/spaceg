@@ -26,7 +26,7 @@ class NebulaGraphic : public GraphicEntity
 private:
     
     //layer of nebula
-    ubyte layerCount_;
+    ubyte8 layerCount_;
     
     //color:
     sf::Color color_;
@@ -37,9 +37,7 @@ private:
     //vertexes
     std::vector<sf::Vertex> vertexes_;
     
-    
     //custom shader
-    
     
     //see for reference: https://www.youtube.com/watch?v=CaTI2d0tQME
     

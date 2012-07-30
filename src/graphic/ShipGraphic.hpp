@@ -28,6 +28,9 @@ private:
     
     //model
     
+    //is selected -> draw decal around
+    bool selected_;
+    
 public:
     
     ShipGraphic(Ship* const ship);

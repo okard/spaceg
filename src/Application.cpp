@@ -5,7 +5,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "Exception.h"
+#include "GameException.hpp"
 #include "ui/RenderInterface.h"
 #include "ui/SfmlUtils.h"
 
@@ -82,6 +82,7 @@ void Application::run()
 void Application::handleEvent(const sf::Event& event)
 {
      //TODO Switch case
+     //TODO Split to ui event handler and normal event handler
             
     // Close window : exit
     if (event.type == sf::Event::Closed)

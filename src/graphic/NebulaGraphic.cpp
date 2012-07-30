@@ -96,6 +96,7 @@ void NebulaGraphic::draw(sf::RenderTarget &target, sf::RenderStates states) cons
     if(vertexes_.size() <= 0)
         return;
     
+    //can be removes? test code?
     states.transform.translate(1,1);
     
     //prepare shader

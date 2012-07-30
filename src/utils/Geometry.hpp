@@ -8,10 +8,11 @@ namespace spaceg {
 /**
 * A simple point
 */
+template<typename T>
 class Point
 {
 private:
-    int x, y;
+    T x, y;
 public:
     
 }
@@ -19,10 +20,11 @@ public:
 /**
 * A rect
 */
+template<typename T>
 class Rect
 {
 private:
-    int x, y, w, h;
+    T x, y, w, h;
 public:
     
 };

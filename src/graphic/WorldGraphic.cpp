@@ -13,8 +13,14 @@ using namespace spaceg;
 
 
 WorldGraphic::WorldGraphic(World* const world)
-    : world_(world)
+    : world_(world),
+      spacefieldTex_(nullptr),
+      x_(0), y_(0)
 {
+    vertices_[0].position = sf::Vector2f(0, 0);
+    vertices_[1].position = sf::Vector2f(0, 1);
+    vertices_[2].position = sf::Vector2f(1, 1);
+    vertices_[3].position = sf::Vector2f(1, 0);
 }
 
 WorldGraphic::~WorldGraphic()
@@ -26,37 +32,46 @@ WorldGraphic::~WorldGraphic()
 */
 void WorldGraphic::update(long timeElapsed)
 {
-    //set position for vertices
-    auto vp = target_->getView().getViewport();
+    //use right texture tiling factor?
     
-    vertices_[0].position = sf::Vector2f(vp.left, vp.top);
-    vertices_[1].position = sf::Vector2f(0, vp.top+vp.width);
-    vertices_[2].position = sf::Vector2f(vp.left+vp.height, vp.top+vp.width);
-    vertices_[3].position = sf::Vector2f(vp.left+vp.height, 0);
+    //complete world size relation to position with maximum tiling mapping
+    // n tiles for the current screen (depend also on zoom level?)
+    // world is x,y
+    // position in world
 }
     
     
 void WorldGraphic::draw (sf::RenderTarget &target, sf::RenderStates states) const
 {
-    //use the states.transform for right drawing?
+    //draw world background
     
-    //create texture mapping
+    //pay attention for zoom level?
     
-    //const FloatRect& sf::View::getViewport    (       )
+    //scaling of background quad
+    auto v = target.getView();
+    auto c = v.getCenter();
+    auto s = v.getSize();
+    states.transform.translate(-c.x, -c.y);
+    states.transform.scale(s.x, s.y);
     
-    //use target size a view to set quad coords
-             
-    //current view of starfield
+    //render spacefield
+    if(spacefieldTex_)
+        spacefieldTex_->bind();
+        
+    target.draw(&vertices_[0], 4, sf::Quads, states);
     
-    //Create a quad
-    //using reapeted texture
-    //move tex coords
-    
-    //center point is 0.5f, 0.5f
-    //use a position to set the tex coords
-    
-    //const Vector2f &  getCenter () const
-    //Get the center of the view.
-    //const Vector2f &    getSize () const 
+    //reset states?
+    //draw rest of world, planets nebula
+ 
+}
+
+
+void WorldGraphic::setSpaceFieldTexture(sf::Texture* tex)
+{
+    if(tex)
+    {
+        spacefieldTex_ = tex;
+        spacefieldTex_->setRepeated(true); 
+    }
 }
      
