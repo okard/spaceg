@@ -3,7 +3,7 @@
 
 using namespace spaceg;
 
-
+namespace spaceg { sf::Texture* textureLoader(const std::string&); }
 
 template <> 
 const TexResMng::LoaderFunc TexResMng::loaderF_ = &textureLoader;

@@ -6,6 +6,7 @@
 #include <SFML/Graphics/Transform.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
+#include <iostream>
 
 using namespace spaceg;
 
@@ -33,6 +34,16 @@ WorldGraphic::~WorldGraphic()
 void WorldGraphic::update(long timeElapsed)
 {
     //use right texture tiling factor?
+    //Shrink
+    
+    // 5er scope in 10 range? math
+    
+    float fac = 3;
+    
+    vertices_[0].texCoords = sf::Vector2f(0, 0);
+    vertices_[1].texCoords = sf::Vector2f(0, fac);
+    vertices_[2].texCoords = sf::Vector2f(fac, fac);
+    vertices_[3].texCoords = sf::Vector2f(fac, 0);
     
     //complete world size relation to position with maximum tiling mapping
     // n tiles for the current screen (depend also on zoom level?)
@@ -49,9 +60,10 @@ void WorldGraphic::draw (sf::RenderTarget &target, sf::RenderStates states) cons
     
     //scaling of background quad
     auto v = target.getView();
-    auto c = v.getCenter();
+    auto vp = v.getViewport();
     auto s = v.getSize();
-    states.transform.translate(-c.x, -c.y);
+    
+    states.transform.translate(-vp.left, -vp.top);
     states.transform.scale(s.x, s.y);
     
     //render spacefield

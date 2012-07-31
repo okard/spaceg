@@ -66,7 +66,10 @@ public:
     */
     void random();
     
-    //void generate(unsigned int seed);
+    /**
+    * Using special seed
+    */
+    void generate(unsigned int seed);
     
     /**
     * Set texture

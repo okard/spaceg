@@ -36,16 +36,18 @@ NebulaGraphic::~NebulaGraphic()
     
 }
 
-//create random settings
-void NebulaGraphic::random()
+
+
+/**
+* Using special seed
+*/
+void NebulaGraphic::generate(unsigned int seed)
 {
+    std::cout << "Seed: " << seed << std::endl;
+    
     vertexes_.clear();
     
-    MersenneTwister rand;
-    unsigned int seed = rand.random();
-    
-    std::cout << "Seed: " << seed << std::endl;
-    rand.seed(seed);
+    MersenneTwister rand(seed);
     
     //green: 2807516958
     //blue: 251307725
@@ -79,6 +81,15 @@ void NebulaGraphic::random()
         vertexes_.push_back(sf::Vertex(proj.transformPoint(sf::Vector2f(quadSize, quadSize)), c, sf::Vector2f(1, 1)));
         vertexes_.push_back(sf::Vertex(proj.transformPoint(sf::Vector2f(quadSize, 0)), c, sf::Vector2f(1, 0)));
     } 
+}
+
+
+
+//create random settings
+void NebulaGraphic::random()
+{
+    MersenneTwister rand;
+    generate(rand.random());
 }
 
     

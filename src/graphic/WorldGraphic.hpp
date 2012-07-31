@@ -6,6 +6,8 @@
 #include <SFML/Graphics/Vertex.hpp>
 
 #include "GraphicEntity.h"
+#include "NebulaGraphic.h"
+
 
 namespace sf { class Texture; }
 

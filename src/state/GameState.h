@@ -21,6 +21,10 @@ class Entity;
 class GameState : public IState
 {
 private:
+    
+    //TODO split logic, graphic entities
+        // sorting of graphic entities?
+        
     //saved entities
     std::vector<Entity*> entities_;
     

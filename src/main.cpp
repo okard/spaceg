@@ -8,6 +8,8 @@
 
 #include "state/GameState.h"
 #include "graphic/NebulaGraphic.h"
+#include "game/World.h"
+#include "graphic/WorldGraphic.hpp"
  
 using namespace spaceg;
 
@@ -24,16 +26,27 @@ int main(int argc, char **argv)
     
     //test stuff
     GameState MyState;
-    sf::Texture nebulaTex;
+    
+    //nebula test
+    sf::Texture* nebulaTex = TexResMng::getInstance().retrieve("data/img/nebula2.png");
     NebulaGraphic nebula;
-    if(!nebulaTex.loadFromFile("data/img/nebula2.png"))
-        throw GameException("file load failed");
-    nebula.setTexture(&nebulaTex);
-    nebula.random();
+    nebula.setTexture(nebulaTex);
+    nebula.generate(251307725);
+    
+    NebulaGraphic nebula2;
+    nebula2.setTexture(nebulaTex);
+    nebula2.generate(2807516958);
+    
+    //world graphic test:
+    sf::Texture* starfield = TexResMng::getInstance().retrieve("data/img/starfield01.png");
+    World w;
+    WorldGraphic world(&w);
+    world.setSpaceFieldTexture(starfield);
+    
+    MyState.attach(&world);
     MyState.attach(&nebula);
+    MyState.attach(&nebula2);
     
-    
-    TexResMng::getInstance().retrieve<textureLoader>("data/img/nebula2.png");
     
     LuaGameState state;
     app.switchState(&MyState);
