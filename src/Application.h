@@ -41,6 +41,10 @@ private:
     //State Handling
     IState* currentState_;
     
+    
+    //Create Signals for mouse/keyboard events
+    
+    
 public:
     /**
     * settung up application
@@ -72,13 +76,16 @@ public:
     //TODO get view
     
 private:
-    //handle sfml events
+    ///handle sfml events
     void handleEvent(const sf::Event& event);
     
-    //logic update
+    ///Ui Event Handling
+    void handleEventUi(const sf::Event& event);
+    
+    ///logic update
     void update();
     
-    //render to screen
+    ///render to screen (draw)
     void render();
 };
     

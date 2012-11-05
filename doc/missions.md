@@ -53,6 +53,6 @@ This file has a short overview of the missions detail description can be found i
 
 ### Mission 06 - The laboratory
 
-* Destory a lab
+* Destroy a lab
 
 

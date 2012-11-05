@@ -1,5 +1,5 @@
 
-#include "Entity.h"
+#include "Entity.hpp"
 
 
 using namespace spaceg;
@@ -8,15 +8,6 @@ using namespace spaceg;
 * Default constructor
 */
 Entity::Entity()
-    : entityType_(TypeLogic)
-{
-}
-
-/**
-* Entity with given type
-*/
-Entity::Entity(EntityType type)
-    : entityType_(type)
 {
 }
 
@@ -32,10 +23,3 @@ void Entity::update(long timeElapsed)
 {
 }
 
-/**
-* Get entity type
-*/
-Entity::EntityType Entity::getType() const
-{
-    return entityType_;
-}

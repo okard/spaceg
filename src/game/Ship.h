@@ -5,7 +5,7 @@
 
 #include <string>
 
-#include "Entity.h"
+#include "../base/Entity.hpp"
 
 
 namespace spaceg {

@@ -2,7 +2,7 @@
 #ifndef __SPACEG_PLANET__
 #define __SPACEG_PLANET__
 
-#include "Entity.h"
+#include "../base/Entity.hpp"
 
 namespace spaceg {
 

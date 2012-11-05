@@ -4,12 +4,12 @@
 #include "GameException.hpp"
 #include "ResourceManager.h"
 
-#include "lua/LuaGameState.h"
+#include "lua/LuaGameState.hpp"
 
 #include "state/GameState.h"
-#include "graphic/NebulaGraphic.h"
+#include "render/NebulaGraphic.h"
 #include "game/World.h"
-#include "graphic/WorldGraphic.hpp"
+#include "render/WorldGraphic.hpp"
  
 using namespace spaceg;
 

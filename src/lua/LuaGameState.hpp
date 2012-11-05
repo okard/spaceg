@@ -21,8 +21,6 @@ class LuaGameState : public GameState
 {
 private:
     
-    //lua state
-    
     //Scripting/Lua
     slua::State luaState_;
     
@@ -31,6 +29,15 @@ private:
     //table for state representation
 
 public:
+	LuaGameState();
+	
+	LuaGameState(const char* const fileName);
+	
+	~LuaGameState();
+
+	//register lua interfaces from engine to game
+	void reg();
+
     
     //shared luastate?
     //LuaGameState(slua::State luaState) 

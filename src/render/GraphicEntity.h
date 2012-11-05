@@ -5,7 +5,7 @@
 
 #include <SFML/Graphics/Drawable.hpp>
 
-#include "../game/Entity.h"
+#include "../base/Entity.hpp"
 
 namespace spaceg {
 
@@ -29,8 +29,7 @@ protected:
     //sf::RenderTarget* target_;
     
 public:
-    GraphicEntity() : 
-        Entity(TypeGraphic)
+    GraphicEntity() 
     {   
     }
     

@@ -20,7 +20,15 @@ but later you get the privilege to handle your own fleet of ships. You protect y
 can trade with other races, can be conqueror, give the order to research new technology. But something mysterious
 happens in the universe are you able to stand your destiny?
 
-The game happens on a 2d space map. Story is important, so a lot of dialogs. Mainly controlled by mouse.
+The game happens on a 2d space map. Story is important, so a lot of dialogs. Mainly controlled by mouse. All things
+are handled in realtime. Problematic aspect of handling multiple fleets related to mission system, 
+possible to handle multiple missions at the same time with multiple fleets?
+
+## Resource System
+
+Meta resource system, similiar to browser games resources can be used for update production facilities, 
+each planet is limited, new planets can be used through diplomatics when already colonized or with special
+ships. 
 
 
 ## Entities on Map
@@ -29,8 +37,10 @@ The game happens on a 2d space map. Story is important, so a lot of dialogs. Mai
 
 * Planets
     - Docks: Managing ships
-        - 
+        - Weapons
+        - Equip
     - Research: Research weapons, technology
+    - Trade
     - Enter Orbit
 * Portals
     - Use

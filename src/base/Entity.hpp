@@ -5,24 +5,14 @@
 #define __SPACEG_ENTITY__
 
 namespace spaceg {
+
+//TODO inherit from game object?    
     
 /**
 * Basic Game Entity
 */
 class Entity
 {
-public:
-    //TODO Rename to category
-    enum EntityType
-    {
-        TypeLogic,
-        TypeGraphic,
-        TypeScript,
-        TypeAudio,
-        TypeGroup,
-        TypeCustom
-    };
-    
 protected:
     // it is a static entity
     bool static_ = false;
@@ -30,8 +20,9 @@ protected:
     // the entity is active
     bool active_ = true;
     
-    // entity type
-    EntityType entityType_;
+    //position
+    float x;
+    float y;
     
 public:
     
@@ -39,11 +30,6 @@ public:
     * Default constructor
     */
     Entity();
-    
-    /**
-    * Entity with given type
-    */
-    Entity(EntityType type);
     
     /**
     * Return true if entity requires an update
@@ -55,17 +41,10 @@ public:
     */
     virtual void update(long timeElapsed);
     
-    /**
-    * Get entity type
-    */
-    EntityType getType() const;
+    
+    //position
     
 };
-
-
-
-
-//GraphicEntity has a Sprite?
     
 } //end namespace spaceg
 

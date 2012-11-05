@@ -17,6 +17,8 @@ private:
     
     //chunks?
     
+    //WorldChunk
+    
     //two layer?
         //space and detail near planets and nebulas
         

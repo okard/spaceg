@@ -11,7 +11,6 @@
 
 #include "state/IState.h"
 #include "state/GameState.h"
-#include "graphic/NebulaGraphic.h"
 
 //debug
 #include <iostream>
@@ -81,6 +80,10 @@ void Application::run()
 
 void Application::handleEvent(const sf::Event& event)
 {
+	 //1. handleEventApp
+	 //2. handleEventUi
+	 //3. handleEventSignals
+	
      //TODO Switch case
      //TODO Split to ui event handler and normal event handler
             

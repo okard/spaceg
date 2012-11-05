@@ -1,13 +1,15 @@
 
 #include "GameState.h"
 
+//Todo Remove SDML/liBRocket Dependencies
+
 
 #include <SFML/Graphics/Sprite.hpp>
 #include <Rocket/Core/ElementDocument.h>
 
 #include "../Application.h"
-#include "../game/Entity.h"
-#include "../graphic/GraphicEntity.h"
+#include "../base/Entity.hpp"
+#include "../render/GraphicEntity.h"
 
 #include <iostream>
 
@@ -73,6 +75,7 @@ void GameState::draw()
     
     for(Entity* e: entities_)
     {
+		/*
         //Order graphic entities for faster rendering
         if(e->getType() == Entity::TypeGraphic)
         {
@@ -82,6 +85,7 @@ void GameState::draw()
             
             app_->getRenderTarget()->draw(ge);
         }
+        */
     }
 }
 
