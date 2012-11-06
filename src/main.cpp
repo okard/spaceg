@@ -6,9 +6,9 @@
 
 #include "lua/LuaGameState.hpp"
 
-#include "state/GameState.h"
+#include "state/BaseState.hpp"
 #include "render/NebulaGraphic.h"
-#include "game/World.h"
+#include "game/World.hpp"
 #include "render/WorldGraphic.hpp"
  
 using namespace spaceg;
@@ -21,11 +21,12 @@ int main(int argc, char **argv)
     //-log outputs?
     
     //load settings? fullscreen/resolution
+    //audio on off
     
     Application app;
     
     //test stuff
-    GameState MyState;
+    BaseState MyState;
     
     //nebula test
     sf::Texture* nebulaTex = TexResMng::getInstance().retrieve("data/img/nebula2.png");
@@ -39,7 +40,9 @@ int main(int argc, char **argv)
     
     //world graphic test:
     sf::Texture* starfield = TexResMng::getInstance().retrieve("data/img/starfield01.png");
-    World w;
+    
+    View v;
+    World w(v);
     WorldGraphic world(&w);
     world.setSpaceFieldTexture(starfield);
     

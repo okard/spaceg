@@ -1,5 +1,5 @@
 
-#include "GameState.h"
+#include "BaseState.hpp"
 
 //Todo Remove SDML/liBRocket Dependencies
 
@@ -19,7 +19,7 @@ using namespace spaceg;
 /**
 * Constructor
 */
-GameState::GameState()
+BaseState::BaseState()
     : app_(nullptr)
 {
     entities_.reserve(10);
@@ -29,14 +29,14 @@ GameState::GameState()
 /**
 * Destructor
 */
-GameState::~GameState()
+BaseState::~BaseState()
 {
 }
 
 /**
 * Attach a game entity to this state
 */
-void GameState::attach(Entity* const entity)
+void BaseState::attach(Entity* const entity)
 {
     entities_.push_back(entity);
 }
@@ -45,7 +45,7 @@ void GameState::attach(Entity* const entity)
 /**
 * Activate state for this application;
 */
-void GameState::activate(Application* const app)
+void BaseState::activate(Application* const app)
 {
     app_ = app;
 }
@@ -53,7 +53,7 @@ void GameState::activate(Application* const app)
 /**
 * Update Game State
 */
-void GameState::update(long timeElapsed)
+void BaseState::update(long timeElapsed)
 {
     //keyboard/mouse input?
     
@@ -68,7 +68,7 @@ void GameState::update(long timeElapsed)
 /**
 * Draw current state
 */
-void GameState::draw()
+void BaseState::draw()
 {
     if(app_ == nullptr)
         return;
@@ -92,7 +92,7 @@ void GameState::draw()
 /**
 * Clean up state
 */
-void GameState::cleanup()
+void BaseState::cleanup()
 {
     entities_.clear();
 }

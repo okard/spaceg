@@ -16,7 +16,7 @@
 namespace spaceg {
     
 class RenderInterface;
-class IState;
+class State;
   
 /**
 * Application Class
@@ -39,7 +39,7 @@ private:
     Rocket::Core::Context* uiCtx_;
     
     //State Handling
-    IState* currentState_;
+    State* currentState_;
     
     
     //Create Signals for mouse/keyboard events
@@ -64,7 +64,7 @@ public:
     /**
     * Switch State
     */
-    void switchState(IState* const state);
+    void switchState(State* const state);
     
     /**
     * Gets the rendering target

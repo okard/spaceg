@@ -9,8 +9,8 @@
 #include "ui/RenderInterface.h"
 #include "ui/SfmlUtils.h"
 
-#include "state/IState.h"
-#include "state/GameState.h"
+#include "state/State.hpp"
+#include "state/BaseState.hpp"
 
 //debug
 #include <iostream>
@@ -80,18 +80,32 @@ void Application::run()
 
 void Application::handleEvent(const sf::Event& event)
 {
-	 //1. handleEventApp
-	 //2. handleEventUi
-	 //3. handleEventSignals
+	//TODO ui fetch all events only
 	
-     //TODO Switch case
-     //TODO Split to ui event handler and normal event handler
-            
-    // Close window : exit
+     
+	 
+	//1. handleEventApp
+	
+	// Close window : exit
     if (event.type == sf::Event::Closed)
         window_.close();
-    
-    // The window was resized
+        
+	 
+	//2. handleEventUi
+	handleEventUi(event);
+	 
+	//3. handleEventSignals
+	
+
+}
+
+///Ui Event Handling
+void Application::handleEventUi(const sf::Event& event)
+{
+	
+	//TODO switch case
+	    
+	// The window was resized
     if (event.type == sf::Event::Resized)
     {
         //std::cerr << "RESIZE" << std::endl;  
@@ -118,13 +132,15 @@ void Application::handleEvent(const sf::Event& event)
     
     if(event.type == sf::Event::KeyReleased)
         uiCtx_->ProcessKeyUp(keyConvert(event.key.code), getKeyModifier());
-    
-    // Sends a single character of text as text input into this context.
+        
+	// Sends a single character of text as text input into this context.
     //void ProcessTextInput(Rocket::Core::word character);
     // Sends a string of text as text input into this context.
     //void ProcessTextInput(const Rocket::Core::String& string);
 }
-
+    
+    
+/// Update the current game state 
 void Application::update()
 {
     const sf::Time elapsedTime = clock_.restart();
@@ -135,12 +151,15 @@ void Application::update()
     uiCtx_->Update();      
 }
 
+/// Render all the stuff
 void Application::render()
 {
     // Clear the whole texture with red color
     renderTexture_.clear(sf::Color::Black);
     renderTexture_.setView(view_);
 
+	// Game state handling:
+	
     // Draw stuff to the texture
     if(currentState_)
         currentState_->draw();
@@ -158,7 +177,8 @@ void Application::render()
     //Hook posteffects together with state?
     
     
-    //Render the ui
+    
+    //Render the ui as overlay
     uiRenderInterface_->startRender();
     uiCtx_->Render();
     uiRenderInterface_->finishRender();
@@ -168,7 +188,7 @@ void Application::render()
 }
 
 
-void Application::switchState(IState* const state)
+void Application::switchState(State* const state)
 {
     if(!state)
         return;

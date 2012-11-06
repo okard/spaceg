@@ -3,12 +3,16 @@
 #ifndef __SPACEG_WORLD__
 #define __SPACEG_WORLD__
 
+#include "../base/Geometry.hpp"
 
-namespace spaceg {
+namespace spaceg 
+{
 
 class World 
 {
 private:
+	View& view_;
+
     
     //world size is mapped to float x, y
     
@@ -32,6 +36,8 @@ private:
     //load nebulas from file
     
 public:
+	World(View& view);
+	~World();
     
     
 };

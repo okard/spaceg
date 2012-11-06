@@ -6,9 +6,14 @@
 #ifndef __SPACEG_LUASPRITEENTITY__
 #define __SPACEG_LUASPRITEENTITY__
 
+#include "../render/SpriteEntity.hpp"
+
 
 namespace spaceg {
 	
+/**
+* Lua Bindings für Sprite Entity
+*/	
 class LuaSpriteEntity
 {
 private:

@@ -4,6 +4,8 @@
 #ifndef __SPACEG_ENTITY__
 #define __SPACEG_ENTITY__
 
+#include "Geometry.hpp"
+
 namespace spaceg {
 
 //TODO inherit from game object?    
@@ -21,8 +23,7 @@ protected:
     bool active_ = true;
     
     //position
-    float x;
-    float y;
+    Rectf position;
     
 public:
     

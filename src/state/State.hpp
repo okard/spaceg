@@ -11,8 +11,17 @@ class Application;
 /**
 * State Interface
 */   
-class IState
+class State
 {
+public:
+	enum Status
+	{
+		UnInitialized,
+		Active,
+		Holded,
+		Disposed
+	};
+
 private:
     
     
@@ -20,12 +29,12 @@ public:
     /**
     * Destructs state finally
     */
-    virtual ~IState() {}
+    virtual ~State() {}
     
     //Initialize
     //Hold
     //Resume
-    //Destroy
+    //Destroy/Dispose
     
     /**
     * Activate state and attach to application

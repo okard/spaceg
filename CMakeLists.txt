@@ -21,4 +21,5 @@ target_link_libraries(spaceg
                       "GL" "GLEW" 
                       "sfml-system" "sfml-window" "sfml-graphics" "sfml-audio" 
                       "RocketCore" "RocketControls" "RocketDebugger"
-                      "slua" "lua")
+                      "slua" "lua"
+                      "yajl")

@@ -1,35 +1,7 @@
 
-#pragma once
-#ifndef __SPACEG_SHIP__
-#define __SPACEG_SHIP__
 
-#include <string>
-
-#include "../base/Entity.hpp"
-
-
-namespace spaceg {
-    
-
-/**
-* Space Ship Entity
-*/
-class Ship : public Entity
-{
-public:
-    /**
-    * Ship Types
-    */
-    enum ShipType
-    {
-        STYPE_CARGO,
-        STYPE_SPEED,
-        STYPE_LIGHT_MILITARY,
-        STYPE_HEAVY_MILITARY
-    };
-    
-private:
-    //logic
+--[[
+//logic
     
     //ShipID
     
@@ -62,13 +34,5 @@ private:
 
     //Weapons/Equip
     //the containing weapons and equipment
-      
-public:
-    
-};
 
-
-} //end namespace spaceg
-
-#endif //__SPACEG_SHIP__
-
+--]]

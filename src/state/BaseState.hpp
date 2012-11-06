@@ -5,7 +5,7 @@
 
 #include <vector>
 
-#include "IState.h"
+#include "State.hpp"
 
 /*
 * SpaceG Namespace
@@ -17,16 +17,23 @@ class Entity;
     
 /**
 * Basic Game State
+* TODO templated for entities?
 */
-class GameState : public IState
+class BaseState : public State
 {
 private:
     
     //TODO split logic, graphic entities
         // sorting of graphic entities?
         
+	//TODO Quadtree implementation for storage
+	//TODO Picking API
+	
+	//TODO Decals?
+        
     //saved entities
     std::vector<Entity*> entities_;
+    
     
     //application
     Application* app_;
@@ -35,12 +42,12 @@ public:
     /**
     * Constructor
     */
-    GameState();
+    BaseState();
     
     /**
     * Destructor
     */
-    virtual ~GameState();
+    virtual ~BaseState();
     
     /**
     * Attach a game entity to this state
@@ -66,6 +73,8 @@ public:
     * Clean up state
     */
     virtual void cleanup();
+    
+    //getApplication()
     
 };
     
