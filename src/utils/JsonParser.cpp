@@ -1,6 +1,8 @@
 
 #include "JsonParser.hpp"
 
+#include <cstring>
+
 using namespace spaceg;
 
 
@@ -219,6 +221,12 @@ int JsonParser::onNumber(const char *numberVal, size_t numberLen)
 {
 	auto tok = nextBufferToken();
 	tok.type = TOK_NUMBER;
+	
+	//copy value into buffer
+	tok.bufferValue.size = numberLen;
+	tok.bufferValue.ptr = operator new(numberLen);
+	memcpy (tok.bufferValue.ptr, numberVal, numberLen);
+	
 	return true;
 }
 
@@ -226,6 +234,12 @@ int JsonParser::onString(const unsigned char *stringVal, size_t stringLen)
 {
 	auto tok = nextBufferToken();
 	tok.type = TOK_STRING;
+	
+	//copy value into buffer
+	tok.bufferValue.size = stringLen;
+	tok.bufferValue.ptr = operator new(stringLen);
+	memcpy (tok.bufferValue.ptr, stringVal, stringLen);
+	
 	return true;
 }
 
@@ -240,6 +254,12 @@ int JsonParser::onMapKey(const unsigned char *key, size_t stringLen)
 {
 	auto tok = nextBufferToken();
 	tok.type = TOK_MAPKEY;
+	
+	//copy value into buffer
+	tok.bufferValue.size = stringLen;
+	tok.bufferValue.ptr = operator new(stringLen);
+	memcpy (tok.bufferValue.ptr, key, stringLen);
+	
 	return true;	
 }
 

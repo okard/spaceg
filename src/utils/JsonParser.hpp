@@ -41,16 +41,21 @@ public:
 
 	/**
 	* Internal Token Structure
+	* Pay attention to memory management
 	*/
 	struct Token
 	{
+		//code flag into for clearing buffer with destructor
 		TokenType type;
 		union {
 			bool booleanValue;
 			long long integerValue;
 			double doubleValue;
-			//std::string numberValue;
-			//std::string stringValue;
+			
+			struct {
+				void* ptr;
+				size_t size;
+			} bufferValue;
 		};
 	};
 	
