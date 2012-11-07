@@ -61,7 +61,8 @@ private:
 	///inputstream
 	std::ifstream file_;
 	
-	char buffer_[1024];
+	
+	std::vector<char> buffer_;
 	
 	///ring buffer
 	std::vector<Token> tokenBuffer_;
@@ -76,7 +77,7 @@ public:
 	* (param BufferSize)
 	* (param TokeBufferSize)
 	*/
-	JsonParser();
+	JsonParser(size_t fileBufferSize, size_t tokBufferSize);
 	
 	/**
 	* Destroy json parser
