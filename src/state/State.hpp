@@ -38,7 +38,8 @@ public:
     
     /**
     * Activate state and attach to application
-    *TODO Rename?
+    * TODO Rename?
+    * TODO Remove Application reference
     */
     virtual void activate(Application* const app){}
     

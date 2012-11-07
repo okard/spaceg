@@ -17,13 +17,15 @@ class Entity
 {
 protected:
     // it is a static entity
+    // means fixed position
     bool static_ = false;
     
     // the entity is active
+    // entity exist and can be used
     bool active_ = true;
     
     //position
-    Rectf position;
+    Rectf position_;
     
 public:
     
@@ -44,6 +46,7 @@ public:
     
     
     //position
+    // const Rectf& getPosition() const;
     
 };
     

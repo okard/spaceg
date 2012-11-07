@@ -5,9 +5,11 @@
 
 #include "../base/Geometry.hpp"
 
-namespace spaceg 
-{
+namespace spaceg {
 
+/**
+* World Presentation
+*/
 class World 
 {
 private:

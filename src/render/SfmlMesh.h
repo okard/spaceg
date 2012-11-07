@@ -31,6 +31,8 @@ public:
     
     //add sf:.Vertex + Indices
     
+    //add a x binary loader
+    
     void draw (sf::RenderTarget &target, sf::RenderStates states) const;   
 };
 
