@@ -8,7 +8,8 @@
 
 namespace spaceg {
 
-//TODO inherit from game object?    
+//TODO inherit from game object?  
+//TODO Entity Lifecycle, Events: create, destroy, active, etc  
     
 /**
 * Basic Game Entity

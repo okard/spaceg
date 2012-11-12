@@ -1,4 +1,9 @@
 
+
+
+-- given the current LuaState as parameter
+-- function main(Engine interface)
+
 function main()
 
 	-- local w = World()

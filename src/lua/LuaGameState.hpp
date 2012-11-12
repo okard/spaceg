@@ -6,7 +6,7 @@
 #define __SPACEG_LUAGAMESTATE__
 
 #include <slua/State.hpp>
-#include <slua/Context.hpp>
+#include <slua/Bind.hpp>
 
 #include "../state/BaseState.hpp"
 
@@ -24,8 +24,6 @@ private:
     //Scripting/Lua
     slua::State luaState_;
     
-    slua::Context luaCtx_;
-    
     //table for state representation
 
 public:
@@ -34,6 +32,9 @@ public:
 	LuaGameState(const char* const fileName);
 	
 	~LuaGameState();
+	
+	
+	//run()
 
 	//register lua interfaces from engine to game
 	void reg();
@@ -49,8 +50,12 @@ public:
     
     //script
     //init
-    
-    
+
+	//LuaInterface
+private:
+		
+	
+
     
 };
     
