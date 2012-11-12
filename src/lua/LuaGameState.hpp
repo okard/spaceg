@@ -52,12 +52,13 @@ public:
     //init
 
 	//LuaInterface
-private:
-		
-	
+public:
+	int getUISystem(slua::Context& ctx);	
 
-    
+    static const slua::RegStatus<LuaGameState> Bind;
 };
+
+
     
     
 } //end namespace spaceg

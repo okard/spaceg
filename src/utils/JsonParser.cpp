@@ -99,6 +99,19 @@ JsonParser::JsonParser(size_t fileBufferSize, size_t tokBufferSize)
 
 JsonParser::~JsonParser()
 {
+	//clear buffered tokens left in ring buffer
+	for (int i=0; i<tokenBuffer_.size(); i++) 
+	{
+		switch(tokenBuffer_[i].type)
+		{
+			case TOK_MAPKEY:
+			case TOK_NUMBER:
+			case TOK_STRING:
+				if(tokenBuffer_[i].bufferValue.ptr != nullptr)
+					operator delete(tokenBuffer_[i].bufferValue.ptr);
+		}
+	}
+	
 	yajl_free(handle_);  
 }
 
@@ -121,19 +134,33 @@ bool JsonParser::nextToken(Token& tok)
 		auto t = tokenBuffer_[tokenStart_];
 		
 		tok.type = t.type;
-		//copy to tok
+		//set to tok
+		//the buffer getting transferred
 		switch(t.type)
 		{
 			case TOK_BOOLEAN: tok.booleanValue = t.booleanValue; break;
 			case TOK_DOUBLE: tok.doubleValue = t.doubleValue; break;
 			case TOK_INTEGER: tok.integerValue = t.integerValue; break;
-			//case TOK_MAPKEY:
-			//case TOK_NUMBER:
-			//case TOK_STRING:
+			
+			case TOK_MAPKEY:
+			case TOK_NUMBER:
+			case TOK_STRING:
+				tok.bufferValue.ptr = t.bufferValue.ptr;
+				tok.bufferValue.size = t.bufferValue.size;
+				
+				//clear old token
+				tok.bufferValue.ptr = nullptr;
+				tok.bufferValue.size = 0;
+				
+				break;
 		}
 		
 		tokenStart_++; //one ahead in ring buffer
 		tokenCount_--; //on token less
+		
+		
+		
+		return true;
 	}
 	else
 	{
@@ -142,6 +169,8 @@ bool JsonParser::nextToken(Token& tok)
 		//look if eof or fill
 		if(tokenCount_ > 0)
 			return nextToken(tok);
+		else
+			return false;
 	}
 	
 }

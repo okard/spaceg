@@ -57,6 +57,7 @@ public:
 				size_t size;
 			} bufferValue;
 		};
+		
 	};
 	
 private:
