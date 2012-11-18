@@ -1,3 +1,6 @@
 [submodule "deps/slua"]
 	path = deps/slua
 	url = git://github.com/okard/slua.git
+[submodule "deps/cul"]
+	path = deps/cul
+	url = git://github.com/okard/cul.git

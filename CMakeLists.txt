@@ -10,6 +10,12 @@ add_subdirectory("deps/slua")
 include_directories("deps/slua/include")
 link_directories("${CMAKE_CURRENT_LIST_DIR}/deps/slua/lib")
 
+# CUL
+add_subdirectory("deps/cul")
+include_directories("deps/cul/include")
+link_directories("${CMAKE_CURRENT_LIST_DIR}/deps/cul/lib")
+
+
 # C++11
 set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -std=c++11")
 

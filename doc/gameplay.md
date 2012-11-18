@@ -21,8 +21,13 @@ can trade with other races, can be conqueror, give the order to research new tec
 happens in the universe are you able to stand your destiny?
 
 The game happens on a 2d space map. Story is important, so a lot of dialogs. Mainly controlled by mouse. All things
-are handled in realtime. Problematic aspect of handling multiple fleets related to mission system, 
-possible to handle multiple missions at the same time with multiple fleets?
+are handled in realtime. 
+
+Missions can be split in two types, interactive missions for story telling, the player controls each ship in realtime
+and travel through the space. The second types are missions which are not directly under the control of a player,
+for a mission a fleet getting configured and send out, the success of the mission getting simulated in the background with 
+a results report of the mission. Similiar system which is often used in browser games. These missions can be 
+used for mining, research and raids to support the resource and research system.
 
 ## Resource System
 
