@@ -17,7 +17,7 @@ namespace spaceg {
 * Lua Game States
 * The class represents a game state which is controlled by a lua script
 */    
-class LuaGameState : public BaseState
+class LuaGameState : public BaseState, public slua::LuaObject
 {
 private:
     
