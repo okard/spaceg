@@ -5,7 +5,7 @@
 
 #include <SFML/Graphics/Vertex.hpp>
 
-#include "GraphicEntity.h"
+#include "SfmlEntity.hpp"
 #include "NebulaGraphic.h"
 
 
@@ -19,7 +19,7 @@ class World;
 /**
 * World Graphic
 */
-class WorldGraphic : public GraphicEntity
+class WorldGraphic : public SfmlEntity
 {
 private:
     

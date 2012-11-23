@@ -9,7 +9,7 @@
 
 #include "../Application.h"
 #include "../base/Entity.hpp"
-#include "../render/GraphicEntity.h"
+#include "../render/SfmlEntity.hpp"
 
 #include <iostream>
 
@@ -45,9 +45,8 @@ void BaseState::attach(Entity* const entity)
 /**
 * Activate state for this application;
 */
-void BaseState::activate(Application* const app)
+void BaseState::activate()
 {
-    app_ = app;
 }
 
 /**
@@ -95,4 +94,20 @@ void BaseState::draw()
 void BaseState::cleanup()
 {
     entities_.clear();
+}
+
+/**
+* Set the Application Interface
+*/
+void BaseState::setApplication(Application* const app)
+{
+	app_ = app;
+}
+
+/**
+* Get Application
+*/
+Application* const BaseState::getApplication()
+{
+	return app_;
 }

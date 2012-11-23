@@ -57,7 +57,7 @@ public:
     /**
     * Activate state for this application;
     */
-    virtual void activate(Application* const app);
+    virtual void activate();
     
     /**
     * Update Game State
@@ -74,7 +74,15 @@ public:
     */
     virtual void cleanup();
     
-    //getApplication()
+    /**
+    * Set the Application Interface
+    */
+    void setApplication(Application* const app);
+    
+    /**
+    * Get Application
+    */
+    Application* const getApplication();
     
 };
     

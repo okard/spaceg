@@ -6,8 +6,6 @@
 
 namespace spaceg {
     
-class Application;
-    
 /**
 * State Interface
 */   
@@ -18,7 +16,7 @@ public:
 	{
 		UnInitialized,
 		Active,
-		Holded,
+		Holded, //disabled
 		Disposed
 	};
 
@@ -31,21 +29,23 @@ public:
     */
     virtual ~State() {}
     
-    //Initialize
+    
+    //virtual void initialize();
+    //virtual void dispose();
+    
     //Hold
     //Resume
-    //Destroy/Dispose
     
     /**
     * Activate state and attach to application
-    * TODO Rename?
+    * TODO Rename? run
     * TODO Remove Application reference
     */
-    virtual void activate(Application* const app){}
+    virtual void activate(){}
     
     /**
     * Disable state
-    *TODO Rename?
+    *TODO Rename? stop
     */
     virtual void disable(){}
     
@@ -56,9 +56,11 @@ public:
         
     /**
     * Draw the state
+    * rename to render
     */
     virtual void draw() = 0;
     
+    //isInitialized    
 };
     
     

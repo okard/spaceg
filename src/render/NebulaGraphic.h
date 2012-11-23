@@ -10,7 +10,7 @@
 #include <SFML/Graphics/Color.hpp>
 
 #include "../Types.h"
-#include "GraphicEntity.h"
+#include "SfmlEntity.hpp"
 
 //Forward Declarations
 namespace sf { class Texture; }
@@ -21,7 +21,7 @@ namespace spaceg {
 /**
 * Class to render nebula
 */
-class NebulaGraphic : public GraphicEntity
+class NebulaGraphic : public SfmlEntity
 {
 private:
     

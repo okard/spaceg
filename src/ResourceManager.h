@@ -38,7 +38,10 @@ private:
     ResourceManager() {}
     ResourceManager(const ResourceManager&) {}
     ResourceManager& operator=(const ResourceManager&) { return *this; }
-    ~ResourceManager() {}
+    ~ResourceManager() 
+    {
+		clear();
+	}
       
 public:
     
@@ -126,6 +129,7 @@ typedef ResourceManager<sf::Texture*, std::string>  TexResMng;
 
 //for sf:.Image
 //for sf::Texture?  <sf::Texture*, std::string>
+//Audio
 
 
 } //end namespace spaceg

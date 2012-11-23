@@ -25,6 +25,7 @@ int main(int argc, char **argv)
     
     Application app;
     
+    /*
     //test stuff
     BaseState MyState;
     
@@ -49,10 +50,12 @@ int main(int argc, char **argv)
     MyState.attach(&world);
     MyState.attach(&nebula);
     MyState.attach(&nebula2);
+    */
     
-    
-    LuaGameState state;
-    app.switchState(&MyState);
+    // Running a Lua Game State
+    LuaGameState state("data/lua/main.lua");
+    state.setApplication(&app);
+    app.switchState(&state);
     app.run();
 
     return EXIT_SUCCESS;

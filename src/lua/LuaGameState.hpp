@@ -9,6 +9,7 @@
 #include <slua/Bind.hpp>
 
 #include "../state/BaseState.hpp"
+#include "EngineContext.hpp"
 
 
 namespace spaceg {
@@ -17,15 +18,18 @@ namespace spaceg {
 * Lua Game States
 * The class represents a game state which is controlled by a lua script
 */    
-class LuaGameState : public BaseState, public slua::LuaObject
+class LuaGameState : public BaseState
 {
 private:
     
     //Scripting/Lua
     slua::State luaState_;
     
+    //Engine Interface
+	EngineContext engineCtx_;
+    
     //table for state representation
-
+    
 public:
 	LuaGameState();
 	
@@ -33,8 +37,7 @@ public:
 	
 	~LuaGameState();
 	
-	
-	//run()
+	//loadFile(filename)
 
 	//register lua interfaces from engine to game
 	void reg();
@@ -51,11 +54,6 @@ public:
     //script
     //init
 
-	//LuaInterface
-public:
-	int getUISystem(slua::Context& ctx);	
-
-    static const slua::RegStatus<LuaGameState> Bind;
 };
 
 

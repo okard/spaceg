@@ -38,6 +38,9 @@ private:
     RenderInterface* uiRenderInterface_;
     Rocket::Core::Context* uiCtx_;
     
+    
+    //TODO use smart pointer here
+    
     //State Handling
     State* currentState_;
     

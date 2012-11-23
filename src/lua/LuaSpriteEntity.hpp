@@ -6,7 +6,11 @@
 #ifndef __SPACEG_LUASPRITEENTITY__
 #define __SPACEG_LUASPRITEENTITY__
 
-#include "../render/SpriteEntity.hpp"
+#include <SFML/Graphics/Sprite.hpp>
+
+#include <slua/Bind.hpp>
+
+#include "../render/SfmlEntity.hpp"
 
 
 namespace spaceg {
@@ -14,9 +18,12 @@ namespace spaceg {
 /**
 * Lua Bindings für Sprite Entity
 */	
-class LuaSpriteEntity
+class LuaSpriteEntity : public SfmlEntity, public slua::LuaObject
 {
 private:
+
+	sf::Sprite sprite_;
+	
 public:
 
 	//filename
@@ -27,8 +34,8 @@ public:
 	
 	//shaderArguments?
 	
-	//float x, float y, float rotation, float scale_x, float scale_y, color?
-	void draw();
+	
+	virtual void render();
 	
 };
 
