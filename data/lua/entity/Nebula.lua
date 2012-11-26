@@ -1,6 +1,10 @@
 
 
 
+Nebula = Enity();
+
+
+
 Nebula = {}
 
 
@@ -8,6 +12,6 @@ Nebula = {}
 function Nebula:OnCreate()
 
 	self.color = '';
-	self.sprite = SpriteEntity();
+	self.sprite = self.addSprite();
 
 end

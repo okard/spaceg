@@ -52,6 +52,8 @@ void Entity::removeEntity(std::shared_ptr<Entity> entity)
 	if(!entity)
 		return;
 	
+	OnUpdate.disconnect<Entity, &Entity::update>(entity.get());
+	
 	entities_.erase(entity);
 }
     

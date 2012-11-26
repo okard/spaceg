@@ -29,7 +29,9 @@ void GraphicEntity::removeEntity(std::shared_ptr<GraphicEntity> entity)
 */
 void GraphicEntity::render()
 {
+	//call sub nodes
 	if(isActive())
 		OnRender();
+		
 }
 	

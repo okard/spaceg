@@ -22,7 +22,6 @@ using namespace spaceg;
 BaseState::BaseState()
     : app_(nullptr)
 {
-    entities_.reserve(10);
 }
     
     
@@ -31,14 +30,6 @@ BaseState::BaseState()
 */
 BaseState::~BaseState()
 {
-}
-
-/**
-* Attach a game entity to this state
-*/
-void BaseState::attach(Entity* const entity)
-{
-    entities_.push_back(entity);
 }
 
 
@@ -56,12 +47,7 @@ void BaseState::update(long timeElapsed)
 {
     //keyboard/mouse input?
     
-    //update logic part of entities
-    for(Entity* e: entities_)
-    {
-        if(e->requestUpdate())
-            e->update(timeElapsed);
-    }
+    
 }
     
 /**
@@ -71,29 +57,6 @@ void BaseState::draw()
 {
     if(app_ == nullptr)
         return;
-    
-    for(Entity* e: entities_)
-    {
-		/*
-        //Order graphic entities for faster rendering
-        if(e->getType() == Entity::TypeGraphic)
-        {
-            const GraphicEntity& ge = static_cast<GraphicEntity&>(*e);
-            
-            //rende GraphicEntity which is a sf::Drawable over Application interface
-            
-            app_->getRenderTarget()->draw(ge);
-        }
-        */
-    }
-}
-
-/**
-* Clean up state
-*/
-void BaseState::cleanup()
-{
-    entities_.clear();
 }
 
 /**

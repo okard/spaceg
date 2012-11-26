@@ -28,13 +28,7 @@ private:
         
 	//TODO Quadtree implementation for storage
 	//TODO Picking API
-	
-	//TODO Decals?
-        
-    //saved entities
-    std::vector<Entity*> entities_;
-    
-    
+	 
     //application
     Application* app_;
     
@@ -48,12 +42,7 @@ public:
     * Destructor
     */
     virtual ~BaseState();
-    
-    /**
-    * Attach a game entity to this state
-    */
-    void attach(Entity* const entity); 
-    
+     
     /**
     * Activate state for this application;
     */
@@ -68,11 +57,6 @@ public:
     * Draw current state
     */
     virtual void draw();
-    
-    /**
-    * Clean up state
-    */
-    virtual void cleanup();
     
     /**
     * Set the Application Interface

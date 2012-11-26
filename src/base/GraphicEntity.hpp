@@ -16,12 +16,19 @@ class GraphicEntity : public Entity
 {
 private:
 
-	
+	// The logic entity for graphic entity
+	std::shared_ptr<Entity> logicEntity_;
+		
 public:
 	/**
 	* Render Signal
 	*/
 	cul::signal<> OnRender;
+	
+	
+	//GraphicEntity(std::shared_ptr<Entity> logicEntity)
+
+	//TODO require a graphic entity to having sub entities?
 	
 	/**
     * Add a child entity

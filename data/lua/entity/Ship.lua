@@ -1,6 +1,11 @@
 
 
 --[[
+Ship = Entity();
+
+Ship.sprite = SpriteEntity();
+
+
 //logic
     
     //ShipID
