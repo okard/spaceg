@@ -37,6 +37,7 @@ public:
 	
 	virtual void render();
 	
+	//EngineContext::getInstancePtr()->draw(sprite_);
 };
 
 

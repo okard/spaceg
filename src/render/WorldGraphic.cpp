@@ -68,7 +68,7 @@ void WorldGraphic::draw (sf::RenderTarget &target, sf::RenderStates states) cons
     
     //render spacefield
     if(spacefieldTex_)
-        spacefieldTex_->bind();
+		sf::Texture::bind(spacefieldTex_);
         
     target.draw(&vertices_[0], 4, sf::Quads, states);
     

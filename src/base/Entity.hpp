@@ -12,29 +12,39 @@
 #include "Geometry.hpp"
 
 namespace spaceg {
+	
+class Entity;
+typedef std::shared_ptr<Entity> EntityPtr;
+typedef std::unordered_set<EntityPtr> EntityList;
+
+typedef cul::signal<long> UpdateEventHandler;
 
 //TODO inherit from game object?  
-//TODO Entity Lifecycle, Events: create, destroy, active, etc  
+//TODO Entity Lifecycle
+//     Events: create, destroy, active, etc  
     
 /**
 * Basic Game Entity
+* Split to Entity and Entity2D
 */
-class Entity
+class Entity //: public std::enable_shared_from_this<Entity> ?
 {
 	
 private:
     //save entities
-    //notice  std::hash<std::shared_ptr> exists
-    std::unordered_set<std::shared_ptr<Entity>> entities_;
+    EntityList entities_;
     
 protected:
     // it is a static entity
-    // means fixed position
+    // it doesn't change
     bool static_ = false;
     
     // the entity is active
     // entity exist and can be used
     bool active_ = true;
+    
+    //logic entities? like quadtree and so on for optimized container rendering?
+    //-> QuadTreeSceneEntity -> PlayerLogicEntity -> PlayerSprite
     
 	// position
     Rectf position_;
@@ -67,7 +77,7 @@ public:
     /**
     * Add a child entity
     */
-    void addEntity(std::shared_ptr<Entity> entity);
+    void addEntity(EntityPtr entity);
     
     /**
     * Remove child entity
@@ -77,19 +87,17 @@ public:
     /**
     * Get Position of Entity
     */
-    const Rectf& getPosition() const;
+    inline const Rectf& getPosition() const { return position_; }
     
     /**
     * Is static entity
     */
-    bool isStatic();
+    inline bool isStatic() const { return static_; }
     
     /**
     * Is active
     */
-    bool isActive();
-    
-    
+    inline bool isActive() const { return active_; }  
 };
     
 } //end namespace spaceg

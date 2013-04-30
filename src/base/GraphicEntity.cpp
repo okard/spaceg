@@ -11,7 +11,7 @@ void GraphicEntity::addEntity(std::shared_ptr<GraphicEntity> entity)
 {
 	if(entity)
 	{
-		OnRender.connect<GraphicEntity, &GraphicEntity::render>(entity.get());
+		OnRender.connect(entity.get(), &GraphicEntity::render);
 		Entity::addEntity(entity);
 	}
 }

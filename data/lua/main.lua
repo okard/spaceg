@@ -24,3 +24,16 @@ function main()
 
 end
 
+function onkeypressed()
+	--get entity at x/y
+end
+
+
+function update(t)
+
+end
+
+
+function draw()
+
+end

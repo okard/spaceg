@@ -118,8 +118,9 @@ void Application::handleEventUi(const sf::Event& event)
 	switch(event.type)
 	{
 		case sf::Event::Resized: 
-			coord = window_.convertCoords (sf::Vector2i(event.size.width, event.size.height)); 
-			uiCtx_->SetDimensions(Rocket::Core::Vector2i(coord.x, coord.y));
+		
+			//coord = window_.convertCoords (sf::Vector2i(event.size.width, event.size.height)); 
+			uiCtx_->SetDimensions(Rocket::Core::Vector2i(event.size.width, event.size.height));
 			//uiCtx_->Update();
 			break;
 		

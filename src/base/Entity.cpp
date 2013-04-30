@@ -33,13 +33,13 @@ void Entity::update(long timeElapsed)
 }
 
 /// Add the child entity to internal list
-void Entity::addEntity(std::shared_ptr<Entity> entity)
+void Entity::addEntity(EntityPtr entity)
 {
 	if(!entity)
 		return;
 		
 	//TODO Register Events here
-	OnUpdate.connect<Entity, &Entity::update>(entity.get());
+	OnUpdate.connect(entity.get(), &Entity::update);
 
 	entities_.insert(entity);
 }
@@ -52,32 +52,8 @@ void Entity::removeEntity(std::shared_ptr<Entity> entity)
 	if(!entity)
 		return;
 	
-	OnUpdate.disconnect<Entity, &Entity::update>(entity.get());
+	OnUpdate.disconnect(entity.get(), &Entity::update);
 	
 	entities_.erase(entity);
 }
     
-
-/**
-* Get Position of Entity
-*/
-const Rectf& Entity::getPosition() const
-{
-	return position_;
-}
-
-/**
-* Is static entity
-*/
-bool Entity::isStatic()
-{
-	return static_;
-}
-
-/**
-* Is active
-*/
-bool Entity::isActive()
-{
-	return active_;
-}

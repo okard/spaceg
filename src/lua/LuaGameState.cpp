@@ -15,7 +15,7 @@ LuaGameState::LuaGameState(const char* const fileName)
 {
 	luaState_.LoadFile(fileName);
 	
-	//slua::Bind::Class<EngineContext>(luaState_.getContext());
+
 }
 
 LuaGameState::~LuaGameState()
@@ -24,7 +24,7 @@ LuaGameState::~LuaGameState()
 
 void LuaGameState::reg()
 {
-
+	//slua::Bind::Class<EngineContext>(luaState_.getContext());
 }
 
 

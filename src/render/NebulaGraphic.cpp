@@ -114,7 +114,7 @@ void NebulaGraphic::draw(sf::RenderTarget &target, sf::RenderStates states) cons
     
     //render one texture multiple times with different colors
     if(texture_)
-        texture_->bind();
+		sf::Texture::bind(texture_);
     
     //std::cout << "Render: " << vertexes_.size() << std::endl;
     target.draw(&vertexes_[0], vertexes_.size(), sf::Quads, states);

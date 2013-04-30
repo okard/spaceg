@@ -22,6 +22,8 @@ class EngineContext : public slua::LuaObject
 private:
 	//LuaGameState
 	
+	//
+	
 public:
 
 	int createUIDocument(slua::Context& ctx);
@@ -33,6 +35,10 @@ public:
 	//Bind Table
 	
 	static const slua::BindStatus<EngineContext> bindStatus;
+	
+	
+	
+	//singleton?
 };
 
 

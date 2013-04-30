@@ -3,6 +3,8 @@
 #ifndef __SPACEG_GEOMETRY__
 #define __SPACEG_GEOMETRY__
 
+//TODO Using GLM here?
+
 namespace spaceg {
 
 /**

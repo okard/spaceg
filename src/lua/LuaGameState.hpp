@@ -43,6 +43,8 @@ public:
 	void reg();
 	
 	
+	//call lua functions
+	
 	//draw() call containing LuaGraphicsEntity
 
 	//api for UI

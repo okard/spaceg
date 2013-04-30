@@ -5,6 +5,8 @@
 
 
 namespace spaceg {
+	
+//TODO Event Life Cycle
     
 /**
 * State Interface
