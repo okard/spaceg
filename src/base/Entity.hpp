@@ -17,7 +17,7 @@ class Entity;
 typedef std::shared_ptr<Entity> EntityPtr;
 typedef std::unordered_set<EntityPtr> EntityList;
 
-typedef cul::signal<long> UpdateEventHandler;
+typedef cul::signal<long> UpdateSignal;
 
 //TODO inherit from game object?  
 //TODO Entity Lifecycle
@@ -51,7 +51,7 @@ protected:
       
 public:
 	//Update Event
-    cul::signal<long> OnUpdate;
+    UpdateSignal OnUpdate;
     
     /**
     * Default constructor
@@ -82,7 +82,7 @@ public:
     /**
     * Remove child entity
     */
-    void removeEntity(std::shared_ptr<Entity> entity);
+    void removeEntity(EntityPtr entity);
     
     /**
     * Get Position of Entity

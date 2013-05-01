@@ -24,6 +24,14 @@ function main()
 
 end
 
+function init()
+
+end
+
+function destroy()
+
+end
+
 function onkeypressed()
 	--get entity at x/y
 end

@@ -63,3 +63,19 @@ ships.
 
 ## Ships
 
+* ShipClass
+* Crew
+	Has different skills and abilities for different ship classes
+	* Weapon
+	* Repair
+	* Tech
+	* Commanding
+	
+* Equipment
+	* Weapons
+	* Defense
+	* Support
+	
+
+	
+

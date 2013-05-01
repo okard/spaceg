@@ -24,7 +24,7 @@ LuaGameState::~LuaGameState()
 
 void LuaGameState::reg()
 {
-	//slua::Bind::Class<EngineContext>(luaState_.getContext());
+	slua::Bind::Class<EngineContext>(luaState_);
 }
 
 

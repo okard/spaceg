@@ -14,14 +14,7 @@ static const slua::BindFunction<EngineContext> function[]=
 const slua::BindStatus<EngineContext> EngineContext::bindStatus = 
 {
 	.className = "EngineContext",
-	.metatableRegisted = false, //remove
-	.Functions = function
-	/*
-	{
-		{"createUIDocument", &EngineContext::createUIDocument},
-		{0,0}
-	}*/
-		
+	.Functions = function	
 };
 
 

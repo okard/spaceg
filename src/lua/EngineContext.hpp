@@ -36,7 +36,7 @@ public:
 	
 	static const slua::BindStatus<EngineContext> bindStatus;
 	
-	
+	//add a lua logging function
 	
 	//singleton?
 };

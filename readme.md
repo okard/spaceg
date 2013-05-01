@@ -1,5 +1,8 @@
 # SpaceG
 
+## License
+All source files are licensed under GPLv3
+All textures, models are under CC 
 
 ## Dependencies
 

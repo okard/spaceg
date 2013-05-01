@@ -8,10 +8,13 @@
 ## Ships
 
 ### Class Ranger
+Small fast ships for scouting
 
 ### Class Cargo
+Bigger ships for transport missions
 
 ### Class Cruiser
+Big ships with a lot of weapons
 
 
 ## Weapons

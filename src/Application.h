@@ -42,6 +42,7 @@ private:
     //TODO use smart pointer here
     
     //State Handling
+    //TODO StateStack? std::vector<std::shared_ptr<State> > StateStack;
     State* currentState_;
     
     
