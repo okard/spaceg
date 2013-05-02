@@ -15,9 +15,8 @@ namespace spaceg {
 class GraphicEntity : public Entity
 {
 private:
-
 	// The logic entity for graphic entity
-	std::shared_ptr<Entity> logicEntity_;
+	EntityPtr logicEntity_;
 		
 public:
 	/**

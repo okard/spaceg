@@ -13,7 +13,6 @@ function Nebula:OnCreate()
 	--set logic properties
 	self.color = '';
 	
-	
 	-- requires a sprite entity
 	-- sprite object not mapped to scene
 	self.sprite = Sprite()
@@ -21,4 +20,6 @@ function Nebula:OnCreate()
 	-- add sub entity
 	self:add(self.sprite)
 
+	-- register entity
+	--Engine.Register(self);
 end

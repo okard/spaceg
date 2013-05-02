@@ -18,6 +18,7 @@ class Entity;
 /**
 * Basic Game State
 * TODO templated for entities?
+* Rename to Application State
 */
 class BaseState : public State
 {

@@ -1,8 +1,9 @@
 
 
-#include "Application.h"
+#include "Application.hpp"
 #include "GameException.hpp"
 #include "ResourceManager.h"
+#include "Log.hpp"
 
 #include "lua/LuaGameState.hpp"
 
@@ -16,6 +17,10 @@ using namespace spaceg;
 
 int main(int argc, char **argv)
 {
+	//Register Logging:
+	cul::Log::onLog().connect(engine_logger);
+	cul::Log::Source().verbose("program started");
+	
     //Parse commandline options
     //-main script(lua) file to run?
     //-log outputs?
@@ -53,8 +58,10 @@ int main(int argc, char **argv)
     */
     
     // Running a Lua Game State
-    LuaGameState state("data/lua/main.lua");
+    LuaGameState state;
     state.setApplication(&app);
+    state.loadFile("data/lua/main.lua");
+    state.callMain();
     app.switchState(&state);
     app.run();
 

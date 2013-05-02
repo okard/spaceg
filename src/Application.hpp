@@ -20,6 +20,7 @@ class State;
   
 /**
 * Application Class
+* Merging Logic, Graphic, UI Subsystem
 */
 class Application
 {
@@ -33,11 +34,10 @@ private:
     sf::Sprite renderSprite_;
     sf::View view_;
     
-    //UI
+    //UI libRocket
     SystemInterface uiSysInterface_;
     RenderInterface* uiRenderInterface_;
     Rocket::Core::Context* uiCtx_;
-    
     
     //TODO use smart pointer here
     
@@ -46,9 +46,7 @@ private:
     State* currentState_;
     
     
-    //Create Signals for mouse/keyboard events
-    
-    
+    //Create Signals for mouse/keyboard events  
 public:
     /**
     * settung up application
@@ -70,10 +68,13 @@ public:
     */
     void switchState(State* const state);
     
+    //pushState
+    //popState
+    
     /**
     * Gets the rendering target
     */
-    sf::RenderTarget * const getRenderTarget();
+    inline sf::RenderTarget * const getRenderTarget() { return &renderTexture_; }
     
     //TODO get ui Context
     

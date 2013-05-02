@@ -21,9 +21,21 @@
 	- UI
 * Reimplemented some things in lua code
 	- Think about transfering delegate structs via lua for event mapping with complete native execution
+	- Reimplement the Nebula Rendering
+	- Implement Sprite Interface
+	- Implement UI Interface
+	- Picking API
 * Remove unused stuff
 * Memory Management
 * Implement Logging
+* SceneGraph API for Lua?
+* Create Particle System (Point Sprites)
+* Create Decal System
+* Thinking over Entity System
+	- Entities Logic 
+	- Entities Logic with Position
+	- Entities Logic with Position + Graphic(Renderable)
+	
 
 ## Textures
 

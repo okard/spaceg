@@ -85,6 +85,11 @@ public:
     void removeEntity(EntityPtr entity);
     
     /**
+    * Get count of sub entities
+    */
+    inline size_t entityCount() const { return entities_.size(); }
+    
+    /**
     * Get Position of Entity
     */
     inline const Rectf& getPosition() const { return position_; }

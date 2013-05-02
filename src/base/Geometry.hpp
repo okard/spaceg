@@ -61,22 +61,22 @@ public:
 		this->y = y;
 	}
 
-	T getX()
+	inline T getX()
 	{
 		return x;
 	}
 	
-	T getY()
+	inline T getY()
 	{
 		return y;
 	}
 	
-	T getWidth()
+	inline T getWidth()
 	{
 		return w;
 	}
 
-	T getHeight()
+	inline T getHeight()
 	{
 		return h;
 	}

@@ -7,7 +7,7 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <Rocket/Core/ElementDocument.h>
 
-#include "../Application.h"
+#include "../Application.hpp"
 #include "../base/Entity.hpp"
 #include "../render/SfmlEntity.hpp"
 

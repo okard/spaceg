@@ -1,5 +1,5 @@
 
-#include "Application.h"
+#include "Application.hpp"
 
 #include <GL/glew.h>
 
@@ -83,7 +83,6 @@ void Application::run()
 void Application::handleEvent(const sf::Event& event)
 {
 	//TODO ui fetch all events only
-	
 		 
 	//1. handleEventApp
 	switch(event.type)
@@ -213,10 +212,5 @@ void Application::switchState(State* const state)
     
     state->activate();
     currentState_ = state;
-}
-
-sf::RenderTarget* const Application::getRenderTarget()
-{
-    return &renderTexture_;
 }
      

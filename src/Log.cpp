@@ -8,7 +8,7 @@ using namespace spaceg;
 
 
 
-void engine_logger(const cul::LogMessage& le)
+void spaceg::engine_logger(const cul::LogMessage& le)
 {
 	//static logfile
 	

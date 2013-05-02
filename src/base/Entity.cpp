@@ -1,6 +1,8 @@
 
 #include "Entity.hpp"
 
+#include <cullog/Log.hpp>
+
 
 using namespace spaceg;
 
@@ -9,6 +11,7 @@ using namespace spaceg;
 */
 Entity::Entity()
 {
+	cul::Log::Source().verbose("Entity created");
 }
 
 /**
@@ -16,6 +19,7 @@ Entity::Entity()
 */
 Entity::~Entity()
 {
+	
 }
 
 

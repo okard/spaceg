@@ -32,15 +32,22 @@ private:
     
 public:
 	LuaGameState();
-	
-	LuaGameState(const char* const fileName);
-	
 	~LuaGameState();
 	
-	//loadFile(filename)
-
-	//register lua interfaces from engine to game
-	void reg();
+	/**
+	* Load a lua file
+	*/
+	void loadFile(const char* const fileName);
+		
+	/**
+	* Register the objects to lua vm
+	*/
+	void registerLuaInterface();
+	
+	/**
+	* call main function
+	*/
+	void callMain();
 	
 	
 	//call lua functions
