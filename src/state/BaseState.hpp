@@ -30,7 +30,7 @@ private:
 	//TODO Quadtree implementation for storage
 	//TODO Picking API
 	 
-    //application
+    //application to reference
     Application* app_;
     
 public:

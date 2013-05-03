@@ -214,3 +214,8 @@ void Application::switchState(State* const state)
     currentState_ = state;
 }
      
+Application& Application::getInstance()
+{
+	static Application app;
+	return app;
+}

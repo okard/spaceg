@@ -2,6 +2,8 @@
 
 #include "LuaGameState.hpp"
 
+#include "LuaSpriteEntity.hpp"
+
 #include <slua/Context.hpp>
 
 using namespace spaceg;
@@ -25,14 +27,32 @@ void LuaGameState::loadFile(const char* const fileName)
 		
 void LuaGameState::registerLuaInterface()
 {
-	slua::Bind::Class<EngineContext>(luaState_);
+	slua::Bind::Class<LuaSpriteEntity>(luaState_);
 }
 
 //Call "main" Function in Lua File
 void LuaGameState::callMain()
 {
-	slua::Context ctx = luaState_;
+	slua::Context& ctx = luaState_;
 	ctx.pushGlobal("main");
+	ctx.call(0,0);
+}
+
+// Update the state
+void LuaGameState::update(long timeElapsed)
+{
+	slua::Context& ctx = luaState_;
+	ctx.pushGlobal("update");
+	ctx.pushInteger(timeElapsed);
+	ctx.call(1,0);
+}
+	
+//draw
+void LuaGameState::draw()
+{
+	//call draw
+	slua::Context& ctx = luaState_;
+	ctx.pushGlobal("draw");
 	ctx.call(0,0);
 }
 

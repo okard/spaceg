@@ -9,8 +9,6 @@
 #include <slua/Bind.hpp>
 
 #include "../state/BaseState.hpp"
-#include "EngineContext.hpp"
-
 
 namespace spaceg {
 
@@ -21,14 +19,8 @@ namespace spaceg {
 class LuaGameState : public BaseState
 {
 private:
-    
     //Scripting/Lua
     slua::State luaState_;
-    
-    //Engine Interface
-	EngineContext engineCtx_;
-    
-    //table for state representation
     
 public:
 	LuaGameState();
@@ -48,6 +40,17 @@ public:
 	* call main function
 	*/
 	void callMain();
+	
+	/**
+    * Update the state
+    */
+    virtual void update(long timeElapsed);
+        
+    /**
+    * Draw the state
+    * rename to render
+    */
+    virtual void draw();
 	
 	
 	//call lua functions

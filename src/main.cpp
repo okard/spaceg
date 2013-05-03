@@ -28,7 +28,7 @@ int main(int argc, char **argv)
     //load settings? fullscreen/resolution
     //audio on off
     
-    Application app;
+    Application& app = Application::getInstance();
     
     /*
     //test stuff
@@ -60,6 +60,7 @@ int main(int argc, char **argv)
     // Running a Lua Game State
     LuaGameState state;
     state.setApplication(&app);
+    state.registerLuaInterface();
     state.loadFile("data/lua/main.lua");
     state.callMain();
     app.switchState(&state);

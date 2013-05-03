@@ -12,7 +12,6 @@
 #include "ui/SystemInterface.h"
 
 
-
 namespace spaceg {
     
 class RenderInterface;
@@ -47,17 +46,23 @@ private:
     
     
     //Create Signals for mouse/keyboard events  
-public:
+private:
     /**
     * settung up application
     */
     Application();
     
     /**
+    * Copy Ctor
+    */
+    Application(const Application& app){}
+    
+    /**
     * Destruct and cleanup Application
     */
     ~Application();
-    
+ 
+public:   
     /**
     * Run Application
     */
@@ -74,11 +79,13 @@ public:
     /**
     * Gets the rendering target
     */
-    inline sf::RenderTarget * const getRenderTarget() { return &renderTexture_; }
+    inline sf::RenderTarget* const getRenderTarget() { return &renderTexture_; }
     
     //TODO get ui Context
     
     //TODO get view
+    
+    static Application& getInstance();
     
 private:
     ///handle sfml events

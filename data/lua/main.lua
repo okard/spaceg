@@ -3,7 +3,7 @@ require("data/lua/lib/utils");
 require("data/lua/entity/Entity");
 --require("data/lua/entity/Nebula");
 
-
+testSprite = nil
 
 -- given the current LuaState as parameter
 -- function main(Engine interface)
@@ -14,6 +14,9 @@ function main()
 	local test = new(Entity);
 	
 	print(test.x);
+	
+	testSprite = Sprite();
+	--testSprite:loadTexture(
 
 	-- local w = World()
 	-- w.load(world1.world)
@@ -46,8 +49,8 @@ function onkeypressed()
 end
 
 
-function update(t) --deliver time
-
+function update(t) --deliver time is ms
+	--print(t)
 end
 
 
