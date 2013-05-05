@@ -52,7 +52,8 @@ int LuaSpriteEntity::loadTexture(slua::Context& ctx)
 	
 	auto tex = TexResMng::getInstance().retrieve(ctx.getString(2));
 	tex->setRepeated(true);
-	sprite_.setTexture ((*tex), true);
+	tex->setSmooth(true);
+	sprite_.setTexture ((*tex));
 	
 	return 0;
 }
@@ -99,7 +100,7 @@ int LuaSpriteEntity::setSize(slua::Context& ctx)
 	float scaley = luaInt2Float(ctx.getInteger(3)) / lbounds.height;
 	
 	//cul::Log::Source().verbose("[LuaSpriteEntity::setSize] Param: %f, %f", luaInt2Float(ctx.getInteger(2)), luaInt2Float(ctx.getInteger(3)));
-	//cul::Log::Source().verbose("[LuaSpriteEntity::setSize] Bounds: %f, %f Scale: %f, %f", width, height, wfactor, hfactor);
+	cul::Log::Source().verbose("[LuaSpriteEntity::setSize] Scale: %f, %f", scalex, scaley);
 	
 	sprite_.scale(scalex, scaley);
 }
@@ -130,7 +131,21 @@ int LuaSpriteEntity::setTextureRect(slua::Context& ctx)
 	|| !ctx.isType(5, slua::LuaType::NUMBER))
 		throw GameException("Invalid call of Sprite::setTextureRect require 4 number arguments");
 	
-	sprite_.setTextureRect( sf::IntRect(ctx.getInteger(2), ctx.getInteger(3), ctx.getInteger(4), ctx.getInteger(5)));	
+	
+	auto x = ctx.getInteger(2);
+	auto y = ctx.getInteger(3);
+	auto width = ctx.getInteger(4);
+	auto height = ctx.getInteger(5);
+	
+	cul::Log::Source().verbose("[LuaSpriteEntity::setTextureRect]: %d, %d, %d, %d", x, y, width, height);
+
+	//todo fix design mistakes of sf::Sprite
+	//save the current size of the sprite
+	//get the texture size
+	// calc out the scale/and other fixes
+
+	auto rect = sf::IntRect(x,y, width, height);
+	sprite_.setTextureRect(rect);
 }
 
 int LuaSpriteEntity::loadFragmentShader(slua::Context& ctx)
@@ -155,8 +170,8 @@ int LuaSpriteEntity::render(slua::Context& ctx)
 {
 	//TODO retrieve Application instance over lua_State?
 	//draw sprite
-	const_cast<sf::Texture*>(sprite_.getTexture())->setRepeated(true);
-	Application::getInstance().getRenderTarget()->draw(sprite_, states_);
+	Application::getInstance().getRenderTarget()->draw(sprite_);
+	//include states_
 	return 0;
 }
 

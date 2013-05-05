@@ -19,7 +19,7 @@ namespace spaceg {
 /**
 * Lua Bindings für Sprite Entity
 */	
-class LuaSpriteEntity : public slua::LuaObject //public spaceg::GraphicEntity,
+class LuaSpriteEntity : public slua::LuaObject, public spaceg::GraphicEntity
 {
 private:
     //sprite

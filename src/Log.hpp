@@ -6,6 +6,8 @@
 
 namespace spaceg {
 	
+//TODO default log source
+	
 /**
 * Default Engine Logger
 */

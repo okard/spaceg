@@ -20,8 +20,10 @@ function main()
 	
 	print(testSprite:getViewport());
 	x,y,w,h = testSprite:getViewport();
+	
+	
 	testSprite:setSize(w, h);
-	testSprite:setTextureRect(0,0, 4096*5, 4096*5);
+	testSprite:setTextureRect(0,0, 256*4, 256*4);
 
 	-- local w = World()
 	-- w.load(world1.world)

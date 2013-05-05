@@ -32,9 +32,10 @@
 * Create Particle System (Point Sprites)
 * Create Decal System
 * Thinking over Entity System
-	- Entities Logic 
-	- Entities Logic with Position
-	- Entities Logic with Position + Graphic(Renderable)
+	- LogicEntity  
+	- LogicEntity2D (contains 2D Information)
+	- RenderEntity  (contains 2D Information + Render Interface)
+* Reimplement the ResourceManager System
 	
 
 ## Textures
