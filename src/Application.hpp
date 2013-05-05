@@ -83,7 +83,7 @@ public:
     
     //TODO get ui Context
     
-    //TODO get view
+    inline sf::View& getView() { return view_; }
     
     static Application& getInstance();
     

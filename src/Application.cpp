@@ -6,11 +6,13 @@
 #include <SFML/Graphics.hpp>
 
 #include "GameException.hpp"
+#include "Log.hpp"
 #include "ui/RenderInterface.h"
 #include "ui/SfmlUtils.h"
 
 #include "state/State.hpp"
 #include "state/BaseState.hpp"
+
 
 //debug
 #include <iostream>
@@ -37,6 +39,11 @@ Application::Application()
     //glew init
     glewInit();
     
+    //logging:
+    auto cs = window_.getSettings();
+    cul::Log::Source().verbose("OpenGL Context: %d.%d", cs.majorVersion, cs.minorVersion);
+    //depthBits, stencilBits, antialiasingLevel
+    
     //GUI Init
     //Getting directly rendered to window not to render texture
     uiRenderInterface_ = new RenderInterface(&window_);
@@ -50,7 +57,6 @@ Application::Application()
     Rocket::Core::FontDatabase::LoadFontFace("data/font/LinLibertine_Rah.ttf", "Libertine", Rocket::Core::Font::STYLE_NORMAL, Rocket::Core::Font::WEIGHT_NORMAL);
     
     //test
-
     Rocket::Core::ElementDocument* document = uiCtx_->LoadDocument("data/ui_test.rml");
     if (document != NULL)
         document->Show();
@@ -183,11 +189,10 @@ void Application::render()
     //Draw Render Texture
     renderSprite_.setTexture(renderTexture_.getTexture());
     window_.draw(renderSprite_);
+    
     //TODO Post Effects Fragment shader here please 
     //Hook posteffects together with state?
-    
-    
-    
+     
     //Render the ui as overlay
     uiRenderInterface_->startRender();
     uiCtx_->Render();

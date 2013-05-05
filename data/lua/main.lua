@@ -16,7 +16,12 @@ function main()
 	print(test.x);
 	
 	testSprite = Sprite();
-	--testSprite:loadTexture(
+	testSprite:loadTexture("data/texture/starfield01.png");
+	
+	print(testSprite:getViewport());
+	x,y,w,h = testSprite:getViewport();
+	testSprite:setSize(w, h);
+	testSprite:setTextureRect(0,0, 4096*5, 4096*5);
 
 	-- local w = World()
 	-- w.load(world1.world)
@@ -55,5 +60,5 @@ end
 
 
 function draw() -- deliver viewport? x,y,width,height
-
+	testSprite:render();
 end

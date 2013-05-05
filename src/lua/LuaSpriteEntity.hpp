@@ -30,6 +30,8 @@ private:
     sf::RenderStates states_;	
     
     //disable/enable shader
+    
+    //save Application Reference here
 public:
 
 	LuaSpriteEntity();
@@ -37,6 +39,13 @@ public:
 
 	//filename
 	int loadTexture(slua::Context& ctx);
+	
+	//position
+	//texturePosition
+	int setPosition(slua::Context& ctx);
+	int setSize(slua::Context& ctx);
+	int getViewport(slua::Context& ctx);
+	int setTextureRect(slua::Context& ctx);
 	
 	//load shader
 	int loadFragmentShader(slua::Context& ctx);
