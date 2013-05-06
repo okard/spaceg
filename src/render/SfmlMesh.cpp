@@ -1,6 +1,6 @@
 
 
-#include "SfmlMesh.h"
+#include "SfmlMesh.hpp"
 
 using namespace spaceg;
 

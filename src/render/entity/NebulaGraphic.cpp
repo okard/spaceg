@@ -7,7 +7,7 @@
 #include <SFML/Graphics/Transform.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
-#include "../utils/Random.hpp"
+#include "../../utils/Random.hpp"
 
 #include <iostream>
 

@@ -28,6 +28,7 @@
 * Remove unused stuff
 * Memory Management
 * Implement Logging
+	- Generic Engine Log Source
 * SceneGraph API for Lua?
 * Create Particle System (Point Sprites)
 * Create Decal System
@@ -36,6 +37,12 @@
 	- LogicEntity2D (contains 2D Information)
 	- RenderEntity  (contains 2D Information + Render Interface)
 * Reimplement the ResourceManager System
+	- Texture/Shader Resource Manager
+* Thinking about storing Entities and Object 
+	- Using an ID system also easier for Lua objects
+* Think about workflow
+	- When calling lua functions
+	- Mapping between entities (scenegraph)
 	
 
 ## Textures

@@ -12,6 +12,7 @@
 #include <slua/Bind.hpp>
 
 #include "../base/GraphicEntity.hpp"
+#include "../render/SfmlSprite.hpp"
 
 
 namespace spaceg {
@@ -22,8 +23,7 @@ namespace spaceg {
 class LuaSpriteEntity : public slua::LuaObject, public spaceg::GraphicEntity
 {
 private:
-    //sprite
-	sf::Sprite sprite_;
+	SfmlSprite sprite_;
 	//shader
 	sf::Shader shader_;
 	//render states
@@ -42,6 +42,7 @@ public:
 	
 	//position
 	//texturePosition
+	int setColor(slua::Context& ctx);
 	int setPosition(slua::Context& ctx);
 	int setSize(slua::Context& ctx);
 	int getViewport(slua::Context& ctx);
@@ -54,6 +55,7 @@ public:
 	//shaderArguments?
 	
 	//move texture
+	int moveTexture(slua::Context& ctx);
 	
 	virtual int render(slua::Context& ctx);
 	

@@ -8,9 +8,9 @@
 #include "lua/LuaGameState.hpp"
 
 #include "state/BaseState.hpp"
-#include "render/NebulaGraphic.h"
-#include "game/World.hpp"
-#include "render/WorldGraphic.hpp"
+//#include "render/NebulaGraphic.h"
+//#include "game/World.hpp"
+//#include "render/WorldGraphic.hpp"
  
 using namespace spaceg;
 

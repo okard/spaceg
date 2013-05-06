@@ -9,8 +9,8 @@
 #include <SFML/Graphics/Vertex.hpp>
 #include <SFML/Graphics/Color.hpp>
 
-#include "../Types.h"
-#include "SfmlEntity.hpp"
+#include "../../Types.h"
+#include "../SfmlEntity.hpp"
 
 //Forward Declarations
 namespace sf { class Texture; }

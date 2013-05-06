@@ -5,7 +5,7 @@
 
 #include <SFML/Graphics/Vertex.hpp>
 
-#include "SfmlEntity.hpp"
+#include "../SfmlEntity.hpp"
 #include "NebulaGraphic.h"
 
 

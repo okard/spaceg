@@ -23,7 +23,8 @@ function main()
 	
 	
 	testSprite:setSize(w, h);
-	testSprite:setTextureRect(0,0, 256*4, 256*4);
+	testSprite:setTextureRect(0,0, w/2, h/2);
+	testSprite:setColor(255, 150, 150, 255);
 
 	-- local w = World()
 	-- w.load(world1.world)
@@ -58,6 +59,7 @@ end
 
 function update(t) --deliver time is ms
 	--print(t)
+	testSprite:moveTexture(500, 100);
 end
 
 
