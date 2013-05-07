@@ -2,34 +2,128 @@
 
 ## Meta entities
 * Player
-* Fleets
+	- Name
+	- Race
+	- Storage (store global equips)
+	- Ships
+	- Crews (each ship require a crew)
+	- Resources
+		- Money
+		- Materials
+			- Steel
+			- Silicon
+			- Deuterium
 
+## Crew
+* Name
+* Bonus
+* Skills
+	- Tech		(faster)
+	- Military 	(weapon bonuses)
+	- Transport (more weight, more space)
+* Abbilities
+* Updates
+* Experience
 
-## Ships
+## Ship
 
-### Class Ranger
-Small fast ships for scouting
+* Class
+	- Ranger - Small fast ships for scouting
+	- Cargo - Bigger ships for transport missions
+	- Cruiser - Big ships with a lot of weapons
+	
+* Speed
+* Integrity (HP)
+* Integrity Regeneration Rate
+* Shields
+* Shield Regeneration Rate
+* Energy (For Weapons and Abilities)
+* Energy Regenration Rate
+* Equipment
+	* Weapons
+	* Support
+* Level
+* Sensory Range
+* Currently Effects
+	- e.g. (shield generate +10 for 60 seconds)
+* Maximum weight
+* Storage Space
+* Crew
+* Gear
 
-### Class Cargo
-Bigger ships for transport missions
+(A ship has 2 settings each with 4 active and 2 passive equips, first active equip is marked as autofire)
 
-### Class Cruiser
-Big ships with a lot of weapons
+## Equipment (Modules)
 
+* Weight (in tons)
+* Energy Balance
+* Category
+* Active/Passive
+* Requirements
+* IsAvailable
+	
+### Weapon Modules
+* Class (also bullet?)
+	- Phaser
+	- Beam
+	- Ion Cannon
+* Bullet
+	- Time to Life
+	- Range
+	- Type (Physical/Energy)
+	- Damage
+	- Target
+* Energy Cost
+* Cooldown
+* Level
 
-## Weapons
-* Phaser
-* Beam
-* Ion Cannon
+### Support Modules
 
+* Reactor - Generate Energy (positive energy balance)
+* Shieldgenerator - Regenerate Shields
+* Cloaking device - Hide Ship
+* Multishieldgenerator - effects ships near by
+* Nanobots - Regenerate Integrity
+* FactoryModule - Produce projectiles fir projectile weapons
+* Material Collector - Collect Materials
 
-## Equip
-
-* Shieldgenerator
-* Reactor
-* Cloaking device
+### Gear Modules
+* Jet
+* Impulse
+* Warp
 
 ## Researchs
 
-* 
+* Enable Equipment
+* Enable Updates
+* General Bonuses
 
+## Space Stations
+
+* Docks
+* Factory
+	- Produce Equipment with materials
+	- Upgrade Equipment with materials
+	- Produce Ships
+	- Upgrade Ships
+* Shops
+	- Equipment
+	- Ships
+	- Materials
+	
+## Planets
+
+* Docks
+* Factory
+* Shops
+* Resources
+
+## Nebulas
+
+* Type
+* Resources
+
+## Portals
+
+* Connect different maps
+* Shortcuts on map
