@@ -81,6 +81,8 @@ public:
     */
     inline sf::RenderTarget* const getRenderTarget() { return &renderTexture_; }
     
+    
+    inline const sf::Window& getWindow() const { return window_; }
     //TODO get ui Context
     
     inline sf::View& getView() { return view_; }

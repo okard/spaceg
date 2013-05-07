@@ -88,7 +88,7 @@ int LuaSpriteEntity::setPosition(slua::Context& ctx)
 	|| !ctx.isType(3, slua::LuaType::NUMBER))
 		throw GameException("Invalid call of Sprite::setPosition require 2 number arguments");
 		
-	sprite_.setPosition(luaInt2Float(ctx.getInteger(2)), luaInt2Float(ctx.getInteger(3)));
+	sprite_.setPosition(ctx.getFloat(2), ctx.getFloat(3));
 	return 0;
 }
 
@@ -112,7 +112,7 @@ int LuaSpriteEntity::setSize(slua::Context& ctx)
 	sprite_.scale(scalex, scaley);
 	*/
 	
-	sprite_.setSize(luaInt2Float(ctx.getInteger(2)), luaInt2Float(ctx.getInteger(3)));
+	sprite_.setSize(ctx.getFloat(2), ctx.getFloat(3));
 	return 0;
 }
 
@@ -124,10 +124,10 @@ int LuaSpriteEntity::getViewport(slua::Context& ctx)
 	auto center = view.getCenter();
 	
 	//the sfml view only delivers center and width and height not the corner
-	ctx.pushInteger(luaFloat2Int(center.x - (size.x/2.f)));
-	ctx.pushInteger(luaFloat2Int(center.y - (size.y/2.f)));
-	ctx.pushInteger(luaFloat2Int(size.x));
-	ctx.pushInteger(luaFloat2Int(size.y));
+	ctx.pushFloat(center.x - (size.x/2.f));
+	ctx.pushFloat(center.y - (size.y/2.f));
+	ctx.pushFloat(size.x);
+	ctx.pushFloat(size.y);
 	return 4;
 }
 
@@ -141,10 +141,10 @@ int LuaSpriteEntity::setTextureRect(slua::Context& ctx)
 	|| !ctx.isType(5, slua::LuaType::NUMBER))
 		throw GameException("Invalid call of Sprite::setTextureRect require 4 number arguments");
 	
-	auto x = luaInt2Float(ctx.getInteger(2));
-	auto y = luaInt2Float(ctx.getInteger(3));
-	auto width = luaInt2Float(ctx.getInteger(4));
-	auto height = luaInt2Float(ctx.getInteger(5));
+	auto x = ctx.getFloat(2);
+	auto y = ctx.getFloat(3);
+	auto width = ctx.getFloat(4);
+	auto height = ctx.getFloat(5);
 	
 	cul::Log::Source().verbose("[LuaSpriteEntity::setTextureRect]: %d, %d, %d, %d", x, y, width, height);
 
@@ -183,8 +183,8 @@ int LuaSpriteEntity::moveTexture(slua::Context& ctx)
 	|| !ctx.isType(3, slua::LuaType::NUMBER))
 		throw GameException("Invalid call of Sprite::moveTexture require 2 number arguments");
 		
-	float xmove = luaInt2Float(ctx.getInteger(2));
-	float ymove = luaInt2Float(ctx.getInteger(3));
+	float xmove = ctx.getFloat(2);
+	float ymove = ctx.getFloat(3);
 	
 	//normalize with texture size
 	

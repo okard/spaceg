@@ -3,6 +3,7 @@
 #include "LuaGameState.hpp"
 
 #include "LuaSpriteEntity.hpp"
+#include "LuaInput.hpp"
 
 #include <slua/Context.hpp>
 
@@ -28,6 +29,7 @@ void LuaGameState::loadFile(const char* const fileName)
 void LuaGameState::registerLuaInterface()
 {
 	slua::Bind::Class<LuaSpriteEntity>(luaState_);
+	LuaInput::reg(luaState_);
 }
 
 //Call "main" Function in Lua File
