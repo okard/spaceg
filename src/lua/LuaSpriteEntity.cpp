@@ -50,9 +50,11 @@ LuaSpriteEntity::~LuaSpriteEntity()
 //load texture for sprite
 int LuaSpriteEntity::loadTexture(slua::Context& ctx)
 {
+	#if true
 	//TODO set lua_error
 	if(ctx.stackCount() != 2 || !ctx.isType(2, slua::LuaType::STRING))
 		throw GameException("Invalid call of Sprite::loadTexture require 1 string argument");
+	#endif
 	
 	auto tex = TexResMng::getInstance().retrieve(ctx.getString(2));
 	tex->setRepeated(true);
@@ -192,6 +194,9 @@ int LuaSpriteEntity::moveTexture(slua::Context& ctx)
 	auto texrec = sprite_.getTextureRect();
 	texrec.left += xmove;
 	texrec.top += ymove;
+	
+	//if width == texture.width add textrec.top > width then textrec.left = 0
+	
 	//texrec.width += xmove;
 	//texrec.height += ymove;
 	sprite_.setTextureRect(texrec);

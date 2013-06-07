@@ -44,6 +44,7 @@
 * Think about workflow
 	- When calling lua functions
 	- Mapping between entities (scenegraph)
+* Release/Debug checks in scripting code for optimization
 	
 
 ## Textures

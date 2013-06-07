@@ -10,6 +10,7 @@
 #include <Rocket/Core.h>
 
 #include "ui/SfmlSystemInterface.hpp"
+#include "input/SfmlInputManager.hpp"
 
 
 namespace spaceg {
@@ -39,7 +40,7 @@ private:
     Rocket::Core::Context* uiCtx_;
     
     //Input
-    //SfmlInputManager
+    SfmlInputManager inputMng_;
     
     //TODO use smart pointer here
     
@@ -85,7 +86,7 @@ public:
     /// Get Mouse Position for Rendering Target
     sf::Vector2f getMousePositionForRenderTarget();
     
-    /// The Application Instance
+    /// The Application Instance (Remove)
     static Application& getInstance();
     
 private:

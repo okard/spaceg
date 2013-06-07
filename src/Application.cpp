@@ -115,7 +115,7 @@ void Application::handleEvent(const sf::Event& event)
 	handleEventUi(event);
 	 
 	//3. handleEventSignals
-	
+	inputMng_.handleEvent(event);
 }
 
 ///Ui Event Handling

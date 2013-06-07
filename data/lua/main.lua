@@ -21,6 +21,7 @@ function main()
 	print(testSprite:getViewport());
 	x,y,w,h = testSprite:getViewport();
 	
+	--register camera change function
 	
 	testSprite:setSize(w, h);
 	testSprite:setTextureRect(0,0, w/2, h/2);

@@ -13,7 +13,7 @@ using namespace spaceg;
 
 
 LuaGameState::LuaGameState(Application& app)
-	: app_(app)
+	: app_(app), bind_(*this), cam_(*this)
 {
 }
 
@@ -34,6 +34,10 @@ void LuaGameState::registerLuaInterface()
 	//custom binder
 	slua::Bind::Class<LuaSpriteEntity>(luaState_);
 	LuaInput::reg(luaState_);
+	
+	bind_.registerObject<LuaCamera>(cam_, "Camera");
+	
+	//bind_.push(
 }
 
 //Call "main" Function in Lua File

@@ -12,6 +12,8 @@ namespace spaceg {
 * Default Engine Logger
 */
 void engine_logger(const cul::LogMessage& le);
+
+//log exception?
 	
 } //end namespace spaceg
 

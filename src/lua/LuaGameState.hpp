@@ -8,6 +8,8 @@
 #include <slua/State.hpp>
 #include <slua/Bind.hpp>
 
+#include "LuaBinder.hpp"
+#include "LuaCamera.hpp"
 #include "../state/State.hpp"
 
 namespace spaceg {
@@ -25,8 +27,12 @@ private:
     slua::State luaState_;
     
     //Binder Class Instance
+    LuaBinder bind_;
     
+    //Application reference
     Application& app_;
+    
+    LuaCamera cam_;
     
 public:
 	LuaGameState(Application& app);
@@ -72,7 +78,9 @@ public:
     //script
     //init
     
-    //singleton
+    inline Application& getApplication() { return app_; }
+    
+    inline slua::State& getLuaState() { return luaState_; }
 
 };
 
