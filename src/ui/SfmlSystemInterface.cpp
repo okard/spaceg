@@ -1,13 +1,13 @@
 
 
-#include "SystemInterface.h"
+#include "SfmlSystemInterface.hpp"
 
 
 using namespace spaceg;
 
 
 
-float SystemInterface::GetElapsedTime()
+float SfmlSystemInterface::GetElapsedTime()
 {
     return clock_.getElapsedTime().asSeconds();
 }

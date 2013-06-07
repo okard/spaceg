@@ -16,7 +16,6 @@ public:
 	static int isPressedMBL(lua_State* L);
 	static int isPressedMBR(lua_State* L);
 	
-	
 	//Binding Information
 	static const slua::BindStatus<LuaInput> bindStatus;
 };

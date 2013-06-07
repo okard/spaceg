@@ -36,6 +36,7 @@
 	- LogicEntity  
 	- LogicEntity2D (contains 2D Information)
 	- RenderEntity  (contains 2D Information + Render Interface)
+	- Component Based?
 * Reimplement the ResourceManager System
 	- Texture/Shader Resource Manager
 * Thinking about storing Entities and Object 

@@ -14,14 +14,14 @@ namespace spaceg {
 /**
 * libRocket Render Interface
 */
-class RenderInterface : public Rocket::Core::RenderInterface 
+class SfmlRenderInterface : public Rocket::Core::RenderInterface 
 {
 private:
     sf::RenderTarget* target_;
     
 public:
-    RenderInterface(sf::RenderTarget* target);
-    ~RenderInterface();
+    SfmlRenderInterface(sf::RenderTarget* target);
+    ~SfmlRenderInterface();
 
     void startRender();
     void finishRender();

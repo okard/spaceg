@@ -42,11 +42,12 @@ int LuaInput::getMousePosition(lua_State* L)
 {
 	slua::Context ctx(L);
 	
-	auto target = Application::getInstance().getRenderTarget();
-	auto pos = target->mapPixelToCoords(sf::Mouse::getPosition(Application::getInstance().getWindow()), target->getView());
-	
+	Application& app = Application::getInstance();
+	auto target = app.getRenderTarget();
+	auto pos = app.getMousePositionForRenderTarget();
 	ctx.pushFloat(pos.x);
 	ctx.pushFloat(pos.y);
+	//check if is in View?
 	return 2;
 }
 

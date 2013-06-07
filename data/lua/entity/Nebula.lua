@@ -2,7 +2,7 @@
 
 
 -- creates a new logic entity
-Nebula = Entity()
+Nebula = class(Entity);
 
 
 -- entity event

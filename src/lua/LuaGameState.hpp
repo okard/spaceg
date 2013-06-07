@@ -8,22 +8,28 @@
 #include <slua/State.hpp>
 #include <slua/Bind.hpp>
 
-#include "../state/BaseState.hpp"
+#include "../state/State.hpp"
 
 namespace spaceg {
+	
+class Application;
 
 /**
 * Lua Game States
 * The class represents a game state which is controlled by a lua script
 */    
-class LuaGameState : public BaseState
+class LuaGameState : public State
 {
 private:
     //Scripting/Lua
     slua::State luaState_;
     
+    //Binder Class Instance
+    
+    Application& app_;
+    
 public:
-	LuaGameState();
+	LuaGameState(Application& app);
 	~LuaGameState();
 	
 	/**

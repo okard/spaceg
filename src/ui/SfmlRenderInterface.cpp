@@ -1,5 +1,5 @@
 
-#include "RenderInterface.h"
+#include "SfmlRenderInterface.hpp"
 
 #include <Rocket/Core/Core.h>
 
@@ -22,28 +22,28 @@ struct SfmlRenderGeometry
 
 
 
-RenderInterface::RenderInterface(sf::RenderTarget* Window)
+SfmlRenderInterface::SfmlRenderInterface(sf::RenderTarget* Window)
 {
     target_ = Window;
 }
 
-RenderInterface::~RenderInterface()
+SfmlRenderInterface::~SfmlRenderInterface()
 {
 }
 
-void RenderInterface::startRender()
+void SfmlRenderInterface::startRender()
 {
     target_->pushGLStates();    
     //glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
 }
 
-void RenderInterface::finishRender()
+void SfmlRenderInterface::finishRender()
 {
     target_->popGLStates();
 }
 
 // Called by Rocket when it wants to render geometry that it does not wish to optimise.
-void RenderInterface::RenderGeometry(Rocket::Core::Vertex* vertices, int num_vertices, int* indices, int num_indices, const Rocket::Core::TextureHandle texture, const Rocket::Core::Vector2f& translation)
+void SfmlRenderInterface::RenderGeometry(Rocket::Core::Vertex* vertices, int num_vertices, int* indices, int num_indices, const Rocket::Core::TextureHandle texture, const Rocket::Core::Vector2f& translation)
 {
     //std::cerr << "RenderInterface::RenderGeometry" << std::endl;
     //std::cerr << "num_vertices: " <<  num_vertices << " num_indices: " << num_indices << std::endl;
@@ -75,7 +75,7 @@ void RenderInterface::RenderGeometry(Rocket::Core::Vertex* vertices, int num_ver
 }
 
 // Called by Rocket when it wants to compile geometry it believes will be static for the forseeable future.     
-Rocket::Core::CompiledGeometryHandle RenderInterface::CompileGeometry(Rocket::Core::Vertex* vertices,
+Rocket::Core::CompiledGeometryHandle SfmlRenderInterface::CompileGeometry(Rocket::Core::Vertex* vertices,
                                                                            int num_vertices, int* indices,
                                                                            int num_indices,
                                                                            const Rocket::Core::TextureHandle texture)
@@ -107,7 +107,7 @@ Rocket::Core::CompiledGeometryHandle RenderInterface::CompileGeometry(Rocket::Co
 }
 
 // Called by Rocket when it wants to render application-compiled geometry.      
-void RenderInterface::RenderCompiledGeometry(Rocket::Core::CompiledGeometryHandle geometry, const Rocket::Core::Vector2f& translation)
+void SfmlRenderInterface::RenderCompiledGeometry(Rocket::Core::CompiledGeometryHandle geometry, const Rocket::Core::Vector2f& translation)
 {
     auto geo = reinterpret_cast<SfmlRenderGeometry*>(geometry);
     
@@ -122,13 +122,13 @@ void RenderInterface::RenderCompiledGeometry(Rocket::Core::CompiledGeometryHandl
 }
 
 // Called by Rocket when it wants to release application-compiled geometry.     
-void RenderInterface::ReleaseCompiledGeometry(Rocket::Core::CompiledGeometryHandle geometry)
+void SfmlRenderInterface::ReleaseCompiledGeometry(Rocket::Core::CompiledGeometryHandle geometry)
 {
     delete reinterpret_cast<SfmlRenderGeometry*>(geometry);    
 }
 
 // Called by Rocket when it wants to enable or disable scissoring to clip content.      
-void RenderInterface::EnableScissorRegion(bool enable)
+void SfmlRenderInterface::EnableScissorRegion(bool enable)
 {
     //std::cerr << "Enable Scissor" << std::endl;
     if (enable)
@@ -138,14 +138,14 @@ void RenderInterface::EnableScissorRegion(bool enable)
 }
 
 // Called by Rocket when it wants to change the scissor region.     
-void RenderInterface::SetScissorRegion(int x, int y, int width, int height)
+void SfmlRenderInterface::SetScissorRegion(int x, int y, int width, int height)
 {
     //std::cerr << "Set Scissor Reg" << std::endl;
     glScissor(x, target_->getSize().y - (y + height), width, height);
 }
 
 // Called by Rocket when a texture is required by the library.      
-bool RenderInterface::LoadTexture(Rocket::Core::TextureHandle& texture_handle, Rocket::Core::Vector2i& texture_dimensions, const Rocket::Core::String& source)
+bool SfmlRenderInterface::LoadTexture(Rocket::Core::TextureHandle& texture_handle, Rocket::Core::Vector2i& texture_dimensions, const Rocket::Core::String& source)
 {
     //std::cerr << "RenderInterface::LoadTexture: " << source.CString() << std::endl;
     
@@ -163,7 +163,7 @@ bool RenderInterface::LoadTexture(Rocket::Core::TextureHandle& texture_handle, R
 }
 
 // Called by Rocket when a texture is required to be built from an internally-generated sequence of pixels.
-bool RenderInterface::GenerateTexture(Rocket::Core::TextureHandle& texture_handle, const Rocket::Core::byte* source, const Rocket::Core::Vector2i& source_dimensions)
+bool SfmlRenderInterface::GenerateTexture(Rocket::Core::TextureHandle& texture_handle, const Rocket::Core::byte* source, const Rocket::Core::Vector2i& source_dimensions)
 {
     //std::cerr << "RenderInterface::GenerateTexture:" << source_dimensions.x << " " << source_dimensions.y << std::endl;
     
@@ -180,7 +180,7 @@ bool RenderInterface::GenerateTexture(Rocket::Core::TextureHandle& texture_handl
 }
 
 // Called by Rocket when a loaded texture is no longer required.        
-void RenderInterface::ReleaseTexture(Rocket::Core::TextureHandle texture_handle)
+void SfmlRenderInterface::ReleaseTexture(Rocket::Core::TextureHandle texture_handle)
 {
     delete reinterpret_cast<sf::Texture*>(texture_handle);
 }

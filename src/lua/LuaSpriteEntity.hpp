@@ -45,7 +45,7 @@ public:
 	int setColor(slua::Context& ctx);
 	int setPosition(slua::Context& ctx);
 	int setSize(slua::Context& ctx);
-	int getViewport(slua::Context& ctx);
+	int getViewport(slua::Context& ctx); //remove
 	int setTextureRect(slua::Context& ctx);
 	
 	//load shader

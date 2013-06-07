@@ -38,6 +38,7 @@ LuaSpriteEntity::LuaSpriteEntity()
 	: states_(&shader_)
 {
 	//can safe a lua ref need constructor function? call LuaObjectCreate()
+	//register lua object to storage
 }
 
 LuaSpriteEntity::~LuaSpriteEntity()

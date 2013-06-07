@@ -7,7 +7,6 @@
 
 #include "lua/LuaGameState.hpp"
 
-#include "state/BaseState.hpp"
 //#include "render/NebulaGraphic.h"
 //#include "game/World.hpp"
 //#include "render/WorldGraphic.hpp"
@@ -58,8 +57,7 @@ int main(int argc, char **argv)
     */
     
     // Running a Lua Game State
-    LuaGameState state;
-    state.setApplication(&app);
+    LuaGameState state(app);
     state.registerLuaInterface();
     state.loadFile("data/lua/main.lua");
     state.callMain();

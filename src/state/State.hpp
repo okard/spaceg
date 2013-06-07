@@ -7,23 +7,23 @@
 namespace spaceg {
 	
 //TODO Event Life Cycle
+
+enum class StateStatus
+{
+	New,	  // created
+	Active,   // running
+	OnHold,   // disabled/pause
+	Disposed  //destroyed
+};
+	
     
 /**
 * State Interface
 */   
 class State
 {
-public:
-	enum Status
-	{
-		UnInitialized,
-		Active,
-		Holded, //disabled
-		Disposed
-	};
-
 private:
-    
+	StateStatus status_;
     
 public:
     /**
@@ -62,7 +62,9 @@ public:
     */
     virtual void draw() = 0;
     
-    //isInitialized    
+    //isInitialized   
+    
+    inline StateStatus getStatus() const { return status_; }
 };
     
     

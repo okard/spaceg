@@ -1,6 +1,7 @@
 # Entities
 
 ## Meta entities
+
 * Player
 	- Name
 	- Race
@@ -15,6 +16,7 @@
 			- Deuterium
 
 ## Crew
+
 * Name
 * Bonus
 * Skills
@@ -31,11 +33,10 @@
 	- Ranger - Small fast ships for scouting
 	- Cargo - Bigger ships for transport missions
 	- Cruiser - Big ships with a lot of weapons
-	
 * Speed
-* Integrity (HP)
+* Integrity (HP) Current/Max
 * Integrity Regeneration Rate
-* Shields
+* Shields Current/Max
 * Shield Regeneration Rate
 * Energy (For Weapons and Abilities)
 * Energy Regenration Rate
@@ -47,7 +48,7 @@
 * Currently Effects
 	- e.g. (shield generate +10 for 60 seconds)
 * Maximum weight
-* Storage Space
+* Storage Space - for materials (Max Weight - Equipment)
 * Crew
 * Gear
 
@@ -68,14 +69,19 @@
 	- Beam
 	- Ion Cannon
 * Bullet
-	- Time to Life
-	- Range
-	- Type (Physical/Energy)
-	- Damage
-	- Target
 * Energy Cost
+* Material/Resource 
 * Cooldown
 * Level
+
+#### Bullet
+* Time to Life
+* Range
+* Type (Mechanical/Energy/\[Wave\])
+* Damage
+* Target
+* Current Position
+
 
 ### Support Modules
 
@@ -113,17 +119,23 @@
 	
 ## Planets
 
-* Docks
-* Factory
-* Shops
-* Resources
+* Docks (Menu)
+* Factory (Menu)
+* Shops (Menu)
+* Resources (Draw)
 
 ## Nebulas
 
+* Position
 * Type
 * Resources
+* Entry (can be accessed)
+* Map (map for inner nebula)
 
 ## Portals
 
-* Connect different maps
-* Shortcuts on map
+* Position
+* Target
+* Map
+
+Connect different maps or provide shortcuts on map

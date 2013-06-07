@@ -12,7 +12,7 @@
 namespace spaceg {
 
     
-class SystemInterface : public Rocket::Core::SystemInterface 
+class SfmlSystemInterface : public Rocket::Core::SystemInterface 
 {
 private:
     sf::Clock clock_;

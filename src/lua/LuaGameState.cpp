@@ -2,6 +2,8 @@
 
 #include "LuaGameState.hpp"
 
+#include "../Application.hpp"
+
 #include "LuaSpriteEntity.hpp"
 #include "LuaInput.hpp"
 
@@ -10,7 +12,8 @@
 using namespace spaceg;
 
 
-LuaGameState::LuaGameState()
+LuaGameState::LuaGameState(Application& app)
+	: app_(app)
 {
 }
 
@@ -28,6 +31,7 @@ void LuaGameState::loadFile(const char* const fileName)
 		
 void LuaGameState::registerLuaInterface()
 {
+	//custom binder
 	slua::Bind::Class<LuaSpriteEntity>(luaState_);
 	LuaInput::reg(luaState_);
 }

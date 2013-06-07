@@ -11,7 +11,7 @@ testSprite = nil
 function main()
 	print("Main is called");
 	
-	local test = new(Entity);
+	local test = Entity();
 	
 	print(test.x);
 	

@@ -43,6 +43,7 @@ inline Rocket::Core::Input::KeyIdentifier keyConvert(sf::Keyboard::Key k)
         case sf::Keyboard::E: return Rocket::Core::Input::KI_E;
     }
     
+    //KeyCount -> create lookup table
 }
 
 inline int getKeyModifier()

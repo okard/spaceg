@@ -1,5 +1,7 @@
 
 
+Ship = class(Entity);
+
 --[[
 Ship = Entity();
 

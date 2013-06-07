@@ -8,6 +8,9 @@ namespace spaceg {
 
 //TODO inherit from game object?  
 //TODO Entity Lifecycle, Events: create, destroy, active, etc  
+
+class GraphicEntity;
+typedef std::shared_ptr<GraphicEntity> GraphicEntityPtr;
     
 /**
 * Basic Graphic Entity

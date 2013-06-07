@@ -9,12 +9,12 @@
 #include <SFML/Graphics.hpp>
 #include <Rocket/Core.h>
 
-#include "ui/SystemInterface.h"
+#include "ui/SfmlSystemInterface.hpp"
 
 
 namespace spaceg {
     
-class RenderInterface;
+class SfmlRenderInterface;
 class State;
   
 /**
@@ -34,9 +34,12 @@ private:
     sf::View view_;
     
     //UI libRocket
-    SystemInterface uiSysInterface_;
-    RenderInterface* uiRenderInterface_;
+    SfmlSystemInterface uiSysInterface_;
+    SfmlRenderInterface* uiRenderInterface_;
     Rocket::Core::Context* uiCtx_;
+    
+    //Input
+    //SfmlInputManager
     
     //TODO use smart pointer here
     
@@ -76,17 +79,13 @@ public:
     //pushState
     //popState
     
-    /**
-    * Gets the rendering target
-    */
+    /// Get the rendering target
     inline sf::RenderTarget* const getRenderTarget() { return &renderTexture_; }
     
+    /// Get Mouse Position for Rendering Target
+    sf::Vector2f getMousePositionForRenderTarget();
     
-    inline const sf::Window& getWindow() const { return window_; }
-    //TODO get ui Context
-    
-    inline sf::View& getView() { return view_; }
-    
+    /// The Application Instance
     static Application& getInstance();
     
 private:

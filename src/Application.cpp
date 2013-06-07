@@ -7,11 +7,10 @@
 
 #include "GameException.hpp"
 #include "Log.hpp"
-#include "ui/RenderInterface.h"
+#include "ui/SfmlRenderInterface.hpp"
 #include "ui/SfmlUtils.h"
 
 #include "state/State.hpp"
-#include "state/BaseState.hpp"
 
 
 //debug
@@ -46,7 +45,7 @@ Application::Application()
     
     //GUI Init
     //Getting directly rendered to window not to render texture
-    uiRenderInterface_ = new RenderInterface(&window_);
+    uiRenderInterface_ = new SfmlRenderInterface(&window_);
     Rocket::Core::SetRenderInterface(uiRenderInterface_);
     Rocket::Core::SetSystemInterface(&uiSysInterface_);
     Rocket::Core::Initialise();
@@ -84,6 +83,12 @@ void Application::run()
         update();
         render();
      }  
+}
+
+// return the mouse position for rendering target
+sf::Vector2f Application::getMousePositionForRenderTarget()
+{
+	return renderTexture_.mapPixelToCoords(sf::Mouse::getPosition(window_), renderTexture_.getView());
 }
 
 void Application::handleEvent(const sf::Event& event)
