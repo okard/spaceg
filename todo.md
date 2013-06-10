@@ -22,10 +22,10 @@
 * Reimplemented some things in lua code
 	- Think about transfering delegate structs via lua for event mapping with complete native execution
 	- Reimplement the Nebula Rendering
-	- Implement Sprite Interface
+	- Implement Sprite Interface (Partial DONE)
 	- Implement UI Interface
 	- Picking API
-* Remove unused stuff
+* Remove unused stuff (IN PROGRESS)
 * Memory Management
 * Implement Logging
 	- Generic Engine Log Source
@@ -40,7 +40,7 @@
 * Reimplement the ResourceManager System
 	- Texture/Shader Resource Manager
 * Thinking about storing Entities and Object 
-	- Using an ID system also easier for Lua objects
+	- Using an ID system also easier for Lua objects DONE
 * Think about workflow
 	- When calling lua functions
 	- Mapping between entities (scenegraph)

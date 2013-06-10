@@ -4,6 +4,12 @@
 using namespace spaceg;
 
 
+// return the mouse position for rendering target
+sf::Vector2f SfmlInputManager::getMousePositionForRenderTarget()
+{
+	//return renderTexture_.mapPixelToCoords(sf::Mouse::getPosition(window_), renderTexture_.getView());
+}
+
 void SfmlInputManager::handleEvent(const sf::Event& event)
 {
 	//saves mouse/keyboard for lua stuff

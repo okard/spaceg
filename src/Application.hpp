@@ -80,17 +80,17 @@ public:
     //pushState
     //popState
     
-    /// Get the rendering target
+    /// Get the rendering target (render texture)
     inline sf::RenderTarget* const getRenderTarget() { return &renderTexture_; }
+    
+    /// Get the render window
+    inline sf::RenderWindow& getRenderWindow() { return window_; }
     
     /// access to view
     inline sf::View& getView() { return view_; }
     
     /// access to InputManager
     inline SfmlInputManager& inputManager() { return inputMng_; }
-    
-    /// Get Mouse Position for Rendering Target
-    sf::Vector2f getMousePositionForRenderTarget();
     
     /// The Application Instance (Remove)
     static Application& getInstance();

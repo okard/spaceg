@@ -11,6 +11,7 @@
 #include "ui/SfmlUtils.h"
 
 #include "state/State.hpp"
+#include "state/StateManager.hpp"
 
 
 //debug
@@ -83,12 +84,6 @@ void Application::run()
         update();
         render();
      }  
-}
-
-// return the mouse position for rendering target
-sf::Vector2f Application::getMousePositionForRenderTarget()
-{
-	return renderTexture_.mapPixelToCoords(sf::Mouse::getPosition(window_), renderTexture_.getView());
 }
 
 void Application::handleEvent(const sf::Event& event)

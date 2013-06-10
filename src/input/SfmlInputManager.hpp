@@ -24,6 +24,10 @@ public:
 	int mouse_wheel;
 	
 	
+	/// Get Mouse Position for Rendering Target
+    sf::Vector2f getMousePositionForRenderTarget();
+    
+	
 	///Event Hook
 	void handleEvent(const sf::Event& event);
 };

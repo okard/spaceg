@@ -2,6 +2,13 @@
 
 Ship = class(Entity);
 
+
+function Ship::__init()
+	self.name = "";
+	
+end
+
+
 --[[
 Ship = Entity();
 

@@ -39,11 +39,13 @@ private:
 	Index indices_[MAX_OBJECTS];
 	
 	
-	unsigned int num_objects_;
+	unsigned int num_objects_; //number of objects 
 	unsigned short freelist_enqueue_;
 	unsigned short freelist_dequeue_;
 	
 public:
+	
+	//TODO interate overall available objects
 
 	ObjectStorage()
 	{

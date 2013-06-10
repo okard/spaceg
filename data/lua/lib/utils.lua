@@ -16,6 +16,8 @@ function class( baseClass )
     new_class_mt.__call = function(c, ...)
         local newinst = {}
         setmetatable( newinst, class_mt )
+        
+        --TODO chaining ctor
         -- call ctor
         if newinst.__init then
             newinst:__init(...);

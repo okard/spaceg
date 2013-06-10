@@ -3,6 +3,8 @@ require("data/lua/lib/utils");
 require("data/lua/entity/Entity");
 --require("data/lua/entity/Nebula");
 
+config = require("data/lua/config");
+
 testSprite = nil
 
 -- given the current LuaState as parameter
@@ -10,6 +12,8 @@ testSprite = nil
 
 function main()
 	print("Main is called");
+	
+	print(config.scroll_speed);
 	
 	local test = Entity();
 	
@@ -62,7 +66,33 @@ end
 
 function update(t) --deliver time is ms
 	--print(t)
-	testSprite:moveTextureRect(1, 1);
+	
+	local x,y,w,h = Camera.getView(camera);
+	local mx,my = Input.getMousePosition(input);
+
+	local xmove = 0;
+	local ymove = 0;
+	
+	local factor = 2; --calc with time and speed
+	
+	if mx >= x and mx <= x+20 then
+		xmove = -factor;
+	end
+	
+	if mx <= w+x and mx >= (w+x-20) then
+		xmove = factor;
+	end
+	
+	if my >= y and my <= y+20 then
+		ymove = -factor;
+	end
+	
+	if my <= h+y and my >= (h+y-20) then
+		ymove = factor;
+	end
+	
+
+	testSprite:moveTextureRect(xmove, ymove);
 	--print(testSprite:getViewport());
 	--print(getMousePosition());
 end

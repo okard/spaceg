@@ -69,7 +69,7 @@ public:
 		
 		//add object to storage
 		auto id = objects_.add();
-		std::cout << "objid: " << id << std::endl;
+		//std::cout << "objid: " << id << std::endl;
 		slua::LuaObjectPtr& ptr =  objects_.get(id);
 		ptr = lo;
 		
@@ -159,7 +159,7 @@ private:
 		
 		auto objptr = objects_.get(id);
 		
-		std::cout << "receive id:" << id << std::endl;
+		//std::cout << "receive id:" << id << std::endl;
 		
 		if(!objptr.valid())
 			throw slua::LuaException("not a valid object");
