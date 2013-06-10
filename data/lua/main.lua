@@ -62,7 +62,7 @@ end
 
 function update(t) --deliver time is ms
 	--print(t)
-	testSprite:moveTexture(1, 1);
+	testSprite:moveTextureRect(1, 1);
 	--print(testSprite:getViewport());
 	--print(getMousePosition());
 end

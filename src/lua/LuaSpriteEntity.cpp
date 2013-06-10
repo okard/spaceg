@@ -21,7 +21,7 @@ static const slua::BindFunction<LuaSpriteEntity> functions[]=
 	{"setSize", &LuaSpriteEntity::setSize},
 	{"setPosition", &LuaSpriteEntity::setPosition},
 	{"setTextureRect", &LuaSpriteEntity::setTextureRect},
-	{"moveTexture", &LuaSpriteEntity::moveTexture},
+	{"moveTextureRect", &LuaSpriteEntity::moveTextureRect},
 	{"setColor", &LuaSpriteEntity::setColor},
 	{0,0}
 };
@@ -163,7 +163,7 @@ int LuaSpriteEntity::loadVertexShader(slua::Context& ctx)
 	return 0;
 }
 
-int LuaSpriteEntity::moveTexture(slua::Context& ctx)
+int LuaSpriteEntity::moveTextureRect(slua::Context& ctx)
 {
 	if(ctx.stackCount() != 3 
 	|| !ctx.isType(2, slua::LuaType::NUMBER)

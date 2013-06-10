@@ -12,6 +12,8 @@ LuaBinder::LuaBinder(LuaGameState& state)
 
 LuaBinder::~LuaBinder()
 {
+	//iterate over all objects and detach it
+	
 }
 
 //initialize storage

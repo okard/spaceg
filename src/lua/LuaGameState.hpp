@@ -33,8 +33,8 @@ private:
     //Application reference
     Application& app_;
     
-    LuaCamera cam_;
-    LuaInput input_;
+    LuaCamera* cam_;
+    LuaInput* input_;
     
 public:
 	LuaGameState(Application& app);

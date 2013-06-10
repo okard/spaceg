@@ -54,7 +54,7 @@ public:
 	//shaderArguments?
 	
 	//move texture
-	int moveTexture(slua::Context& ctx); //moveTextureRect
+	int moveTextureRect(slua::Context& ctx); //moveTextureRect
 	
 	virtual int render(slua::Context& ctx);
 	
