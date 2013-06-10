@@ -83,6 +83,12 @@ public:
     /// Get the rendering target
     inline sf::RenderTarget* const getRenderTarget() { return &renderTexture_; }
     
+    /// access to view
+    inline sf::View& getView() { return view_; }
+    
+    /// access to InputManager
+    inline SfmlInputManager& inputManager() { return inputMng_; }
+    
     /// Get Mouse Position for Rendering Target
     sf::Vector2f getMousePositionForRenderTarget();
     

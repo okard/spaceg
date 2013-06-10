@@ -19,6 +19,9 @@ public:
 	//Mouse Buttons
 	bool mbuttons[sf::Mouse::ButtonCount];
 	
+	int mouse_x;
+	int mouse_y;
+	int mouse_wheel;
 	
 	
 	///Event Hook

@@ -6,7 +6,7 @@ using namespace spaceg;
 
 
 LuaBinder::LuaBinder(LuaGameState& state)
-	: lgstate_(state), ctx_(state.getLuaState())
+	: lgstate_(state), ctx_(state.getLuaState().getState())
 {
 }
 
@@ -19,4 +19,4 @@ ObjectStorage<slua::LuaObjectPtr> LuaBinder::objects_;
 
 
 //object id has to fit into lightuserdata
-static_assert(sizeof(ObjectStorage<slua::LuaObjectPtr>::ObjectId) <= sizeof(slua::lightdata), "Invalid siz of light user data");
+static_assert(sizeof(ObjectStorage<slua::LuaObjectPtr>::ObjectId) <= sizeof(slua::lightdata), "Invalid size of light user data");

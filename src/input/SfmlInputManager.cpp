@@ -10,10 +10,29 @@ void SfmlInputManager::handleEvent(const sf::Event& event)
 	
 	switch(event.type)
 	{
-		case  sf::Event::KeyPressed:
+		case sf::Event::KeyPressed:
 			keys[event.key.code] = true;
-		case  sf::Event::KeyReleased:
+			break;
+			
+		case sf::Event::KeyReleased:
 			keys[event.key.code] = false;
+			break;
+			
+		case sf::Event::MouseButtonPressed:
+			mbuttons[event.mouseButton.button] = true;
+		
+		case sf::Event::MouseButtonReleased:
+			mbuttons[event.mouseButton.button] = false;
+			break;
+			
+		case sf::Event::MouseMoved:
+			mouse_x = event.mouseMove.x;
+			mouse_y = event.mouseMove.y;
+			break;
+			
+		case sf::Event::MouseWheelMoved:
+			mouse_wheel = event.mouseWheel.delta; 
+			break;
 	}
 }
 

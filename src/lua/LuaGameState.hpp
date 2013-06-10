@@ -10,6 +10,7 @@
 
 #include "LuaBinder.hpp"
 #include "LuaCamera.hpp"
+#include "LuaInput.hpp"
 #include "../state/State.hpp"
 
 namespace spaceg {
@@ -33,6 +34,7 @@ private:
     Application& app_;
     
     LuaCamera cam_;
+    LuaInput input_;
     
 public:
 	LuaGameState(Application& app);

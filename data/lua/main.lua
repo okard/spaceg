@@ -15,11 +15,13 @@ function main()
 	
 	print(test.x);
 	
-	testSprite = Sprite();
+	testSprite = Sprite(); --Sprite.create()
 	testSprite:loadTexture("data/texture/starfield01.png");
 	
-	print(testSprite:getViewport());
-	x,y,w,h = testSprite:getViewport();
+	print(camera);
+	print(input);
+	print(Camera.getView(camera));
+	x,y,w,h = Camera.getView(camera);
 	
 	--register camera change function
 	

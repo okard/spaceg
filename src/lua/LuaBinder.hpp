@@ -12,7 +12,7 @@
 #include "LuaInterface.hpp"
 #include "../base/ObjectStorage.hpp"
 
-
+#include <iostream>
 
 
 namespace spaceg {
@@ -29,7 +29,7 @@ class LuaBinder
 private:
 	static ObjectStorage<slua::LuaObjectPtr> objects_;
 	LuaGameState& lgstate_;
-	slua::Context& ctx_;
+	slua::Context ctx_;
 	
 	using ObjectId = ObjectStorage<slua::LuaObjectPtr>::ObjectId;
 	
@@ -40,65 +40,71 @@ public:
 	template<class T>
 	void registerClass()
 	{
-		registerMetaTable<T>(ctx_);
+		slua::Context& ctx = ctx_;
+		registerFuncTable<T>(ctx, true);
 		
-		if(!(T::luaInterface.constructorName))
-			throw slua::LuaException("Missing ctor name");
+		//add a create function to the function table
 		
-		//creater/constructor function
-		ctx_.pushGlobalTable();
+		//global table
+		ctx.pushGlobalTable();
 		slua::Table global;
-		global.setto(ctx_, -1);
-		ctx_.pushFunc(&push_new_object<T>);
-		global.assignField(T::luaInterface.constructorName);
+		global.setto(ctx, -1);	//access to global table
+		
+		global.pushField(T::luaInterface.metatableName);
+		slua::Table tbl;
+		tbl.setto(ctx, -1);
+		ctx.pushFunc(&push_new_object<T>);
+		tbl.assignField("create");
+		
+		//global assign again?
+		ctx.pop(2); //global + func table	
 	}
 	
 	template<class T>
 	void registerObject(const T& obj, const char* name)
 	{
+		slua::Context& ctx = ctx_;
 		const slua::LuaObject& lo = obj;
-		registerMetaTable<T>(ctx_);
+		registerFuncTable<T>(ctx, false);
 		
 		//add object to storage
 		auto id = objects_.add();
-		objects_.get(id) = lo;
+		std::cout << "objid: " << id << std::endl;
+		slua::LuaObjectPtr& ptr =  objects_.get(id);
+		ptr = lo;
 		
-		ctx_.pushGlobalTable();
+		ctx.pushGlobalTable();
         slua::Table global;
-		global.setto(ctx_, -1);	//access to global table
-        ctx_.pushString(name);	//name of object
-        
-        ctx_.pushPtr(reinterpret_cast<void*>(id));
-		if(ctx_.pushMetaTable(T::luaInterface.metatableName))
-			throw slua::LuaException("MetaTable was not created for this type");
-		ctx_.assignMetaTable(-2);
-        
-		global.assignField();	//assign the tbl to name to global table
-		ctx_.pop(1); //pop globaltable
+		global.setto(ctx, -1);	//access to global table
+        ctx.pushString(name);	//name of object
+        ctx.pushPtr(reinterpret_cast<void*>(id));
+		global.assignField();	//assign user data to name
+		ctx.pop(1); //pop globaltable
 	}
 	
 private:
 
 	/**
-	* Register the class metatable to registry
+	* Register function table
 	*/
 	template<class T>
-	inline static void registerMetaTable(slua::Context& ctx)
+	inline static void registerFuncTable(slua::Context& ctx, bool createFunc = false)
 	{
 		static bool registered = false;
 		if(registered)
 			return;
-			
-		slua::Table meta;
-		if(!ctx.pushMetaTable(T::luaInterface.metatableName))
-			throw slua::LuaException("Already registered metatable with this name");	
-		meta.setto(ctx, -1);
 		
-		//TODO register metatable as index function?
-		//register index function
-		ctx.pushStringLiteral("__index");
-		ctx.pushCopy(meta.getIndex());
-		meta.assignField();
+		//global table
+		ctx.pushGlobalTable();
+		slua::Table global;
+		global.setto(ctx, -1);	//access to global table
+		
+		ctx.pushString(T::luaInterface.metatableName);	//name of object
+		
+		//functiontable
+		ctx.pushTable();
+		slua::Table tbl;
+		tbl.setto(ctx, -1);
 		
 		// assign functions
 		// for binding in a metatable the metatable requires a __index function
@@ -106,17 +112,14 @@ private:
 		{
 			ctx.pushInteger(i);
 			ctx.pushClojure(&dispatch<T>, 1); //clojure has internal arguments
-			meta.assignField(T::luaInterface.functions[i].name);
+			tbl.assignField(T::luaInterface.functions[i].name);
 		}
 		
-		//protect metatable
-		ctx.pushStringLiteral("__metatable");
-		ctx.pushBool(false);
-		meta.assignField();
-			
-		//pops the metatable
-		ctx.pop(1);
-
+		//add a blocking metatable?
+		
+		global.assignField();
+		
+		ctx.pop(1); //global table
 		registered = true;
 	}
 	
@@ -125,19 +128,15 @@ private:
 	{
 		slua::Context ctx(state);
 		
+		//create object
 		auto id = objects_.add();
-		
-		//push id
 		objects_.get(id) = new T();
-		
+
+		//push function
 		ctx.pushPtr(reinterpret_cast<void*>(id));
-		if(ctx.pushMetaTable(T::luaInterface.metatableName))
-			throw slua::LuaException("MetaTable was not created for this type");
-		ctx.assignMetaTable(-2);
 		
-		//get id
-		//create instance
-		//call ctor function
+		//call hook
+		
 		return 1;
 	}
 	
@@ -159,6 +158,8 @@ private:
 			throw slua::LuaException("not a valid object or already disposed");
 		
 		auto objptr = objects_.get(id);
+		
+		std::cout << "receive id:" << id << std::endl;
 		
 		if(!objptr.valid())
 			throw slua::LuaException("not a valid object");

@@ -45,7 +45,6 @@ public:
 	int setColor(slua::Context& ctx);
 	int setPosition(slua::Context& ctx);
 	int setSize(slua::Context& ctx);
-	int getViewport(slua::Context& ctx); //remove
 	int setTextureRect(slua::Context& ctx);
 	
 	//load shader
@@ -55,7 +54,7 @@ public:
 	//shaderArguments?
 	
 	//move texture
-	int moveTexture(slua::Context& ctx);
+	int moveTexture(slua::Context& ctx); //moveTextureRect
 	
 	virtual int render(slua::Context& ctx);
 	

@@ -5,56 +5,54 @@
 #include <SFML/Window/Mouse.hpp>
 #include <slua/Table.hpp>
 
-#include "LuaUtil.hpp"
+#include "LuaGameState.hpp"
 #include "../Application.hpp"
+#include "../GameException.hpp"
 
 using namespace spaceg;
 
+
 //Functions to bind
-static const slua::BindFunction<LuaInput> functions[]=
+static const LuaBindFunction<LuaInput> lua_functions[]=
 {
 	//{"loadTexture", &LuaSpriteEntity::loadTexture},
 	{0,0}
 };
 
 //function context
-const slua::BindStatus<LuaInput> LuaInput::bindStatus = 
+const LuaBindInterface<LuaInput> LuaInput::luaInterface = 
 {
-	.className = "Input",
-	.Functions = functions	
+	.metatableName = "Input",
+	//.constructorName = nullptr,
+	.registerHook = {nullptr, nullptr},
+	.functions = lua_functions	
 };
 
-
-void LuaInput::reg(slua::Context& ctx)
+LuaInput::LuaInput(LuaGameState& lgstate)
+	: lgstate_(lgstate)
+	, app_(lgstate.getApplication())
 {
-	//slua::Bind::Object(ctx, this, "Input");
-	
-	ctx.pushGlobalTable();
-	slua::Table global;
-	global.setto(ctx, -1);
-	ctx.pushFunc(&LuaInput::getMousePosition);
-	global.assignField("getMousePosition");
-	
-	//ctx.pop(1);
 }
 
-int LuaInput::getMousePosition(lua_State* L)
+LuaInput::~LuaInput()
 {
-	slua::Context ctx(L);
-	
-	Application& app = Application::getInstance();
-	auto target = app.getRenderTarget();
-	auto pos = app.getMousePositionForRenderTarget();
+}
+
+
+int LuaInput::getMousePosition(slua::Context& ctx)
+{	
+	auto target = app_.getRenderTarget();
+	auto pos = app_.getMousePositionForRenderTarget();
 	ctx.pushFloat(pos.x);
 	ctx.pushFloat(pos.y);
 	//check if is in View?
 	return 2;
 }
 
-int LuaInput::isPressedMBL(lua_State* L)
+int LuaInput::isPressedMBL(slua::Context& ctx)
 {
 }
 
-int LuaInput::isPressedMBR(lua_State* L)
+int LuaInput::isPressedMBR(slua::Context& ctx)
 {
 }

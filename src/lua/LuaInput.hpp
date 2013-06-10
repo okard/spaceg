@@ -3,21 +3,31 @@
 #ifndef __SPACEG_LUAINPUT__
 #define __SPACEG_LUAINPUT__
 
-#include <slua/Bind.hpp>
+#include <slua/LuaObject.hpp>
+#include "LuaInterface.hpp"
+
 
 namespace spaceg {
+	
+class LuaGameState;
+class Application;
 
-class LuaInput 
+class LuaInput : public slua::LuaObject
 {
+private:
+	LuaGameState& lgstate_;
+	Application& app_;
 
 public:
-	static void reg(slua::Context& ctx);
-	static int getMousePosition(lua_State* L);
-	static int isPressedMBL(lua_State* L);
-	static int isPressedMBR(lua_State* L);
+	LuaInput(LuaGameState& lgstate);
+	~LuaInput();
+
+	int getMousePosition(slua::Context& ctx);
+	int isPressedMBL(slua::Context& ctx);
+	int isPressedMBR(slua::Context& ctx);
 	
-	//Binding Information
-	static const slua::BindStatus<LuaInput> bindStatus;
+public:
+	static const LuaBindInterface<LuaInput> luaInterface;
 };
 
 

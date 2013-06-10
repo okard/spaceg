@@ -25,7 +25,7 @@ template<class T>
 struct LuaBindInterface
 {
 	const char* metatableName;
-	const char* constructorName;
+	//const char* constructorName;
 	const LuaBindFunction<T> registerHook;
 	const LuaBindFunction<T>* functions;
 };

@@ -34,6 +34,9 @@ public:
 	int move(slua::Context& ctx);
 	int onChange(slua::Context& ctx);
 	
+private:
+	inline void fireUpdate();
+public:
 	static const LuaBindInterface<LuaCamera> luaInterface;
 };
 

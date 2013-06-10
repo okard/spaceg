@@ -18,7 +18,6 @@ static const slua::BindFunction<LuaSpriteEntity> functions[]=
 	{"loadFragmentShader", &LuaSpriteEntity::loadFragmentShader},
 	{"loadVertexShader", &LuaSpriteEntity::loadVertexShader},
 	{"render", &LuaSpriteEntity::render},
-	{"getViewport", &LuaSpriteEntity::getViewport},
 	{"setSize", &LuaSpriteEntity::setSize},
 	{"setPosition", &LuaSpriteEntity::setPosition},
 	{"setTextureRect", &LuaSpriteEntity::setTextureRect},
@@ -117,21 +116,6 @@ int LuaSpriteEntity::setSize(slua::Context& ctx)
 	
 	sprite_.setSize(ctx.getFloat(2), ctx.getFloat(3));
 	return 0;
-}
-
-//return the current view as x,y,w,h
-int LuaSpriteEntity::getViewport(slua::Context& ctx)
-{
-	auto view = Application::getInstance().getRenderTarget()->getView();
-	auto size = view.getSize();
-	auto center = view.getCenter();
-	
-	//the sfml view only delivers center and width and height not the corner
-	ctx.pushFloat(center.x - (size.x/2.f));
-	ctx.pushFloat(center.y - (size.y/2.f));
-	ctx.pushFloat(size.x);
-	ctx.pushFloat(size.y);
-	return 4;
 }
 
 //set the texture rect
