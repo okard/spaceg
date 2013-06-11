@@ -9,6 +9,9 @@
 
 namespace spaceg {
 	
+/**
+* State Manager to handle multiple states
+*/
 class StateManager : public State
 {
 private:

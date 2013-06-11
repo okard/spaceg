@@ -8,12 +8,19 @@
 
 namespace spaceg {
 	
+class Application;
+	
 /**
 * SFML Input Manager
 */
 class SfmlInputManager
 {
+private:
+	//Application& app_;
+	
 public:
+
+
 	//Keyboard Keys
 	bool keys[sf::Keyboard::KeyCount];
 	//Mouse Buttons
@@ -23,11 +30,9 @@ public:
 	int mouse_y;
 	int mouse_wheel;
 	
-	
 	/// Get Mouse Position for Rendering Target
     sf::Vector2f getMousePositionForRenderTarget();
     
-	
 	///Event Hook
 	void handleEvent(const sf::Event& event);
 };

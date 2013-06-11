@@ -37,3 +37,6 @@ function class( baseClass )
     return new_class
 end
 
+
+-- protect function
+-- create_closure function

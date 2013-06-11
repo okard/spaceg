@@ -2,10 +2,15 @@
 require("data/lua/lib/utils");
 require("data/lua/entity/Entity");
 --require("data/lua/entity/Nebula");
+--require("data/lua/entity/WorldMap");
 
 config = require("data/lua/config");
 
 testSprite = nil
+testSprite2 = nil
+
+-- game storage add all global stuff to global table named 'game'
+local game = {};
 
 -- given the current LuaState as parameter
 -- function main(Engine interface)
@@ -13,25 +18,28 @@ testSprite = nil
 function main()
 	print("Main is called");
 	
-	print(config.scroll_speed);
+	for k,v in pairs(config) do print(k,v) end
 	
-	local test = Entity();
+	--local test = Entity();
+	--print(test.x);
 	
-	print(test.x);
+	testSprite = Sprite.create();
+	Sprite.loadTexture(testSprite, "data/texture/starfield01.png");
+	--testSprite2 = Sprite();
+	--testSprite2:loadTexture("data/texture/starfield01.png");
 	
-	testSprite = Sprite(); --Sprite.create()
-	testSprite:loadTexture("data/texture/starfield01.png");
-	
-	print(camera);
-	print(input);
 	print(Camera.getView(camera));
 	x,y,w,h = Camera.getView(camera);
 	
 	--register camera change function
 	
-	testSprite:setSize(w, h);
-	testSprite:setTextureRect(0,0, w/2, h/2);
-	testSprite:setColor(255, 150, 150, 255);
+	Sprite.setSize(testSprite, w, h);
+	--testSprite:setTextureRect(0,0, w/2, h/2);
+	Sprite.setTextureRect(testSprite, 0, 0, w/2, h/2);
+	--testSprite:setColor(255, 50, 50, 255);
+	
+	--testSprite2:setSize(w, h);
+	--testSprite2:setTextureRect(0,0, w, h);
 
 	-- local w = World()
 	-- w.load(world1.world)
@@ -48,7 +56,9 @@ function main()
 	
 	-- Gui Element
 	-- Mouse Keyboard Input
-
+	
+	--global table is protected after main?
+	--protect(_G);
 end
 
 function init()
@@ -73,31 +83,39 @@ function update(t) --deliver time is ms
 	local xmove = 0;
 	local ymove = 0;
 	
+	local limit = 50;
 	local factor = 2; --calc with time and speed
 	
-	if mx >= x and mx <= x+20 then
+	if mx >= x and mx <= x+limit then
 		xmove = -factor;
 	end
 	
-	if mx <= w+x and mx >= (w+x-20) then
+	if mx <= w+x and mx >= (w+x-limit) then
 		xmove = factor;
 	end
 	
-	if my >= y and my <= y+20 then
+	if my >= y and my <= y+limit then
 		ymove = -factor;
 	end
 	
-	if my <= h+y and my >= (h+y-20) then
+	if my <= h+y and my >= (h+y-limit) then
 		ymove = factor;
 	end
 	
 
-	testSprite:moveTextureRect(xmove, ymove);
+	Sprite.moveTextureRect(testSprite, xmove, ymove);
+	--testSprite2:moveTextureRect(xmove, ymove);
+	
+	--moves also view?
+	--Camera.move(camera, xmove, ymove);
+	
 	--print(testSprite:getViewport());
 	--print(getMousePosition());
 end
 
 
 function draw() -- deliver viewport? x,y,width,height
-	testSprite:render();
+	--testSprite:render();
+	Sprite.render(testSprite);
+	--testSprite2:render();
 end

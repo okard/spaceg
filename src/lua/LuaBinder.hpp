@@ -28,6 +28,7 @@ class LuaBinder
 {
 private:
 	static ObjectStorage<slua::LuaObjectPtr> objects_;
+	
 	LuaGameState& lgstate_;
 	slua::Context ctx_;
 	
@@ -43,7 +44,7 @@ public:
 		slua::Context& ctx = ctx_;
 		registerFuncTable<T>(ctx, true);
 		
-		//add a create function to the function table
+		//add a create/destroy function to the function table
 		
 		//global table
 		ctx.pushGlobalTable();
@@ -53,8 +54,16 @@ public:
 		global.pushField(T::luaInterface.metatableName);
 		slua::Table tbl;
 		tbl.setto(ctx, -1);
-		ctx.pushFunc(&push_new_object<T>);
+		//pointer to self as closure
+		ctx.pushPtr(this);
+		ctx.pushClojure(&push_new_object<T>, 1);
 		tbl.assignField("create");
+		
+		//pointer to self as closure
+		ctx.pushPtr(this);
+		ctx.pushClojure(&delete_object<T>, 1);
+		tbl.assignField("delete");
+		//destroy function
 		
 		//global assign again?
 		ctx.pop(2); //global + func table	
@@ -73,6 +82,7 @@ public:
 		slua::LuaObjectPtr& ptr =  objects_.get(id);
 		ptr = lo;
 		
+		//add the object as global value
 		ctx.pushGlobalTable();
         slua::Table global;
 		global.setto(ctx, -1);	//access to global table
@@ -83,6 +93,8 @@ public:
 	}
 	
 private:
+
+	//inline static protect_table(slua::Context& ctx);
 
 	/**
 	* Register function table
@@ -128,16 +140,34 @@ private:
 	{
 		slua::Context ctx(state);
 		
+		void* binderPtr = const_cast<void*>(ctx.getPtr(ctx.upIndex(1)));
+		LuaBinder* binder = reinterpret_cast<LuaBinder*>(binderPtr);
+		
 		//create object
+		auto obj = new T();
+		obj->markShareable();
+		
 		auto id = objects_.add();
-		objects_.get(id) = new T();
+		objects_.get(id) = obj;
 
-		//push function
+		//push objectid
 		ctx.pushPtr(reinterpret_cast<void*>(id));
 		
 		//call hook
 		
 		return 1;
+	}
+	
+	template<class T>
+	static int delete_object(lua_State* state)
+	{
+		slua::Context ctx(state);
+		
+		//one parameter
+		//object id
+		
+		throw slua::LuaException("not implemented");
+		
 	}
 	
 	template<class T>
@@ -157,6 +187,8 @@ private:
 		if(!objects_.has(id))
 			throw slua::LuaException("not a valid object or already disposed");
 		
+		//Each type has its own object storage?
+		//T::luaInterface.objectStorage
 		auto objptr = objects_.get(id);
 		
 		//std::cout << "receive id:" << id << std::endl;

@@ -11,6 +11,7 @@
 
 #include <slua/Bind.hpp>
 
+#include "LuaInterface.hpp"
 #include "../base/GraphicEntity.hpp"
 #include "../render/SfmlSprite.hpp"
 
@@ -60,6 +61,9 @@ public:
 	
 	//Binding Information
 	static const slua::BindStatus<LuaSpriteEntity> bindStatus;
+	
+	//LuaInterface
+	static const LuaBindInterface<LuaSpriteEntity> luaInterface;
 };
 
 

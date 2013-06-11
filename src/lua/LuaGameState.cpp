@@ -39,13 +39,14 @@ void LuaGameState::loadFile(const char* const fileName)
 void LuaGameState::registerLuaInterface()
 {
 	//custom binder
-	slua::Bind::Class<LuaSpriteEntity>(luaState_);
+	//slua::Bind::Class<LuaSpriteEntity>(luaState_);
 	
 	cam_->markShareable();
 	bind_.registerObject<LuaCamera>(*cam_, "camera");
 	input_->markShareable();
 	bind_.registerObject<LuaInput>(*input_, "input");
 	
+	bind_.registerClass<LuaSpriteEntity>();
 	//std::cout << "cam_ count: " << cam_.refCount() << std::endl;
 	//std::cout << "input_ count: " << input_.refCount() << std::endl;
 	

@@ -12,6 +12,32 @@
 using namespace spaceg;
 
 //Functions to bind
+static const LuaBindFunction<LuaSpriteEntity> lua_functions[]=
+{
+	//{"loadTexture", &LuaSpriteEntity::loadTexture},
+	{"loadTexture", &LuaSpriteEntity::loadTexture},
+	{"loadFragmentShader", &LuaSpriteEntity::loadFragmentShader},
+	{"loadVertexShader", &LuaSpriteEntity::loadVertexShader},
+	{"render", &LuaSpriteEntity::render},
+	{"setSize", &LuaSpriteEntity::setSize},
+	{"setPosition", &LuaSpriteEntity::setPosition},
+	{"setTextureRect", &LuaSpriteEntity::setTextureRect},
+	{"moveTextureRect", &LuaSpriteEntity::moveTextureRect},
+	{"setColor", &LuaSpriteEntity::setColor},
+	{0,0}
+};
+
+//function context
+const LuaBindInterface<LuaSpriteEntity> LuaSpriteEntity::luaInterface = 
+{
+	.metatableName = "Sprite",
+	//.constructorName = nullptr,
+	.registerHook = {nullptr, nullptr},
+	.functions = lua_functions	
+};
+
+
+//Functions to bind
 static const slua::BindFunction<LuaSpriteEntity> functions[]=
 {
 	{"loadTexture", &LuaSpriteEntity::loadTexture},
