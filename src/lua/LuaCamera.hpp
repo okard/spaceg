@@ -5,7 +5,6 @@
 #define __SPACEG_LUACAMERA_HPP__
 
 #include <slua/LuaRef.hpp>
-#include <slua/LuaObject.hpp>
 #include "LuaInterface.hpp"
 
 
@@ -17,7 +16,7 @@ class Application;
 /**
 * Lua Camera
 */
-class LuaCamera : public slua::LuaObject
+class LuaCamera : public LuaClass
 {
 private:
 	LuaGameState&  lgstate_;

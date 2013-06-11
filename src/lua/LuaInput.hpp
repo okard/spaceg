@@ -3,7 +3,6 @@
 #ifndef __SPACEG_LUAINPUT__
 #define __SPACEG_LUAINPUT__
 
-#include <slua/LuaObject.hpp>
 #include "LuaInterface.hpp"
 
 
@@ -12,7 +11,7 @@ namespace spaceg {
 class LuaGameState;
 class Application;
 
-class LuaInput : public slua::LuaObject
+class LuaInput : public LuaClass
 {
 private:
 	LuaGameState& lgstate_;

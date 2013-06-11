@@ -4,6 +4,8 @@
 #ifndef __SPACEG_LUAINTERFACE_HPP__
 #define __SPACEG_LUAINTERFACE_HPP__
 
+#include <memory>
+
 namespace slua { class Context; }
 
 namespace spaceg {
@@ -30,6 +32,19 @@ struct LuaBindInterface
 	const LuaBindFunction<T>* functions;
 	//objectStorage
 };
+
+
+
+class LuaClass;
+typedef std::shared_ptr<LuaClass> LuaClassPtr;
+
+class LuaClass : public std::enable_shared_from_this<LuaClass>
+{
+	
+	inline operator LuaClassPtr () { return shared_from_this(); }
+};
+
+
 	
 	
 } //end namespace spaceg

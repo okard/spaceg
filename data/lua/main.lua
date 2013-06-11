@@ -28,7 +28,7 @@ function main()
 	
 	main_menu = UI.create();
 	UI.loadDocument(main_menu, "data/ui/main_menu.rml");
-	UI.addCallback(main_menu, "click", function() end);
+	UI.addCallback(main_menu, "click", function() UI.hide(main_menu); end);
 	UI.enableDebugger(main_menu, false);
 	
 	--register camera change function
@@ -53,21 +53,21 @@ function main()
 	protect(_G);
 end
 
-function init()
-
-end
-
-function destroy()
-
-end
-
-function onkeypressed()
-	--get entity at x/y
+function exit()
+	print("exit called");
+	UI.delete(main_menu);
 end
 
 
 function update(t) --deliver time is ms
 	--print(t)
+	
+	if Input.isPressedMBR(input) then
+		UI.show(main_menu);
+	end
+	
+	--react on event?
+	-- open menu etc
 	
 	local x,y,w,h = Camera.getView(camera);
 	local mx,my = Input.getMousePosition(input);

@@ -20,6 +20,9 @@ static const LuaBindFunction<LuaUI> lua_functions[]=
 
 	{"loadDocument", &LuaUI::loadDocument},
 	{"addCallback", &LuaUI::addCallback},
+	{"isVisible", &LuaUI::isVisible},
+	{"show", &LuaUI::show},
+	{"hide", &LuaUI::hide},
 	{"enableDebugger", &LuaUI::enableDebugger},
 	{0,0}
 };
@@ -39,12 +42,12 @@ LuaUI::LuaUI(LuaGameState& lgstate)
 	, app_(lgstate.getApplication())
 	, element_(nullptr)
 {
-	
 }
 
 LuaUI::~LuaUI()
 {
-	
+	for (const auto& em : eventMap_)
+		const_cast<slua::LuaRef*>(&em.second)->unref();
 }
 
 //load
@@ -87,9 +90,42 @@ int LuaUI::addCallback(slua::Context& ctx)
 		element_->AddEventListener(eventName, this);
 		//register eventName -> LuaRef 
 		
+		ctx.pushCopy(3);
+		lua_State* const  luaState = ctx;
+		eventMap_[eventName].set(luaState);
+		
 		return 0;
 	}
 }
+/// is ui frame visible
+int LuaUI::isVisible(slua::Context& ctx)
+{
+	if(element_)
+		ctx.pushBool(element_->IsVisible());
+	else
+		ctx.pushBool(false);
+		
+	return 1;
+}
+
+/// show ui frame
+int LuaUI::show(slua::Context& ctx)
+{
+	if(element_)
+		element_->Show();
+		
+	return 0;
+}
+
+/// hide ui frame
+int LuaUI::hide(slua::Context& ctx)
+{
+	if(element_)
+		element_->Hide();
+		
+	return 0;
+}
+
 
 int LuaUI::enableDebugger(slua::Context& ctx)
 {
@@ -105,11 +141,19 @@ int LuaUI::enableDebugger(slua::Context& ctx)
 
 void LuaUI::ProcessEvent(Rocket::Core::Event &event)
 {
-	//std::cout << "[Debug] UIEvent: " << event.GetType().CString() << std::endl;
-	//std::map<string, LuaRef>
-		//process event 
+	const char* eventName = event.GetType().CString();
+	
+	auto got = eventMap_.find(eventName);
+	if( got != eventMap_.end())
+	{
+		if(got->second.isSet())
+		{
+			got->second.push();
 			//event.GetParameters()->Size() 
 			//add each parameter as lua parameter
+			lgstate_.getLuaState().getContext().call(0,0);
+		}
+	}
 }
 
 /*

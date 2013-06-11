@@ -18,16 +18,18 @@ using namespace spaceg;
 LuaGameState::LuaGameState(Application& app)
 	: app_(app)
 	, bind_(*this)
-	, cam_( new LuaCamera(*this))
-	, input_(new LuaInput(*this))
+	, cam_(std::make_shared<LuaCamera>(*this))
+	, input_(std::make_shared<LuaInput>(*this))
 {
 }
 
 
 LuaGameState::~LuaGameState()
 {
-	cam_->removeReference();
-	input_->removeReference();
+	//call exit
+	slua::Context& ctx = luaState_;
+	ctx.pushGlobal("exit");
+	ctx.call(0,0);
 }
 
 void LuaGameState::loadFile(const char* const fileName)
@@ -41,11 +43,8 @@ void LuaGameState::registerLuaInterface()
 {
 	//custom binder
 	//slua::Bind::Class<LuaSpriteEntity>(luaState_);
-	
-	cam_->markShareable();
-	bind_.registerObject<LuaCamera>(*cam_, "camera");
-	input_->markShareable();
-	bind_.registerObject<LuaInput>(*input_, "input");
+	bind_.registerObject<LuaCamera>(cam_, "camera");
+	bind_.registerObject<LuaInput>(input_, "input");
 	
 	bind_.registerClass<LuaSpriteEntity>();
 	bind_.registerClass<LuaUI>();

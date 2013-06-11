@@ -32,3 +32,13 @@ body
 	height:10px;
 	width:10px;
 }
+
+button 
+{
+	border-top: 1px #ddd;
+	border-right: 1px #ddd;
+	border-left: 1px #ddd;
+	border-bottom: 1px #ddd;
+	padding-left: 2px;
+	padding-right: 2px;
+}

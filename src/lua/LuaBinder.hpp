@@ -4,7 +4,6 @@
 #ifndef __SPACEG_LUABINDER__
 #define __SPACEG_LUABINDER__
 
-#include <slua/LuaObject.hpp>
 #include <slua/Exception.hpp>
 #include <slua/Context.hpp>
 #include <slua/Table.hpp>
@@ -27,12 +26,12 @@ class LuaGameState;
 class LuaBinder
 {
 private:
-	static ObjectStorage<slua::LuaObjectPtr> objects_;
+	static ObjectStorage<LuaClassPtr> objects_;
 	
 	LuaGameState& lgstate_;
 	slua::Context ctx_;
 	
-	using ObjectId = ObjectStorage<slua::LuaObjectPtr>::ObjectId;
+	using ObjectId = ObjectStorage<LuaClassPtr>::ObjectId;
 	
 public:
 	LuaBinder(LuaGameState& state);
@@ -70,16 +69,16 @@ public:
 	}
 	
 	template<class T>
-	void registerObject(const T& obj, const char* name)
+	void registerObject(const std::shared_ptr<T>& obj, const char* name)
 	{
 		slua::Context& ctx = ctx_;
-		const slua::LuaObject& lo = obj;
+		const LuaClassPtr& lo = obj;
 		registerFuncTable<T>(ctx, false);
 		
 		//add object to storage
 		auto id = objects_.add();
 		//std::cout << "objid: " << id << std::endl;
-		slua::LuaObjectPtr& ptr =  objects_.get(id);
+		LuaClassPtr& ptr =  objects_.get(id);
 		ptr = lo;
 		
 		//add the object as global value
@@ -144,11 +143,10 @@ private:
 		LuaBinder* binder = reinterpret_cast<LuaBinder*>(binderPtr);
 		
 		//create object
-		auto obj = new T(binder->lgstate_);
-		obj->markShareable();
-		
 		auto id = objects_.add();
-		objects_.get(id) = obj;
+		objects_.get(id) = std::make_shared<T>(binder->lgstate_);
+
+		//std::cout << "ref info " << objects_.get(id).get().refCount() << std::endl;
 
 		//push objectid
 		ctx.pushPtr(reinterpret_cast<void*>(id));
@@ -163,13 +161,27 @@ private:
 	{
 		slua::Context ctx(state);
 		
+		if(!ctx.isType(1, slua::LuaType::LIGHTUSERDATA))
+			throw slua::LuaException("There seems to be not a lightuserdata (objectid) to dispatch function call");
+		
+		//pay attention to this
+		ObjectId id = static_cast<ObjectId>(reinterpret_cast<long>(const_cast<void*>(ctx.getPtr(1))));
+		
+		if(!objects_.has(id))
+			throw slua::LuaException("not a valid object or already disposed");
+		
+		//Each type has its own object storage?
+		//T::luaInterface.objectStorage
+		auto objptr = objects_.get(id);
+		objects_.remove(id); //already detach? O_o
+		objptr.reset();
+		
 		//one parameter
 		//object id
 		
 		//reset objectstorage
 		
-		throw slua::LuaException("not implemented");
-		
+		return 0;
 	}
 	
 	template<class T>
@@ -195,11 +207,11 @@ private:
 		
 		//std::cout << "receive id:" << id << std::endl;
 		
-		if(!objptr.valid())
+		if(!objptr)
 			throw slua::LuaException("not a valid object");
-		
-		T& obj = static_cast<T&>(objptr.get());
-		return (obj.*(T::luaInterface.functions[funcIndex].mfunc))(ctx);	
+
+		std::shared_ptr<T> obj = std::static_pointer_cast<T>(objptr);
+		return (*obj.*(T::luaInterface.functions[funcIndex].mfunc))(ctx);	
 	}
 	
 };

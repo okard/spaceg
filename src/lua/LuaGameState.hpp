@@ -33,8 +33,9 @@ private:
     //Application reference
     Application& app_;
     
-    LuaCamera* cam_;
-    LuaInput* input_;
+    
+    std::shared_ptr<LuaCamera> cam_;
+    std::shared_ptr<LuaInput> input_;
     
 public:
 	LuaGameState(Application& app);

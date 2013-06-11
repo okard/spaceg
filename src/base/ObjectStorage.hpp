@@ -77,7 +77,7 @@ public:
 		
 		T &o = objects_[in.index];
 		o = objects_[--num_objects_];
-		indices_[o.id & INDEX_MASK].index = in.index;
+		indices_[id & INDEX_MASK].index = in.index;
 		
 		in.index = 0x0000ffff; //ushrt_MAX
 		indices_[freelist_enqueue_].next = id & INDEX_MASK;

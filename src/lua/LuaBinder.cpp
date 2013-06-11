@@ -17,8 +17,8 @@ LuaBinder::~LuaBinder()
 }
 
 //initialize storage
-ObjectStorage<slua::LuaObjectPtr> LuaBinder::objects_;
+ObjectStorage<LuaClassPtr> LuaBinder::objects_;
 
 
 //object id has to fit into lightuserdata
-static_assert(sizeof(ObjectStorage<slua::LuaObjectPtr>::ObjectId) <= sizeof(slua::lightdata), "Invalid size of light user data");
+static_assert(sizeof(ObjectStorage<LuaClassPtr>::ObjectId) <= sizeof(slua::lightdata), "Invalid size of light user data");

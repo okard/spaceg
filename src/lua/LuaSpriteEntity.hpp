@@ -23,7 +23,7 @@ class LuaGameState;
 /**
 * Lua Bindings für Sprite Entity
 */	
-class LuaSpriteEntity : public slua::LuaObject, public spaceg::GraphicEntity
+class LuaSpriteEntity : public LuaClass, public spaceg::GraphicEntity
 {
 private:
 	SfmlSprite sprite_;
