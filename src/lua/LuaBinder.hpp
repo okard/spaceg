@@ -172,7 +172,7 @@ private:
 		
 		//Each type has its own object storage?
 		//T::luaInterface.objectStorage
-		auto objptr = objects_.get(id);
+		LuaClassPtr& objptr = objects_.get(id);
 		objects_.remove(id); //already detach? O_o
 		objptr.reset();
 		

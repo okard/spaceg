@@ -76,6 +76,7 @@ public:
 		Index &in = indices_[id & INDEX_MASK];
 		
 		T &o = objects_[in.index];
+		o.reset(); //why is this required? see LuaBinder delete
 		o = objects_[--num_objects_];
 		indices_[id & INDEX_MASK].index = in.index;
 		

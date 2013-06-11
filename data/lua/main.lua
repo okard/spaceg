@@ -56,6 +56,7 @@ end
 function exit()
 	print("exit called");
 	UI.delete(main_menu);
+	main_menu = nil;
 end
 
 

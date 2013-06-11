@@ -25,14 +25,13 @@ class LuaGameState : public State
 {
 private:
     //Scripting/Lua
-    slua::State luaState_;
+    std::unique_ptr<slua::State> luaState_;
     
     //Binder Class Instance
-    LuaBinder bind_;
+    std::unique_ptr<LuaBinder> bind_;
     
     //Application reference
     Application& app_;
-    
     
     std::shared_ptr<LuaCamera> cam_;
     std::shared_ptr<LuaInput> input_;
@@ -83,7 +82,7 @@ public:
     
     inline Application& getApplication() { return app_; }
     
-    inline slua::State& getLuaState() { return luaState_; }
+    inline slua::State& getLuaState() { return *luaState_; }
 
 };
 
