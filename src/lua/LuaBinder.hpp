@@ -144,7 +144,7 @@ private:
 		LuaBinder* binder = reinterpret_cast<LuaBinder*>(binderPtr);
 		
 		//create object
-		auto obj = new T();
+		auto obj = new T(binder->lgstate_);
 		obj->markShareable();
 		
 		auto id = objects_.add();

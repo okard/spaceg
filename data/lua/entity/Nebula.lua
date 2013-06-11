@@ -6,7 +6,7 @@ Nebula = class(Entity);
 
 
 -- entity event
-function Nebula:OnCreate()
+function Nebula:__init()
 
 	-- seed as parameter: math.randomseed(1234), math.random()
 

@@ -1,0 +1,38 @@
+<rml>
+<head>
+	<!-- <link type="text/template" href="template.rml"/> -->
+	
+	<link type="text/rcss" href="default.rcss"/>
+	<title>Main Menu</title>
+	<style>
+		body
+		{
+			font-family:Libertine;
+			width: 400px;
+			height: 300px;
+			min-width: 200px;
+			min-height: 100px;
+			margin: auto;
+		}
+	</style>
+</head>
+<body>
+	<handle move_target="#document">
+		<div id="title-bar">
+			<span id="title">Dummy Title</span>
+		</div>
+	</handle>
+
+	<div id="content">
+		Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+		<button onclick="start_game">Start Game</button>
+	</div>
+	
+	<div id="footer-bar">
+		<handle size_target="#document">
+			<span id="sizer"></span>
+		</handle>
+	</div>
+	
+</body>
+</rml>

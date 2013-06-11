@@ -1,13 +1,13 @@
 
 require("data/lua/lib/utils");
+
+require("data/lua/Player");
 require("data/lua/entity/Entity");
---require("data/lua/entity/Nebula");
+require("data/lua/entity/Nebula");
 require("data/lua/entity/WorldMap");
 
 config = require("data/lua/config");
 
-testSprite = nil
-testSprite2 = nil
 
 -- game storage add all global stuff to global table named 'game'
 local game = {};
@@ -20,10 +20,16 @@ function main()
 	print("Configuration: ");
 	for k,v in pairs(config) do print(k,v) end
 	
+	game.player = Player();
 	game.world = WorldMap();
 	
 	print(Camera.getView(camera));
 	x,y,w,h = Camera.getView(camera);
+	
+	main_menu = UI.create();
+	UI.loadDocument(main_menu, "data/ui/main_menu.rml");
+	UI.addCallback(main_menu, "click", function() end);
+	UI.enableDebugger(main_menu, false);
 	
 	--register camera change function
 
@@ -44,7 +50,7 @@ function main()
 	-- Mouse Keyboard Input
 	
 	--global table is protected after main?
-	--protect(_G);
+	protect(_G);
 end
 
 function init()

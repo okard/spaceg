@@ -5,6 +5,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include <Rocket/Debugger.h>
+
 #include "GameException.hpp"
 #include "Log.hpp"
 #include "ui/SfmlRenderInterface.hpp"
@@ -61,6 +63,8 @@ Application::Application()
     if (document != NULL)
         document->Show();
     
+    
+    Rocket::Debugger::Initialise(uiCtx_);
 }
 
 Application::~Application()

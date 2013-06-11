@@ -5,6 +5,7 @@
 #include "../Application.hpp"
 
 #include "LuaSpriteEntity.hpp"
+#include "LuaUI.hpp"
 #include "LuaInput.hpp"
 
 #include <slua/Context.hpp>
@@ -47,6 +48,7 @@ void LuaGameState::registerLuaInterface()
 	bind_.registerObject<LuaInput>(*input_, "input");
 	
 	bind_.registerClass<LuaSpriteEntity>();
+	bind_.registerClass<LuaUI>();
 	//std::cout << "cam_ count: " << cam_.refCount() << std::endl;
 	//std::cout << "input_ count: " << input_.refCount() << std::endl;
 	

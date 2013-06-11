@@ -5,6 +5,9 @@
 
 #include <Rocket/Core/EventListener.h>
 
+#include <slua/LuaRef.hpp>
+#include <slua/LuaObject.hpp>
+
 #include "LuaInterface.hpp"
 
 namespace Rocket {
@@ -21,7 +24,7 @@ class LuaGameState;
 /**
 * Lua UI Document
 */
-class LuaUI : public Rocket::Core::EventListener
+class LuaUI : public slua::LuaObject, public Rocket::Core::EventListener
 {
 private:
 	Rocket::Core::ElementDocument* element_;
@@ -39,6 +42,15 @@ public:
 	// add a event callback
 	int addCallback(slua::Context& ctx);
 	
+	int enableDebugger(slua::Context& ctx);
+	
+	//set inner content?
+	
+	//DOM bindings?
+	
+	//setContent(id, format, text)
+	
+	//is visible
 	//show
 	//hide
 	//close

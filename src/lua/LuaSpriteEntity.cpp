@@ -36,7 +36,7 @@ const LuaBindInterface<LuaSpriteEntity> LuaSpriteEntity::luaInterface =
 	.functions = lua_functions	
 };
 
-LuaSpriteEntity::LuaSpriteEntity()
+LuaSpriteEntity::LuaSpriteEntity(LuaGameState& lgstate)
 	: states_(&shader_)
 {
 	//can safe a lua ref need constructor function? call LuaObjectCreate()

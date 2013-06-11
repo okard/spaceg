@@ -39,4 +39,17 @@ end
 
 
 -- protect function
+function protect(table) 
+	local mt = 
+	{ 
+		__index = table, 
+		__newindex = function(table, key, value) 
+					 error("attempted to modify a read only table")
+				     end, 
+		__metatable = false 
+	};
+	setmetatable(table, mt) 
+end
+
+
 -- create_closure function

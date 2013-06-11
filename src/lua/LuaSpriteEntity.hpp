@@ -37,7 +37,7 @@ private:
     //save Application Reference here
 public:
 
-	LuaSpriteEntity();
+	LuaSpriteEntity(LuaGameState& lgstate);
 	virtual ~LuaSpriteEntity();
 
 	//filename

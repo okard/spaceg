@@ -80,6 +80,9 @@ public:
     //pushState
     //popState
     
+    /// Get UI Context
+    inline Rocket::Core::Context* getUICtx() { return uiCtx_; }
+    
     /// Get the rendering target (render texture)
     inline sf::RenderTarget* const getRenderTarget() { return &renderTexture_; }
     
