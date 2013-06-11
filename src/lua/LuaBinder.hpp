@@ -166,6 +166,8 @@ private:
 		//one parameter
 		//object id
 		
+		//reset objectstorage
+		
 		throw slua::LuaException("not implemented");
 		
 	}

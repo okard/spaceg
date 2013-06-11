@@ -17,6 +17,8 @@
 
 
 namespace spaceg {
+
+class LuaGameState;
 	
 /**
 * Lua Bindings für Sprite Entity
@@ -58,9 +60,6 @@ public:
 	int moveTextureRect(slua::Context& ctx); //moveTextureRect
 	
 	virtual int render(slua::Context& ctx);
-	
-	//Binding Information
-	static const slua::BindStatus<LuaSpriteEntity> bindStatus;
 	
 	//LuaInterface
 	static const LuaBindInterface<LuaSpriteEntity> luaInterface;

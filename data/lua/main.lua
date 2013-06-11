@@ -2,7 +2,7 @@
 require("data/lua/lib/utils");
 require("data/lua/entity/Entity");
 --require("data/lua/entity/Nebula");
---require("data/lua/entity/WorldMap");
+require("data/lua/entity/WorldMap");
 
 config = require("data/lua/config");
 
@@ -16,30 +16,16 @@ local game = {};
 -- function main(Engine interface)
 
 function main()
-	print("Main is called");
-	
+	--print out configuration
+	print("Configuration: ");
 	for k,v in pairs(config) do print(k,v) end
 	
-	--local test = Entity();
-	--print(test.x);
-	
-	testSprite = Sprite.create();
-	Sprite.loadTexture(testSprite, "data/texture/starfield01.png");
-	--testSprite2 = Sprite();
-	--testSprite2:loadTexture("data/texture/starfield01.png");
+	game.world = WorldMap();
 	
 	print(Camera.getView(camera));
 	x,y,w,h = Camera.getView(camera);
 	
 	--register camera change function
-	
-	Sprite.setSize(testSprite, w, h);
-	--testSprite:setTextureRect(0,0, w/2, h/2);
-	Sprite.setTextureRect(testSprite, 0, 0, w/2, h/2);
-	--testSprite:setColor(255, 50, 50, 255);
-	
-	--testSprite2:setSize(w, h);
-	--testSprite2:setTextureRect(0,0, w, h);
 
 	-- local w = World()
 	-- w.load(world1.world)
@@ -102,20 +88,12 @@ function update(t) --deliver time is ms
 		ymove = factor;
 	end
 	
-
-	Sprite.moveTextureRect(testSprite, xmove, ymove);
-	--testSprite2:moveTextureRect(xmove, ymove);
-	
+	game.world:move(xmove, ymove);
 	--moves also view?
 	--Camera.move(camera, xmove, ymove);
-	
-	--print(testSprite:getViewport());
-	--print(getMousePosition());
 end
 
 
 function draw() -- deliver viewport? x,y,width,height
-	--testSprite:render();
-	Sprite.render(testSprite);
-	--testSprite2:render();
+	game.world:render();
 end
