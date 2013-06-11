@@ -78,8 +78,7 @@ public:
 		//add object to storage
 		auto id = objects_.add();
 		//std::cout << "objid: " << id << std::endl;
-		LuaClassPtr& ptr =  objects_.get(id);
-		ptr = lo;
+		objects_.get(id) = obj;
 		
 		//add the object as global value
 		ctx.pushGlobalTable();
@@ -91,6 +90,8 @@ public:
 		ctx.pop(1); //pop globaltable
 	}
 	
+	
+	static inline const ObjectStorage<LuaClassPtr>& Storage() { return objects_; }
 private:
 
 	//inline static protect_table(slua::Context& ctx);
@@ -189,6 +190,9 @@ private:
 	{
 		slua::Context ctx(state);
 		
+		//auto ctx.getState()
+		get(state);
+		
 		//func index
 		int funcIndex = ctx.getInteger(ctx.upIndex(1));
 		
@@ -213,6 +217,9 @@ private:
 		std::shared_ptr<T> obj = std::static_pointer_cast<T>(objptr);
 		return (*obj.*(T::luaInterface.functions[funcIndex].mfunc))(ctx);	
 	}
+	
+	
+	static LuaGameState& get(lua_State* state);
 	
 };
 	

@@ -76,7 +76,7 @@ public:
 		Index &in = indices_[id & INDEX_MASK];
 		
 		T &o = objects_[in.index];
-		o.reset(); //why is this required? see LuaBinder delete
+		//o.reset(); //why is this required? see LuaBinder delete
 		o = objects_[--num_objects_];
 		indices_[id & INDEX_MASK].index = in.index;
 		
@@ -103,6 +103,9 @@ public:
 	}
 	
 	
+	inline T& operator[](size_t index) { return objects_[index]; }
+	inline int objCount() const { return num_objects_; }
+	inline size_t objStorageCount()  const { return MAX_OBJECTS; }
 	inline size_t memorySize() const { return (sizeof(T) * MAX_OBJECTS) + (sizeof(Index) * MAX_OBJECTS); }
 };
 	

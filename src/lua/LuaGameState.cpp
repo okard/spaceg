@@ -9,6 +9,7 @@
 #include "LuaInput.hpp"
 
 #include <slua/Context.hpp>
+#include <cullog/Log.hpp>
 
 #include <iostream>
 
@@ -17,11 +18,13 @@ using namespace spaceg;
 
 LuaGameState::LuaGameState(Application& app)
 	: app_(app)
-	, luaState_(new slua::State())
+	, luaState_(new slua::StateEx<LuaGameState*>())
 	, bind_( new LuaBinder(*this))
 	, cam_(std::make_shared<LuaCamera>(*this))
 	, input_(std::make_shared<LuaInput>(*this))
 {
+	luaState_->set(this);
+	cul::Log::Source().verbose("ObjStorageSize: %d", LuaBinder::Storage().memorySize());
 }
 
 

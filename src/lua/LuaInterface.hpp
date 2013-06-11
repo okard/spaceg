@@ -30,6 +30,7 @@ struct LuaBindInterface
 	//const char* constructorName;
 	const LuaBindFunction<T> registerHook;
 	const LuaBindFunction<T>* functions;
+	//static functions?
 	//objectStorage
 };
 

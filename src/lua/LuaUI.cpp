@@ -149,7 +149,19 @@ void LuaUI::ProcessEvent(Rocket::Core::Event &event)
 		if(got->second.isSet())
 		{
 			got->second.push();
-			//event.GetParameters()->Size() 
+			
+			auto pcount = event.GetParameters()->Size();
+			auto ppushed = 0;
+			for(int i=0; i< pcount; i++)
+			{
+				//TODO Requires a custom event instancer
+				Rocket::Core::String str;
+				Rocket::Core::Variant var;
+				event.GetParameters()->Iterate(i, str, var);
+				std::cout << "param key: " << str.CString() << std::endl;
+				std::cout << "param type: " << (char)var.GetType() << std::endl;
+				
+			}
 			//add each parameter as lua parameter
 			lgstate_.getLuaState().getContext().call(0,0);
 		}

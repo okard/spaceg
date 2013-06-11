@@ -25,7 +25,7 @@ class LuaGameState : public State
 {
 private:
     //Scripting/Lua
-    std::unique_ptr<slua::State> luaState_;
+    std::unique_ptr<slua::StateEx<LuaGameState*>> luaState_;
     
     //Binder Class Instance
     std::unique_ptr<LuaBinder> bind_;
