@@ -23,8 +23,8 @@ LuaBinder::~LuaBinder()
 
 LuaGameState& LuaBinder::get(lua_State* state)
 {
-	auto s = slua::State::getState(state);
-	auto se = static_cast<slua::StateEx<LuaGameState*>*>(s);
+	slua::State& s = slua::State::getState(state);
+	auto se = static_cast<slua::StateEx<LuaGameState*>*>(&s);
 	return *se->get();
 }
 

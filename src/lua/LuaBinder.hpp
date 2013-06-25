@@ -73,6 +73,7 @@ public:
 	{
 		slua::Context& ctx = ctx_;
 		const LuaClassPtr& lo = obj;
+		(void)lo;
 		registerFuncTable<T>(ctx, false);
 		
 		//add object to storage
@@ -205,9 +206,11 @@ private:
 		if(!objects_.has(id))
 			throw slua::LuaException("not a valid object or already disposed");
 		
+		//check type? is a LuaClass.checkType interface?
+		// if(T::luaInterface.metatable != objptr->metaTable());
 		//Each type has its own object storage?
 		//T::luaInterface.objectStorage
-		auto objptr = objects_.get(id);
+		LuaClassPtr objptr = objects_.get(id);
 		
 		//std::cout << "receive id:" << id << std::endl;
 		

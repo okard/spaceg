@@ -43,6 +43,11 @@ class LuaClass : public std::enable_shared_from_this<LuaClass>
 {
 	
 	inline operator LuaClassPtr () { return shared_from_this(); }
+	
+	
+	//virtual const char* metaTable() const = 0;
+	//virtual const LuaBindInterfaceCheck& getCheckInterface() = 0;
+	//compare
 };
 
 

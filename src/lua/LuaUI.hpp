@@ -28,10 +28,11 @@ class LuaGameState;
 class LuaUI : public LuaClass, public Rocket::Core::EventListener
 {
 private:
-	Rocket::Core::ElementDocument* element_;
-	
 	LuaGameState& lgstate_;
+	
 	Application& app_;
+	
+	Rocket::Core::ElementDocument* element_;
 	
 	std::unordered_map<std::string, slua::LuaRef> eventMap_;
 public:

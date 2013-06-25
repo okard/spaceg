@@ -108,6 +108,8 @@ void Application::handleEvent(const sf::Event& event)
 			//shutdown application?
 			break;
 		
+		default:
+			break;
 	}
      
 	//2. handleEventUi
@@ -150,6 +152,9 @@ void Application::handleEventUi(const sf::Event& event)
 			break;
 		case sf::Event::KeyReleased:
 			uiCtx_->ProcessKeyUp(keyConvert(event.key.code), getKeyModifier());
+			break;
+			
+		default:
 			break;
 	}
 	  

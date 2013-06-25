@@ -24,14 +24,14 @@ class Application;
 class LuaGameState : public State
 {
 private:
+    //Application reference
+    Application& app_;
+    
     //Scripting/Lua
     std::unique_ptr<slua::StateEx<LuaGameState*>> luaState_;
     
     //Binder Class Instance
     std::unique_ptr<LuaBinder> bind_;
-    
-    //Application reference
-    Application& app_;
     
     std::shared_ptr<LuaCamera> cam_;
     std::shared_ptr<LuaInput> input_;

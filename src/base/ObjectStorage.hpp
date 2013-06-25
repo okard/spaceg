@@ -12,26 +12,32 @@ namespace spaceg {
 	
 //For Ref: http://bitsquid.blogspot.de/2011/09/managing-decoupling-part-4-id-lookup.html
 	
+class Storage
+{
+public:
+	//generic objectid type
+	typedef unsigned int ObjectId;
+};
 
 /**
 * Store objects
 */
 template<class T>
-class ObjectStorage
+class ObjectStorage : public Storage
 {
-public:
-	typedef unsigned int ObjectId;
-	
 private:
-	static const size_t MAX_OBJECTS = 1024*64;
+	static const size_t MAX_OBJECTS = 1024*64; //16bit type  0x0000ffff
 	
-	static const int INDEX_MASK = 0x0000ffff;
-	static const int NEW_OBJECT_ID_ADD = 0x10000;
+	// limit 8-16 bit?
+	// types: 256 (8bit), 1024 (10bit), 4096 (12bit), 65536 (16bit)
+	
+	static const int INDEX_MASK = 0x0000ffff; // == MAX_OBJECTS
+	static const int NEW_OBJECT_ID_ADD = 0x10000; // == INDEX_MASK+1
 	
 	struct Index
 	{
 		ObjectId id;		  //complete id
-		unsigned short index; //object array index
+		unsigned short index; //object array index ObjectID && INDEX_MASK
 		unsigned short next;  //next free index?
 	};
 	
@@ -39,11 +45,13 @@ private:
 	Index indices_[MAX_OBJECTS];
 	
 	
-	unsigned int num_objects_; //number of objects 
+	size_t num_objects_; //number of objects 
 	unsigned short freelist_enqueue_;
 	unsigned short freelist_dequeue_;
 	
 public:
+	//create special internal structure for element count?
+	
 	
 	//TODO interate overall available objects
 
@@ -64,7 +72,7 @@ public:
 	{
 		Index &in = indices_[freelist_dequeue_];
 		freelist_dequeue_ = in.next;
-		in.id += NEW_OBJECT_ID_ADD;
+		in.id += NEW_OBJECT_ID_ADD; //first 2 bytes are the valid counter?
 		in.index = num_objects_++;
 		//T &o = objects_[in.index];
 		//o.id = in.id;
@@ -104,7 +112,7 @@ public:
 	
 	
 	inline T& operator[](size_t index) { return objects_[index]; }
-	inline int objCount() const { return num_objects_; }
+	inline size_t objCount() const { return num_objects_; }
 	inline size_t objStorageCount()  const { return MAX_OBJECTS; }
 	inline size_t memorySize() const { return (sizeof(T) * MAX_OBJECTS) + (sizeof(Index) * MAX_OBJECTS); }
 };

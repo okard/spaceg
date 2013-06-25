@@ -96,6 +96,8 @@ int LuaUI::addCallback(slua::Context& ctx)
 		
 		return 0;
 	}
+	
+	return 0;
 }
 /// is ui frame visible
 int LuaUI::isVisible(slua::Context& ctx)

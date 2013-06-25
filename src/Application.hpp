@@ -17,7 +17,7 @@ namespace spaceg {
     
 class SfmlRenderInterface;
 class State;
-  
+
 /**
 * Application Class
 * Merging Logic, Graphic, UI Subsystem
